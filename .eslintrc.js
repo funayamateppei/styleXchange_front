@@ -24,7 +24,7 @@ module.exports = {
         ecmaVersion: 2020,
         requireConfigFile: false,
     },
-    plugins: ['react', '@next/eslint-plugin-next', 'prettier'],
+    plugins: ['react', '@next/eslint-plugin-next', 'prettier', 'jsx'],
     rules: {
         'import/prefer-default-export': 0,
         'no-console': 'warn',
