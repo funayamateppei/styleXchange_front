@@ -2,6 +2,7 @@ import styles from '@/styles/index.module.css'
 import Head from 'next/head'
 import Link from 'next/link'
 import { useAuth } from '@/hooks/auth'
+import axios from '@/lib/axios'
 
 export default function Home() {
     const { user } = useAuth({ middleware: 'guest' })
@@ -37,6 +38,12 @@ export default function Home() {
                     )}
                 </div>
             </div>
+            
+            <button onClick={() => {
+                axios.get('/api/hoge').then((res) => {
+                    console.log(res);
+                })
+            }}>ボタン</button>
         </>
     )
 }
