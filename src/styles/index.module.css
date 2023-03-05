@@ -1,0 +1,24 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  height: 100vh;
+}
+
+.buttonContainer {
+  display: flex;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  width: 5rem;
+  padding: 0.5rem;
+  border: 1px solid rgb(160, 160, 160);
+  border-radius: 4rem;
+}
+
+.marginRight {
+  margin-right: 1rem;
+}
