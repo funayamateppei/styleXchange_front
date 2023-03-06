@@ -4,7 +4,7 @@ const axios = Axios.create({
     baseURL: process.env.NEXT_PUBLIC_BACKEND_URL,
     headers: {
         'X-Requested-With': 'XMLHttpRequest',
-        'Access-Control-Allow-Origin': '*',
+        'Origin': 'https://graduation-front.vercel.app',
     },
     withCredentials: true,
 })
