@@ -110,13 +110,17 @@ const Login = () => {
                         </label>
                     </div>
 
-                    <div className="flex items-center justify-end mt-4">
+                    <div className="flex items-center justify-center mt-4">
+                        <Link
+                            href="/register"
+                            className="underline text-sm text-gray-600 hover:text-gray-900">
+                            新規登録の方
+                        </Link>
                         <Link
                             href="/forgot-password"
-                            className="underline text-sm text-gray-600 hover:text-gray-900">
-                            Forgot your password?
+                            className="underline text-sm text-gray-600 hover:text-gray-900 ml-3">
+                            パスワードを忘れた方
                         </Link>
-
                         <Button className="ml-3">Login</Button>
                     </div>
                 </form>
