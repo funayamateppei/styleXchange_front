@@ -17,9 +17,9 @@ export default function Home() {
                 <div className={styles.buttonContainer}>
                     {user ? (
                         <Link
-                            href="/dashboard"
+                            href="/home"
                             className={styles.button}>
-                            Dashboard
+                            Home
                         </Link>
                     ) : (
                         <>
