@@ -35,12 +35,7 @@ const Register = () => {
 
     return (
         <GuestLayout>
-            <AuthCard
-                logo={
-                    <Link href="/">
-                        <ApplicationLogo className="w-20 h-20 fill-current text-gray-500" />
-                    </Link>
-                }>
+            <AuthCard>
                 <form onSubmit={submitForm}>
                     {/* Name */}
                     <div>
@@ -122,10 +117,10 @@ const Register = () => {
                         <Link
                             href="/login"
                             className="underline text-sm text-gray-600 hover:text-gray-900">
-                            Already registered?
+                            登録済みの方
                         </Link>
 
-                        <Button className="ml-4">Register</Button>
+                        <Button className="ml-4">新規登録</Button>
                     </div>
                 </form>
             </AuthCard>
