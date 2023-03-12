@@ -1,49 +1,23 @@
-import styles from '@/styles/index.module.css'
+import styles from '@/styles/home.module.css'
+import Layout from '@/components/Layouts/Layout'
 import Head from 'next/head'
-import Link from 'next/link'
+import FooterTabBar from '@/components/FooterTabBar'
 import { useAuth } from '@/hooks/auth'
-import axios from '@/lib/axios'
 
-export default function Home() {
+const Home = () => {
     const { user } = useAuth({ middleware: 'guest' })
 
     return (
-        <>
+        <Layout>
             <Head>
-                <title>login</title>
+                <title>Home</title>
             </Head>
-
             <div className={styles.container}>
-                <div className={styles.buttonContainer}>
-                    {user ? (
-                        <Link
-                            href="/home"
-                            className={styles.button}>
-                            Home
-                        </Link>
-                    ) : (
-                        <>
-                            <Link
-                                href="/login"
-                                className={`${styles.button} ${styles.marginRight}`}>
-                                Login
-                            </Link>
-
-                            <Link
-                                href="/register"
-                                className={styles.button}>
-                                Register
-                            </Link>
-                        </>
-                    )}
-                </div>
+                <div className={styles.content}>{/* ページコンテンツ */}</div>
+                <FooterTabBar user={user} />
             </div>
-            
-            <button onClick={() => {
-                axios.get('/api/hoge').then((res) => {
-                    console.log(res);
-                })
-            }}>ボタン</button>
-        </>
+        </Layout>
     )
 }
+
+export default Home
