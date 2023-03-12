@@ -2,7 +2,7 @@ import Head from 'next/head'
 
 const GuestLayout = ({ children }) => {
     return (
-        <div>
+        <div >
             <Head>
                 <title>Laravel</title>
             </Head>

@@ -1,4 +1,4 @@
-import React from 'react'
+import ApplicationLogo from '@/components/ApplicationLogo'
 import AuthCard from '@/components/AuthCard'
 import Button from '@/components/Button'
 import GuestLayout from '@/components/Layouts/GuestLayout'
