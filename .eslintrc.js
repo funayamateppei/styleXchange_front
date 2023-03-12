@@ -23,6 +23,7 @@ module.exports = {
         },
         ecmaVersion: 2020,
         requireConfigFile: false,
+        parser: require.resolve('@babel/eslint-parser'),
     },
     plugins: ['react', '@next/eslint-plugin-next', 'prettier', 'jsx'],
     rules: {
