@@ -1,19 +1,19 @@
-import styles from '@/styles/profile.module.css'
 import React from 'react'
+import styles from '@/styles/profile.module.css'
 import AppLayout from '@/components/Layouts/AppLayout'
 import FooterTabBar from '@/components/FooterTabBar'
 import Head from 'next/head'
 import { useAuth } from '@/hooks/auth'
 import axios from '@/lib/axios'
 import useSWR from 'swr'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import Image from '@/components/Image'
 
 const profile = () => {
     useAuth({ middleware: 'auth' })
 
     // threadを表示しているかitemを表示しているかの状態管理
-    const { open, setOpen } = useState(true)
+    // const { open, setOpen } = useState(true)
 
     const fetcher = url => {
         return axios(url).then(response => response.data)
@@ -25,7 +25,7 @@ const profile = () => {
     useEffect(() => {
         mutate()
     }, [])
-    console.log(data)
+    // console.log(data)
 
     if (data === null) {
         return (
@@ -51,7 +51,7 @@ const profile = () => {
                         />
                         <div className={styles.follow}>
                             <div className={styles.box}>
-                                <h2>{ data.follower_count}</h2>
+                                <h2>{data.follower_count}</h2>
                                 <p>フォロワー</p>
                             </div>
                             <div className={styles.box}>
