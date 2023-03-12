@@ -1,4 +1,3 @@
-import ApplicationLogo from '@/components/ApplicationLogo'
 import Dropdown from '@/components/Dropdown'
 import Link from 'next/link'
 import NavLink from '@/components/NavLink'
@@ -8,31 +7,30 @@ import ResponsiveNavLink, {
 import { DropdownButton } from '@/components/DropdownLink'
 import { useAuth } from '@/hooks/auth'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { use, useState } from 'react'
 
 const Navigation = ({ user }) => {
     const router = useRouter()
 
     const { logout } = useAuth()
 
+    // ハンバーガーメニューが開いているかどうか
     const [open, setOpen] = useState(false)
+
+    if (user) {
+        const path = `${process.env.NEXT_PUBLIC_BACKEND_URL}/${user.icon_path}`
+    } else {
+        const path = 'icon.png'
+    }
+    // console.log(user.icon_path);
+    // const icon = user.icon_path;
 
     return (
         <nav className="bg-white border-b border-gray-100">
             {/* Primary Navigation Menu */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between h-16">
-                    <div className="flex">
-
-                        {/* Navigation Links */}
-                        <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                            <NavLink
-                                href="/home"
-                                active={router.pathname === '/home'}>
-                                Home
-                            </NavLink>
-                        </div>
-                    </div>
+                    <div className="flex"></div>
 
                     {/* Settings Dropdown */}
                     <div className="hidden sm:flex sm:items-center sm:ml-6">
@@ -75,6 +73,7 @@ const Navigation = ({ user }) => {
                                 fill="none"
                                 viewBox="0 0 24 24">
                                 {open ? (
+                                    // ハンバーガー
                                     <path
                                         className="inline-flex"
                                         strokeLinecap="round"
@@ -83,6 +82,7 @@ const Navigation = ({ user }) => {
                                         d="M6 18L18 6M6 6l12 12"
                                     />
                                 ) : (
+                                    // クローズ
                                     <path
                                         className="inline-flex"
                                         strokeLinecap="round"
@@ -100,31 +100,19 @@ const Navigation = ({ user }) => {
             {/* Responsive Navigation Menu */}
             {open && (
                 <div className="block sm:hidden">
-                    <div className="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink
-                            href="/home"
-                            active={router.pathname === '/home'}>
-                            Home
-                        </ResponsiveNavLink>
-                    </div>
-
                     {/* Responsive Settings Options */}
                     <div className="pt-4 pb-1 border-t border-gray-200">
                         <div className="flex items-center px-4">
                             <div className="flex-shrink-0">
-                                <svg
-                                    className="h-10 w-10 fill-current text-gray-400"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor">
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth="2"
-                                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                                    />
-                                </svg>
+                                <img
+                                    src={
+                                        user?.icon_path
+                                            ? `${process.env.NEXT_PUBLIC_BACKEND_URL}${user.icon_path}`
+                                            : 'icon.png'
+                                    }
+                                    alt="icon"
+                                    className="h-10 w-10 rounded-full border border-gray-400"
+                                />
                             </div>
 
                             <div className="ml-3">
