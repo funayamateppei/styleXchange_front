@@ -25,12 +25,7 @@ const ForgotPassword = () => {
 
     return (
         <GuestLayout>
-            <AuthCard
-                logo={
-                    <Link href="/">
-                        <ApplicationLogo className="w-20 h-20 fill-current text-gray-500" />
-                    </Link>
-                }>
+            <AuthCard>
                 <div className="mb-4 text-sm text-gray-600">
                     Forgot your password? No problem. Just let us know your
                     email address and we will email you a password reset link
