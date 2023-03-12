@@ -84,13 +84,13 @@ const FooterTabBar = ({ user }) => {
                 </div>
                 <div className={styles.tab}>
                     <NavLink
-                        href="/mypage"
-                        active={router.pathname === '/mypage'}>
+                        href="/profile"
+                        active={router.pathname === '/profile'}>
                         {user?.icon_path ? (
                             <img
                                 src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${user.icon_path}`}
                                 alt="icon"
-                                className="h-8 w-8 rounded-full"
+                                className="h-8 w-8 rounded-full border border-gray-400"
                             />
                         ) : (
                             <svg

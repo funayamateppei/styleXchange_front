@@ -111,7 +111,7 @@ const Navigation = ({ user }) => {
                                             : 'icon.png'
                                     }
                                     alt="icon"
-                                    className="h-10 w-10 rounded-full"
+                                    className="h-10 w-10 rounded-full border border-gray-400"
                                 />
                             </div>
 
