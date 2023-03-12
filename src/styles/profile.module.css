@@ -1,17 +1,43 @@
-.container {
-  height: 100%;
-  width: 100%;
-}
-
-.content {
-  width: 95%;
-  height: 100vh
-}
-
 .flexContainer {
   height: 90vh;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.container {
+  width: 95%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  padding: .5rem;
+}
+
+.follow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 70%;
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
 }
