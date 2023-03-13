@@ -1,43 +1,80 @@
 .flexContainer {
-  height: 90vh;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    height: 90vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bold {
+    font-weight: bold;
 }
 
 .container {
-  width: 95%;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: auto;
+    width: 90%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
 }
 
 .content {
-  display: flex;
-  justify-content: center;
-  padding: .5rem;
+    display: flex;
+    justify-content: center;
+    width: 90%;
+    padding: 0.5rem;
 }
 
 .follow {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 90%;
+    margin-left: 1rem;
 }
 
 .box {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
 }
 
 .userInfo {
-  display: flex;
-  flex-direction: column;
-  align-items: start;
+    display: flex;
+    flex-direction: column;
+}
+
+.threads {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+.modeButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    border: 1px solid gray;
+    border-radius: 0.1rem;
+    border-collapse: collapse;
+}
+
+.modeChange {
+    background: rgb(190, 190, 190);
+}
+
+.threadLayout {
+    display: flex;
+}
+
+.items {
+    display: flex;
+    flex-wrap: wrap;
 }
