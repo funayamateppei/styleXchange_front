@@ -12,7 +12,7 @@ import { useState } from 'react'
 const Register = () => {
     const { register } = useAuth({
         middleware: 'guest',
-        redirectIfAuthenticated: '/',
+        redirectIfAuthenticated: '/home',
     })
 
     const [name, setName] = useState('')
