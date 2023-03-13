@@ -1,32 +1,18 @@
 import React from 'react'
 
 import styles from '@/styles/follows.module.css'
-
 import Layout from '@/components/Layouts/Layout'
 import Header from '@/components/Header'
 import FollowUserInfo from '@/components/FollowUserInfo'
 
-import { useState, useEffect } from 'react'
-import useSWR from 'swr'
+import { useState } from 'react'
 import { useAuth } from '@/hooks/auth'
 import axios from '@/lib/axios'
 
 // フォロー欄
-// CSR + ISR
-const follow = ({ data, id }) => {
-    const { user } = useAuth({ middleware: 'guest' })
+const follow = ({ data }) => {
 
-    // 特定のユーザーのフォロー情報
-    const fetcher = url => {
-        return axios(url).then(response => response.data)
-    }
-    const apiUrl = `/api/follows/${id}`
-    const { data: followData, mutate } = useSWR(apiUrl, fetcher, {
-        fallbackData: data,
-    })
-    useEffect(() => {
-        mutate()
-    }, [])
+    const { user } = useAuth({ middleware: 'guest' })
 
     // フォロー中表示かフォロワー表示の状態管理
     // trueがフォロワー falseがフォロー中
@@ -61,15 +47,40 @@ const follow = ({ data, id }) => {
                     {/* 一覧 */}
                     <div>
                         {mode === true
-                            ? followData
-                                ? followData.followers.map(x => (
-                                      <FollowUserInfo user={x} key={x.id} />
-                                  ))
+                            ? data && data.followers
+                                ? data.followers.map(x =>
+                                      user ? (
+                                        <FollowUserInfo
+                                            auth={user.id}
+                                              user={{
+                                                  ...x,
+                                                  is_following: x.followers.some(
+                                                      follower =>
+                                                          follower.id ===
+                                                          user.id,
+                                                  ),
+                                              }}
+                                              key={x.id}
+                                          />
+                                      ) : null,
+                                  )
                                 : null
-                            : followData
-                            ? followData.followings.map(x => (
-                                  <FollowUserInfo user={x} key={x.id} />
-                              ))
+                            : data && data.followings
+                            ? data.followings.map(x =>
+                                  user ? (
+                                    <FollowUserInfo
+                                        auth={user.id}
+                                          user={{
+                                              ...x,
+                                              is_following: x.followers.some(
+                                                  follower =>
+                                                      follower.id === user.id,
+                                              ),
+                                          }}
+                                          key={x.id}
+                                      />
+                                  ) : null,
+                              )
                             : null}
                     </div>
                 </div>
@@ -78,41 +89,66 @@ const follow = ({ data, id }) => {
     )
 }
 
-export async function getAllUserIds() {
-    const response = await axios.get('/api/userIds')
-    const users = await response.data
-    return await users.map(user => {
+export async function getServerSideProps(context) {
+    const { req, res } = context
+    const { id } = context.params // 動的なidを取得
+    try {
+        const response = await axios.get(`/api/follows/${id}`, {
+            withCredentials: true,
+            headers: {
+                Cookie: `graduation_back_session=${req.headers.cookie.graduation_back_session}; XSRF-TOKEN=${req.headers.cookie['XSRF-TOKEN']}`,
+            },
+        })
         return {
-            params: {
-                id: String(user.id),
+            props: {
+                data: response.data,
             },
         }
-    })
-}
-
-export async function getUserFollowsData(id) {
-    const response = await axios.get(`/api/follows/${id}`)
-    const data = await response.data
-    return data
-}
-
-export async function getStaticPaths() {
-    const paths = await getAllUserIds()
-    return {
-        paths,
-        fallback: true,
+    } catch (error) {
+        console.error(error)
+        return {
+            notFound: true,
+        }
     }
 }
 
-export async function getStaticProps({ params }) {
-    const data = await getUserFollowsData(params.id)
-    return {
-        props: {
-            id: data.id,
-            data,
-        },
-        revalidate: 3,
-    }
-}
+// CSR+ISRの残骸
+
+// export async function getAllUserIds() {
+//     const response = await axios.get('/api/userIds')
+//     const users = await response.data
+//     return await users.map(user => {
+//         return {
+//             params: {
+//                 id: String(user.id),
+//             },
+//         }
+//     })
+// }
+
+// export async function getUserFollowsData(id) {
+//     const response = await axios.get(`/api/follows/${id}`)
+//     const data = await response.data
+//     return data
+// }
+
+// export async function getStaticPaths() {
+//     const paths = await getAllUserIds()
+//     return {
+//         paths,
+//         fallback: true,
+//     }
+// }
+
+// export async function getStaticProps({ params }) {
+//     const data = await getUserFollowsData(params.id)
+//     return {
+//         props: {
+//             id: data.id,
+//             data,
+//         },
+//         revalidate: 3,
+//     }
+// }
 
 export default follow
