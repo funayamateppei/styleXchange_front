@@ -26,7 +26,6 @@ const profile = () => {
     useEffect(() => {
         mutate()
     }, [])
-    console.log(data)
 
     if (data === null) {
         return (
@@ -60,18 +59,22 @@ const profile = () => {
                         )}
 
                         <div className={styles.follow}>
-                            <div className={styles.box}>
-                                <h2 className={styles.bold}>
-                                    {data.follower_count}
-                                </h2>
-                                <p>フォロワー</p>
-                            </div>
-                            <div className={styles.box}>
-                                <h2 className={styles.bold}>
-                                    {data.following_count}
-                                </h2>
-                                <p>フォロー中</p>
-                            </div>
+                            <Link href={`/follows/${data.id}`}>
+                                <div className={styles.box}>
+                                    <h2 className={styles.bold}>
+                                        {data.follower_count}
+                                    </h2>
+                                    <p>フォロワー</p>
+                                </div>
+                            </Link>
+                            <Link href={`/follows/${data.id}`}>
+                                <div className={styles.box}>
+                                    <h2 className={styles.bold}>
+                                        {data.following_count}
+                                    </h2>
+                                    <p>フォロー中</p>
+                                </div>
+                            </Link>
                         </div>
                     </div>
 
@@ -94,28 +97,5 @@ const profile = () => {
         </>
     )
 }
-
-// export async function getServerSideProps({ req }) {
-//     // cookie から認証情報を取得する
-//     let data = {}
-//     try {
-//         const response = await axios.get('/api/my/data/me', {
-//             headers: {
-//                 origin: 'localhost',
-//                 Authorization: req.headers.cookie,
-//                 // Cookie: req.headers.cookie,
-//             },
-//         })
-//         data = response.data
-//     } catch (error) {
-//         console.error(error.message)
-//     }
-//     return {
-//         props: {
-//             data,
-//         },
-//         revalidate: 3,
-//     }
-// }
 
 export default profile

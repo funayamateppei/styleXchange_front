@@ -1,0 +1,36 @@
+.container {
+    width: 100%;
+}
+
+.buttonBox {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.modeButton {
+    width: 50%;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid gray;
+    border-collapse: collapse;
+}
+
+.modeChange {
+    background: rgb(190, 190, 190);
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  width: 90%;
+  margin: auto;
+  margin-top: .5rem;
+}
+
+.userName {
+  margin-left: 1rem
+}
