@@ -7,3 +7,7 @@
     border-color: rgba(243, 244, 246, var(--tw-border-opacity));
     position: sticky;
 }
+
+.lineHeight {
+  line-height: 4rem;
+}
