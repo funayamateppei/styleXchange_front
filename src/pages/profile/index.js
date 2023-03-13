@@ -76,8 +76,8 @@ const profile = () => {
                     </div>
 
                     <div className={styles.userInfo}>
-                        <h2>{data.name}</h2>
-                        <p>{data.text}</p>
+                        <h2 className={styles.bold}>{data.name}</h2>
+                        <p className={styles.smallText}>{data.text}</p>
                     </div>
 
                     <Link href={'/profile/edit'}>

@@ -10,6 +10,10 @@
     font-weight: bold;
 }
 
+.smallText {
+    font-size: small;
+}
+
 .container {
     width: 90%;
     height: 100vh;
@@ -46,6 +50,7 @@
 .userInfo {
     display: flex;
     flex-direction: column;
+    margin-bottom: 0.5rem;
 }
 
 .threads {
