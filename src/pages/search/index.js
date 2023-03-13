@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from '@/styles/global.module.css'
+import styles from '@/styles/search.module.css'
 import Layout from '@/components/Layouts/Layout'
 import Head from 'next/head'
 import FooterTabBar from '@/components/FooterTabBar'

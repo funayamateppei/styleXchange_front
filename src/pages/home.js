@@ -1,4 +1,4 @@
-import styles from '@/styles/global.module.css'
+import styles from '@/styles/home.module.css'
 import Layout from '@/components/Layouts/Layout'
 import Head from 'next/head'
 import FooterTabBar from '@/components/FooterTabBar'
