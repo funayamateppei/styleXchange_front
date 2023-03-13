@@ -52,7 +52,7 @@ const profile = () => {
                             />
                         ) : (
                             <img
-                                src="icon.png"
+                                src="../icon.png"
                                 alt="icon"
                                 className="rounded-full border border-gray-400 h-20 w-20"
                             />

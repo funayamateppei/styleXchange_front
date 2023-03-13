@@ -25,7 +25,7 @@ const ProfileItem = ({ data }) => {
                         }`}
                         onClick={modeChangeThread}>
                         <img
-                            src="thread.svg"
+                            src="../thread.svg"
                             alt="thread"
                             className="w-8 h-8"
                         />
@@ -35,7 +35,7 @@ const ProfileItem = ({ data }) => {
                             mode === false ? styles.modeChange : ''
                         }`}
                         onClick={modeChangeItem}>
-                        <img src="item.svg" alt="item" className="w-8 h-8" />
+                        <img src="../item.svg" alt="item" className="w-8 h-8" />
                     </button>
                 </div>
             </div>
