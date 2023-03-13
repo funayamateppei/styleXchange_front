@@ -1,16 +1,17 @@
+import React from 'react'
 import styles from '@/styles/global.module.css'
 import Layout from '@/components/Layouts/Layout'
 import Head from 'next/head'
 import FooterTabBar from '@/components/FooterTabBar'
 import { useAuth } from '@/hooks/auth'
 
-const Home = () => {
+const Search = () => {
     const { user } = useAuth({ middleware: 'guest' })
 
     return (
         <Layout>
             <Head>
-                <title>Home</title>
+                <title>Exhibit</title>
             </Head>
             <div className={styles.container}>
                 <div className={styles.content}>{/* ページコンテンツ */}</div>
@@ -20,4 +21,4 @@ const Home = () => {
     )
 }
 
-export default Home
+export default Search

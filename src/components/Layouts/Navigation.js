@@ -1,16 +1,10 @@
 import Dropdown from '@/components/Dropdown'
-import Link from 'next/link'
-import NavLink from '@/components/NavLink'
-import ResponsiveNavLink, {
-    ResponsiveNavButton,
-} from '@/components/ResponsiveNavLink'
+import { ResponsiveNavButton } from '@/components/ResponsiveNavLink'
 import { DropdownButton } from '@/components/DropdownLink'
 import { useAuth } from '@/hooks/auth'
-import { useRouter } from 'next/router'
-import { use, useState } from 'react'
+import { useState } from 'react'
 
 const Navigation = ({ user }) => {
-    const router = useRouter()
 
     const { logout } = useAuth()
 
@@ -22,8 +16,6 @@ const Navigation = ({ user }) => {
     } else {
         const path = 'icon.png'
     }
-    // console.log(user.icon_path);
-    // const icon = user.icon_path;
 
     return (
         <nav className="bg-white border-b border-gray-100">
