@@ -5,14 +5,27 @@ import Layout from '@/components/Layouts/Layout'
 import Header from '@/components/Header'
 import FollowUserInfo from '@/components/FollowUserInfo'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useAuth } from '@/hooks/auth'
+import useSWR from 'swr'
 import axios from '@/lib/axios'
 
 // フォロー欄
-const follow = ({ data }) => {
-
+const follow = ({ data, id }) => {
     const { user } = useAuth({ middleware: 'guest' })
+
+    // CSRで最新の情報を取得
+    // (フォロー / アンフォロー関数でmutateを使うことで最新の情報にできる)
+    const fetcher = url => {
+        return axios(url).then(response => response.data)
+    }
+    const apiUrl = `/api/follows/${id}`
+    const { data: userData, mutate } = useSWR(apiUrl, fetcher, {
+        fallbackData: data,
+    })
+    useEffect(() => {
+        mutate()
+    }, [])
 
     // フォロー中表示かフォロワー表示の状態管理
     // trueがフォロワー falseがフォロー中
@@ -47,11 +60,11 @@ const follow = ({ data }) => {
                     {/* 一覧 */}
                     <div>
                         {mode === true
-                            ? data && data.followers
-                                ? data.followers.map(x =>
+                            ? userData && userData.followers
+                                ? userData.followers.map(x =>
                                       user ? (
-                                        <FollowUserInfo
-                                            auth={user.id}
+                                          <FollowUserInfo
+                                              auth={user.id}
                                               user={{
                                                   ...x,
                                                   is_following: x.followers.some(
@@ -65,11 +78,11 @@ const follow = ({ data }) => {
                                       ) : null,
                                   )
                                 : null
-                            : data && data.followings
-                            ? data.followings.map(x =>
+                            : userData && userData.followings
+                            ? userData.followings.map(x =>
                                   user ? (
-                                    <FollowUserInfo
-                                        auth={user.id}
+                                      <FollowUserInfo
+                                          auth={user.id}
                                           user={{
                                               ...x,
                                               is_following: x.followers.some(
@@ -102,6 +115,7 @@ export async function getServerSideProps(context) {
         return {
             props: {
                 data: response.data,
+                id: id,
             },
         }
     } catch (error) {
