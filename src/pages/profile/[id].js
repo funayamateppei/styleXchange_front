@@ -3,15 +3,15 @@ import styles from '@/styles/profile.module.css'
 import Layout from '@/components/Layouts/Layout'
 import Header from '@/components/Header'
 import FooterTabBar from '@/components/FooterTabBar'
+import Image from '@/components/Image'
+import ProfileItem from '@/components/ProfileItem'
+import FollowButton from '@/components/FollowButton'
+import Link from 'next/link'
 import Head from 'next/head'
 import { useAuth } from '@/hooks/auth'
-import axios from '@/lib/axios'
-import useSWR from 'swr'
 import { useEffect } from 'react'
-import Image from '@/components/Image'
-import Button from '@/components/Button'
-import Link from 'next/link'
-import ProfileItem from '@/components/ProfileItem'
+import useSWR from 'swr'
+import axios from '@/lib/axios'
 
 const User = ({ id, data }) => {
     const { user } = useAuth({ middleware: 'auth' })
@@ -27,8 +27,6 @@ const User = ({ id, data }) => {
     useEffect(() => {
         mutate()
     }, [])
-
-    console.log(userData)
 
     if (data === null) {
         return (
@@ -86,6 +84,17 @@ const User = ({ id, data }) => {
                             <h2 className={styles.bold}>{data.name}</h2>
                             <p className={styles.smallText}>{data.text}</p>
                         </div>
+
+                        {user ? (
+                            <FollowButton
+                                data={{
+                                    ...userData,
+                                    is_following: userData.followers.some(
+                                        follower => follower.id === user.id,
+                                    ),
+                                }}
+                            />
+                        ) : null}
 
                         {/* 投稿一覧 */}
                         <div className={styles.threads}>
