@@ -23,7 +23,6 @@
     "eslint": "^8.27.0",
     "eslint-config-next": "13.0.3",
     "eslint-config-prettier": "^7.1.0",
-    "eslint-plugin-jsx": "^0.1.0",
     "eslint-plugin-prettier": "^3.3.0",
     "postcss": "^8.4.6",
     "prettier": "2.2.1",
