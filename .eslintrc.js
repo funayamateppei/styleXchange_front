@@ -14,6 +14,7 @@ module.exports = {
     },
     extends: [
         'eslint:recommended',
+        'plugin:jsx/recommended',
         'plugin:react/recommended',
         'plugin:prettier/recommended',
     ],
@@ -24,7 +25,7 @@ module.exports = {
         ecmaVersion: 2020,
         requireConfigFile: false,
     },
-    plugins: ['react', '@next/eslint-plugin-next', 'prettier', 'jsx'],
+    plugins: ['react', '@next/eslint-plugin-next', 'prettier'],
     rules: {
         'import/prefer-default-export': 0,
         'no-console': 'warn',
