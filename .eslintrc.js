@@ -15,7 +15,7 @@ module.exports = {
     extends: [
         'eslint:recommended',
         'plugin:jsx/recommended',
-        'plugin:react/recommended',
+        // 'plugin:react/recommended',
         'plugin:prettier/recommended',
     ],
     parserOptions: {
