@@ -1,0 +1,13 @@
+.header {
+    height: 4rem;
+    width: 100%;
+    background-color: white;
+    border-bottom-width: 1px;
+    --tw-border-opacity: 1;
+    border-color: rgba(243, 244, 246, var(--tw-border-opacity));
+    position: sticky;
+}
+
+.lineHeight {
+  line-height: 4rem;
+}

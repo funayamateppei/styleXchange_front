@@ -11,7 +11,7 @@ const FooterTabBar = ({ user }) => {
             <div className={styles.container}>
                 {/* Navigation Links */}
                 <div className={styles.tab}>
-                    <NavLink href="/" active={router.pathname === '/'}>
+                    <NavLink href="/home" active={router.pathname === '/home'}>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
@@ -47,7 +47,9 @@ const FooterTabBar = ({ user }) => {
                     </NavLink>
                 </div>
                 <div className={styles.tab}>
-                    <NavLink href="/add" active={router.pathname === '/add'}>
+                    <NavLink
+                        href="/exhibit"
+                        active={router.pathname === '/exhibit'}>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"

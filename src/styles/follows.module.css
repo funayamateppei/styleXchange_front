@@ -1,0 +1,77 @@
+.container {
+    width: 100%;
+}
+
+.buttonBox {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.modeButton {
+    width: 50%;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid gray;
+    border-collapse: collapse;
+}
+
+.modeChange {
+    background: rgb(190, 190, 190);
+}
+
+.userInfo {
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    width: 90%;
+    margin: auto;
+    margin-top: 0.5rem;
+}
+
+.info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.userName {
+    margin-left: 1rem;
+}
+
+.followButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1rem;
+    background-color: #2d3748;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #fff;
+    cursor: pointer;
+    width: 6.5rem;
+}
+
+.unFollowButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1rem;
+    background-color: #77a6f6;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #fff;
+    cursor: pointer;
+    width: 6.5rem;
+}
