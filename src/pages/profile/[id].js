@@ -28,7 +28,7 @@ const User = ({ id, data }) => {
         mutate()
     }, [])
 
-    if (data === null) {
+    if (userData === null) {
         return (
             <div className={styles.flexContainer}>
                 <img src="loading.gif" alt="loading" />
@@ -46,9 +46,9 @@ const User = ({ id, data }) => {
                     <div className={styles.container}>
                         {/* ページコンテンツ */}
                         <div className={styles.content}>
-                            {data?.icon_path ? (
+                            {userData?.icon_path ? (
                                 <Image
-                                    src={data.icon_path}
+                                    src={userData.icon_path}
                                     alt="icon"
                                     style="rounded-full border border-gray-400 h-20 w-20"
                                 />
@@ -61,18 +61,22 @@ const User = ({ id, data }) => {
                             )}
 
                             <div className={styles.follow}>
-                                <Link href={`/follows/${data.id}`}>
+                                <Link href={`/follows/${id}`}>
                                     <div className={styles.box}>
                                         <h2 className={styles.bold}>
-                                            {data.follower_count}
+                                            {userData
+                                                ? userData.follower_count
+                                                : null}
                                         </h2>
                                         <p>フォロワー</p>
                                     </div>
                                 </Link>
-                                <Link href={`/follows/${data.id}`}>
+                                <Link href={`/follows/${id}`}>
                                     <div className={styles.box}>
                                         <h2 className={styles.bold}>
-                                            {data.following_count}
+                                            {userData
+                                                ? userData.following_count
+                                                : null}
                                         </h2>
                                         <p>フォロー中</p>
                                     </div>
@@ -81,8 +85,12 @@ const User = ({ id, data }) => {
                         </div>
 
                         <div className={styles.userInfo}>
-                            <h2 className={styles.bold}>{data.name}</h2>
-                            <p className={styles.smallText}>{data.text}</p>
+                            <h2 className={styles.bold}>
+                                {userData ? userData.name : null}
+                            </h2>
+                            <p className={styles.smallText}>
+                                {userData ? userData.text : null}
+                            </p>
                         </div>
 
                         {user ? (
@@ -97,9 +105,11 @@ const User = ({ id, data }) => {
                         ) : null}
 
                         {/* 投稿一覧 */}
-                        <div className={styles.threads}>
-                            <ProfileItem data={data} />
-                        </div>
+                        {userData ? (
+                            <div className={styles.threads}>
+                                <ProfileItem data={userData} />
+                            </div>
+                        ) : null}
                     </div>
                     <FooterTabBar user={user} />
                 </Header>
@@ -136,9 +146,11 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
     const data = await getUserData(params.id)
+    const id = String(data.id)
+    // console.log(data)
     return {
         props: {
-            id: data.id,
+            id: id,
             data,
         },
         revalidate: 3,
