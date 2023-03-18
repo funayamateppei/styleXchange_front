@@ -1,0 +1,7 @@
+.textarea {
+  width: 100%;
+  height: 10rem;
+  border-radius: .2rem;
+  --tw-drop-shadow: drop-shadow(0 1px 1px rgba(0,0,0,0.05));
+  border: 1px solid gray;
+}
