@@ -111,8 +111,8 @@ const User = ({ id, data }) => {
                             </div>
                         ) : null}
                     </div>
-                    <FooterTabBar user={user} />
                 </Header>
+                <FooterTabBar user={user} />
             </Layout>
         </>
     )

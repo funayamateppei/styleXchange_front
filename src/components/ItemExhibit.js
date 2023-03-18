@@ -6,7 +6,13 @@ import Textarea from '@/components/Textarea'
 import ExhibitImage from '@/components/ExhibitImage'
 import ExhibitDefaultImage from '@/components/ExhibitDefaultImage'
 
-const ItemExhibit = ({ index, form, onChange }) => {
+const ItemExhibit = ({
+    index,
+    form,
+    secondCategories,
+    thirdCategories,
+    onChange,
+}) => {
     const {
         title,
         text,
@@ -43,6 +49,56 @@ const ItemExhibit = ({ index, form, onChange }) => {
         onChange({ ...form, [e.target.name]: e.target.value })
     }
 
+    // カテゴリ選択 関数
+    const [categoryModalOpen, setCategoryModalOpen] = useState(false)
+    const [stateFirstCategories, setFirstCategories] = useState(true)
+    const [stateSecondCategories, setStateSecondCategories] = useState(true)
+    const [secondCategoriesName, setSecondCategoriesName] = useState('')
+    const [thirdCategoriesName, setThirdCategoriesName] = useState('')
+    const [SecondCategories, setSecondCategories] = useState([])
+    const [ThirdCategories, setThirdCategories] = useState([])
+    // モーダルオープン
+    const handleCategoryModalButtonClick = () => {
+        setCategoryModalOpen(true)
+        setFirstCategories(true)
+        setStateSecondCategories(true)
+        setSecondCategoriesName('')
+        setThirdCategoriesName('')
+        setSecondCategories([])
+        setThirdCategories([])
+        onChange({ ...form, gender: '' })
+        onChange({ ...form, category_id: '' })
+    }
+    // firstCategory選択時にgenderカラムのstate更新 secondCategory表示
+    const handleFirstCategoryChange = e => {
+        setFirstCategories(false)
+        onChange({ ...form, gender: e.target.value == 1 ? true : false })
+        const filteredSecondCategories = secondCategories.filter(
+            category =>
+                category.gender == 2 || category.gender == e.target.value,
+        )
+        setSecondCategories(filteredSecondCategories)
+    }
+    // secondCategory選択時にthirdCategory表示
+    const handleSecondCategoryChange = (parent_id, name) => {
+        setStateSecondCategories(false)
+        const filteredThirdCategories = thirdCategories.filter(
+            category =>
+                category.parent === parent_id &&
+                (gender === true
+                    ? category.gender == 2 || category.gender == 1
+                    : category.gender == 2 || category.gender == 0),
+        )
+        setThirdCategories(filteredThirdCategories)
+        setSecondCategoriesName(name)
+    }
+    // thirdCategory選択時にcategory_idカラムのstate更新
+    const handleThirdCategoryChange = (id, name) => {
+        setCategoryModalOpen(false)
+        setThirdCategoriesName(name)
+        onChange({ ...form, category_id: id })
+    }
+
     // postage更新関数
     const handlePostageChange = e => {
         if (e.target.value === 'true') {
@@ -52,8 +108,8 @@ const ItemExhibit = ({ index, form, onChange }) => {
         }
     }
 
-    // 色選択関数
-    const [isModalOpen, setIsModalOpen] = useState(false)
+    // 色選択 関数
+    const [colorModalOpen, setColorModalOpen] = useState(false)
     const colors = [
         'white',
         'black',
@@ -70,10 +126,10 @@ const ItemExhibit = ({ index, form, onChange }) => {
     ]
     const handleColorChange = colorName => {
         onChange({ ...form, color: colorName })
-        setIsModalOpen(false)
+        setColorModalOpen(false)
     }
-    const handleButtonClick = () => {
-        setIsModalOpen(true)
+    const handleColorModalButtonClick = () => {
+        setColorModalOpen(true)
     }
     const colorClear = () => {
         onChange({ ...form, color: '' })
@@ -136,6 +192,140 @@ const ItemExhibit = ({ index, form, onChange }) => {
                     />
                 </div>
 
+                <div className={styles.colorSelect}>
+                    <div className={styles.categoryBox}>
+                        <button
+                            className={styles.categoryModalButton}
+                            onClick={handleCategoryModalButtonClick}>
+                            カテゴリ選択
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                strokeWidth={1.5}
+                                stroke="currentColor"
+                                className="w-6 h-6 ml-2">
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+                                />
+                            </svg>
+                        </button>
+                        {gender !== '' && category_id !== '' ? (
+                            <>
+                                <p>{gender ? 'メンズ' : 'レディース'}/</p>
+                                <p>{secondCategoriesName}/</p>
+                                <p>{thirdCategoriesName}</p>
+                            </>
+                        ) : null}
+                    </div>
+                    {categoryModalOpen && (
+                        <div>
+                            <div
+                                className={styles.modalBackground}
+                                onClick={() =>
+                                    setCategoryModalOpen(false)
+                                }></div>
+                            <div className={styles.modal}>
+                                {stateFirstCategories ? (
+                                    <>
+                                        <button
+                                            className={styles.categoryList}
+                                            value={1}
+                                            onClick={handleFirstCategoryChange}>
+                                            <p>メンズ</p>
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                strokeWidth={1.5}
+                                                stroke="currentColor"
+                                                className="w-6 h-6 ml-2">
+                                                <path
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+                                                />
+                                            </svg>
+                                        </button>
+                                        <button
+                                            className={styles.categoryList}
+                                            value={0}
+                                            onClick={handleFirstCategoryChange}>
+                                            <p>レディース</p>
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                strokeWidth={1.5}
+                                                stroke="currentColor"
+                                                className="w-6 h-6 ml-2">
+                                                <path
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+                                                />
+                                            </svg>
+                                        </button>
+                                    </>
+                                ) : (
+                                    <>
+                                        {stateSecondCategories
+                                            ? SecondCategories.map(
+                                                  (category, index) => (
+                                                      <button
+                                                          key={index}
+                                                          className={
+                                                              styles.categoryList
+                                                          }
+                                                          onClick={e =>
+                                                              handleSecondCategoryChange(
+                                                                  category.parent,
+                                                                  category.name,
+                                                              )
+                                                          }>
+                                                          <p>{category.name}</p>
+                                                          <svg
+                                                              xmlns="http://www.w3.org/2000/svg"
+                                                              fill="none"
+                                                              viewBox="0 0 24 24"
+                                                              strokeWidth={1.5}
+                                                              stroke="currentColor"
+                                                              className="w-6 h-6 ml-2">
+                                                              <path
+                                                                  strokeLinecap="round"
+                                                                  strokeLinejoin="round"
+                                                                  d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+                                                              />
+                                                          </svg>
+                                                      </button>
+                                                  ),
+                                              )
+                                            : ThirdCategories.map(
+                                                  (category, index) => (
+                                                      <button
+                                                          key={index}
+                                                          className={
+                                                              styles.categoryList
+                                                          }
+                                                          onClick={e =>
+                                                              handleThirdCategoryChange(
+                                                                  category.id,
+                                                                  category.name,
+                                                              )
+                                                          }>
+                                                          <p>{category.name}</p>
+                                                      </button>
+                                                  ),
+                                              )}
+                                    </>
+                                )}
+                            </div>
+                        </div>
+                    )}
+                </div>
+
                 <div className={styles.labelInputBox}>
                     <label htmlFor="text">
                         商品の説明<span className={styles.span}>任意</span>
@@ -165,8 +355,8 @@ const ItemExhibit = ({ index, form, onChange }) => {
 
                 <div className={styles.colorSelect}>
                     <button
-                        className={styles.colorModalButton}
-                        onClick={handleButtonClick}>
+                        className={styles.modalButton}
+                        onClick={handleColorModalButtonClick}>
                         {color === '' ? 'カラー選択' : `${color}`}
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -187,11 +377,11 @@ const ItemExhibit = ({ index, form, onChange }) => {
                         onClick={colorClear}>
                         clear
                     </button>
-                    {isModalOpen && (
+                    {colorModalOpen && (
                         <div>
                             <div
                                 className={styles.modalBackground}
-                                onClick={() => setIsModalOpen(false)}></div>
+                                onClick={() => setColorModalOpen(false)}></div>
                             <div className={styles.modal}>
                                 {colors.map(color => (
                                     <img
