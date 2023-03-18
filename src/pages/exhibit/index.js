@@ -9,9 +9,10 @@ import FooterTabBar from '@/components/FooterTabBar'
 import ExhibitImage from '@/components/ExhibitImage'
 import ExhibitDefaultImage from '@/components/ExhibitDefaultImage'
 import Textarea from '@/components/Textarea'
+import ItemExhibit from '@/components/ItemExhibit'
 
 const Exhibit = () => {
-    const { user } = useAuth({ middleware: 'guest' })
+    const { user } = useAuth({ middleware: 'auth' })
 
     // thread image
     const [threadImages, setThreadImages] = useState([])
@@ -19,7 +20,22 @@ const Exhibit = () => {
     const [threadText, setThreadText] = useState('')
 
     // items 複数
-    const [items, setItems] = useState([])
+    const [forms, setForms] = useState([
+        {
+            title: '',
+            text: '',
+            price: '',
+            gender: '',
+            category_id: '',
+            color: '',
+            size: '',
+            condition: '',
+            days: '',
+            postage: true,
+            images: [],
+        },
+    ])
+    console.log(forms)
 
     // ThreadImages更新関数
     const handleThreadImageChange = e => {
@@ -43,6 +59,33 @@ const Exhibit = () => {
         setThreadText(e.target.value)
         console.log(threadText)
     }
+
+    // フォーム追加の関数
+    const handleAddForm = () => {
+        setForms([
+            ...forms,
+            {
+                title: '',
+                text: '',
+                price: '',
+                gender: '',
+                category_id: '',
+                color: '',
+                size: '',
+                condition: '',
+                days: '',
+                postage: true,
+                images: [],
+            },
+        ])
+    }
+
+    const handleFormChange = (index, form) => {
+        const newForms = [...forms] // 親コンポーネントで管理しているStateコピー
+        newForms[index] = form // コピー(配列)のindex番目のformデータを返り値で更新
+        setForms(newForms)
+    }
+    console.log(forms)
 
     return (
         <Layout>
@@ -99,6 +142,29 @@ const Exhibit = () => {
                             }}
                             placeholder="キャプションを入力"
                         />
+                    </div>
+
+                    <div className={styles.itemContainer}>
+                        <div className={styles.itemCardContainer}>
+                            {forms.map((form, index) => (
+                                <ItemExhibit
+                                    key={index}
+                                    index={index}
+                                    form={form}
+                                    onChange={event =>
+                                        handleFormChange(index, event)
+                                    }
+                                />
+                            ))}
+                        </div>
+                    </div>
+                    <div className={styles.buttonBox}>
+                        <button
+                            className={styles.itemCardButton}
+                            onClick={handleAddForm}>
+                            アイテム追加
+                        </button>
+                        <button className={styles.exhibitButton}>出品</button>
                     </div>
                 </div>
             </div>

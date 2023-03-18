@@ -1,0 +1,152 @@
+.itemCard {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 3px black;
+    margin: 0.5rem;
+}
+
+.cardContainer {
+    width: 95%;
+    padding: 0.5rem;
+    box-sizing: border-box;
+}
+
+.cardContainer h2 {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.imageContainer {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 30%;
+    overflow-x: auto;
+}
+
+.labelInputBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.labelInputBox label {
+    display: flex;
+    align-items: center;
+}
+
+.span {
+    font-size: 0.8rem;
+    padding: 0 3px;
+    background-color: rgb(200, 200, 200);
+    border-radius: 0.3rem;
+    margin-left: 0.3rem;
+}
+
+.input {
+    border-radius: 0.3rem;
+}
+
+.priceBox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.price {
+    text-align: end;
+    border: none;
+    border-bottom: 1px solid gray;
+}
+
+.select {
+    width: 60%;
+    padding: 0.3rem 0.5rem;
+    border: 1px solid gray;
+    margin-right: 0.3rem;
+    --tw-bg-opacity: 1;
+    background-color: rgba(243, 244, 246, var(--tw-bg-opacity));
+    border: none;
+    border-bottom: 1px solid gray;
+}
+
+.selectBox {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin: 0.5rem 0;
+}
+
+.selectBox label {
+    margin-right: 1rem;
+    font-size: 0.8rem;
+}
+
+.colorSelect {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin: 0.5rem 0;
+}
+
+.colorModalButton {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 60%;
+    padding: 0.3rem 0.5rem;
+    border: 1px solid gray;
+    margin-right: 0.3rem;
+    --tw-bg-opacity: 1;
+    background-color: rgba(243, 244, 246, var(--tw-bg-opacity));
+    border: none;
+    border-bottom: 1px solid gray;
+}
+
+.colorClearButton {
+    padding: 0.3rem 0.5rem;
+    --tw-bg-opacity: 1;
+    background-color: rgba(243, 244, 246, var(--tw-bg-opacity));
+    box-shadow: 0 0 1px black;
+}
+
+.modalBackground {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    --tw-bg-opacity: 1;
+    background-color: rgba(243, 244, 246, var(--tw-bg-opacity));
+    z-index: 1000;
+}
+
+.modalColorImage {
+    width: 25%;
+    margin: 5px;
+    border-radius: 100%;
+    box-shadow: 0 0 3px black;
+    cursor: pointer;
+}
