@@ -50,6 +50,11 @@
     align-items: flex-end;
 }
 
+.threadImagesContainer {
+    display: flex;
+    flex-direction: column;
+}
+
 .imageContainer {
     display: flex;
     align-items: center;

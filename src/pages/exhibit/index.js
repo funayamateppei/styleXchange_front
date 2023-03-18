@@ -112,28 +112,30 @@ const Exhibit = () => {
                         hidden
                         required
                     />
-                    <div className={styles.imageContainer}>
-                        {threadImages.map((image, index) => (
-                            <ExhibitImage
-                                key={index}
-                                index={index}
-                                src={URL.createObjectURL(image)}
-                                onDelete={() => handleDeleteThreadImage(index)}
-                            />
-                        ))}
-                        {Array.from({
-                            length: 10 - threadImages.length,
-                        }).map((defaultImage, index) => (
-                            <label
-                                htmlFor="threadImageInput"
-                                className="cursor-pointer"
-                                key={index + threadImages.length}>
-                                <ExhibitDefaultImage
-                                    index={index + threadImages.length}
-                                    src="default.jpg"
+                    <div className={styles.threadImagesContainer}>
+                        <div className={styles.imageContainer}>
+                            {threadImages.map((image, index) => (
+                                <ExhibitImage
+                                    key={index}
+                                    index={index}
+                                    src={URL.createObjectURL(image)}
+                                    onDelete={() => handleDeleteThreadImage(index)}
                                 />
-                            </label>
-                        ))}
+                            ))}
+                            {Array.from({
+                                length: 10 - threadImages.length,
+                            }).map((defaultImage, index) => (
+                                <label
+                                    htmlFor="threadImageInput"
+                                    className="cursor-pointer"
+                                    key={index + threadImages.length}>
+                                    <ExhibitDefaultImage
+                                        index={index + threadImages.length}
+                                        src="default.jpg"
+                                    />
+                                </label>
+                            ))}
+                        </div>
                     </div>
                     <div className={styles.textareaBox}>
                         <Textarea
