@@ -181,12 +181,11 @@ const Exhibit = ({ secondCategories, thirdCategories }) => {
 export async function getStaticProps() {
     const response = await axios.get('/api/categories')
     const categories = await response.data
-    console.log(categories)
     const secondCategories = await categories.filter(
-        category => category.big_category === 1,
+        category => category.big_category == 1,
     )
     const thirdCategories = await categories.filter(
-        category => category.big_category === 0,
+        category => category.big_category == 0,
     )
     return {
         props: {
