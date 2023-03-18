@@ -3,6 +3,7 @@ import styles from '@/styles/exhibit.module.css'
 import Head from 'next/head'
 import { useAuth } from '@/hooks/auth'
 import { useState } from 'react'
+import axios from '@/lib/axios'
 
 import Layout from '@/components/Layouts/Layout'
 import FooterTabBar from '@/components/FooterTabBar'
@@ -11,7 +12,7 @@ import ExhibitDefaultImage from '@/components/ExhibitDefaultImage'
 import Textarea from '@/components/Textarea'
 import ItemExhibit from '@/components/ItemExhibit'
 
-const Exhibit = () => {
+const Exhibit = ({ secondCategories, thirdCategories }) => {
     const { user } = useAuth({ middleware: 'auth' })
 
     // thread image
@@ -35,7 +36,6 @@ const Exhibit = () => {
             images: [],
         },
     ])
-    console.log(forms)
 
     // ThreadImages更新関数
     const handleThreadImageChange = e => {
@@ -57,7 +57,6 @@ const Exhibit = () => {
     // ThreadText更新関数
     const handleChangeThreadText = e => {
         setThreadText(e.target.value)
-        console.log(threadText)
     }
 
     // フォーム追加の関数
@@ -85,7 +84,6 @@ const Exhibit = () => {
         newForms[index] = form // コピー(配列)のindex番目のformデータを返り値で更新
         setForms(newForms)
     }
-    console.log(forms)
 
     return (
         <Layout>
@@ -119,7 +117,9 @@ const Exhibit = () => {
                                     key={index}
                                     index={index}
                                     src={URL.createObjectURL(image)}
-                                    onDelete={() => handleDeleteThreadImage(index)}
+                                    onDelete={() =>
+                                        handleDeleteThreadImage(index)
+                                    }
                                 />
                             ))}
                             {Array.from({
@@ -153,6 +153,8 @@ const Exhibit = () => {
                                     key={index}
                                     index={index}
                                     form={form}
+                                    secondCategories={secondCategories}
+                                    thirdCategories={thirdCategories}
                                     onChange={event =>
                                         handleFormChange(index, event)
                                     }
@@ -173,6 +175,25 @@ const Exhibit = () => {
             <FooterTabBar user={user} />
         </Layout>
     )
+}
+
+// カテゴリを全て取得
+export async function getStaticProps() {
+    const response = await axios.get('/api/categories')
+    const categories = await response.data
+    const secondCategories = await categories.filter(
+        category => category.big_category == 1,
+    )
+    const thirdCategories = await categories.filter(
+        category => category.big_category == 0,
+    )
+    return {
+        props: {
+            secondCategories,
+            thirdCategories,
+        },
+        revalidate: 3,
+    }
 }
 
 export default Exhibit
