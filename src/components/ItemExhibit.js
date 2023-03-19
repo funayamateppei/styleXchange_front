@@ -13,6 +13,7 @@ const ItemExhibit = ({
     thirdCategories,
     onChange,
 }) => {
+    console.log(form)
     const {
         title,
         text,
@@ -30,17 +31,18 @@ const ItemExhibit = ({
     // ItemImages更新関数
     const handleItemImageChange = e => {
         const files = Array.from(e.target.files)
+        console.log(form)
         if (files.length <= 10) {
-            onChange({ ...form, [e.target.name]: [...images, ...files] })
+            onChange({ ...form, images: [...images, ...files] })
         } else {
             alert('画像は10枚までしか選択できません')
         }
     }
 
     // ItemImages削除関数
-    const handleDeleteItemImage = index => {
+    const handleDeleteItemImage = (e, i) => {
         const newItemImages = [...images] // 画像配列のコピーを作成
-        newItemImages.splice(index, 1) // 指定されたインデックスの画像を削除
+        newItemImages.splice(i, 1) // 指定されたインデックスの画像を削除
         onChange({ ...form, images: newItemImages }) // 画像配列を更新
     }
 
@@ -58,7 +60,8 @@ const ItemExhibit = ({
     const [SecondCategories, setSecondCategories] = useState([])
     const [ThirdCategories, setThirdCategories] = useState([])
     // モーダルオープン
-    const handleCategoryModalButtonClick = () => {
+    const handleCategoryModalButtonClick = e => {
+        e.preventDefault()
         setCategoryModalOpen(true)
         setFirstCategories(true)
         setStateSecondCategories(true)
@@ -71,6 +74,7 @@ const ItemExhibit = ({
     }
     // firstCategory選択時にgenderカラムのstate更新 secondCategory表示
     const handleFirstCategoryChange = e => {
+        e.preventDefault()
         setFirstCategories(false)
         onChange({ ...form, gender: e.target.value == 1 ? true : false })
         const filteredSecondCategories = secondCategories.filter(
@@ -80,7 +84,8 @@ const ItemExhibit = ({
         setSecondCategories(filteredSecondCategories)
     }
     // secondCategory選択時にthirdCategory表示
-    const handleSecondCategoryChange = (parent_id, name) => {
+    const handleSecondCategoryChange = (e, parent_id, name) => {
+        e.preventDefault()
         setStateSecondCategories(false)
         const filteredThirdCategories = thirdCategories.filter(
             category =>
@@ -93,7 +98,8 @@ const ItemExhibit = ({
         setSecondCategoriesName(name)
     }
     // thirdCategory選択時にcategory_idカラムのstate更新
-    const handleThirdCategoryChange = (id, name) => {
+    const handleThirdCategoryChange = (e, id, name) => {
+        e.preventDefault()
         setCategoryModalOpen(false)
         setThirdCategoriesName(name)
         onChange({ ...form, category_id: id })
@@ -128,10 +134,12 @@ const ItemExhibit = ({
         onChange({ ...form, color: colorName })
         setColorModalOpen(false)
     }
-    const handleColorModalButtonClick = () => {
+    const handleColorModalButtonClick = e => {
+        e.preventDefault()
         setColorModalOpen(true)
     }
-    const colorClear = () => {
+    const colorClear = e => {
+        e.preventDefault()
         onChange({ ...form, color: '' })
     }
 
@@ -141,7 +149,7 @@ const ItemExhibit = ({
                 <h2>アイテム {index + 1}</h2>
 
                 <input
-                    id="itemImageInput"
+                    id={`itemImageInput${index}`}
                     type="file"
                     name="images"
                     accept="image/*"
@@ -152,26 +160,24 @@ const ItemExhibit = ({
                 />
                 <div className={styles.imageContainer}>
                     {images
-                        ? images.map((image, index) => (
+                        ? images.map((image, i) => (
                               <ExhibitImage
-                                  key={index}
-                                  index={index}
+                                  key={i}
+                                  index={i}
                                   src={URL.createObjectURL(image)}
-                                  onDelete={e =>
-                                      handleDeleteItemImage(e, index)
-                                  }
+                                  onDelete={e => handleDeleteItemImage(e, i)}
                               />
                           ))
                         : null}
                     {Array.from({
                         length: 10 - images.length,
-                    }).map((defaultImage, index) => (
+                    }).map((defaultImage, i) => (
                         <label
-                            htmlFor="itemImageInput"
+                            htmlFor={`itemImageInput${index}`}
                             className="cursor-pointer"
-                            key={index + images.length}>
+                            key={i + images.length}>
                             <ExhibitDefaultImage
-                                index={index + images.length}
+                                index={i + images.length}
                                 src="default.jpg"
                             />
                         </label>
@@ -281,6 +287,7 @@ const ItemExhibit = ({
                                                           }
                                                           onClick={e =>
                                                               handleSecondCategoryChange(
+                                                                  e,
                                                                   category.parent,
                                                                   category.name,
                                                               )
@@ -311,6 +318,7 @@ const ItemExhibit = ({
                                                           }
                                                           onClick={e =>
                                                               handleThirdCategoryChange(
+                                                                  e,
                                                                   category.id,
                                                                   category.name,
                                                               )
@@ -339,18 +347,25 @@ const ItemExhibit = ({
                     />
                 </div>
 
-                <div className={styles.priceBox}>
-                    <label htmlFor="price">販売価格</label>
-                    <input
-                        id="price"
-                        type="number"
-                        name="price"
-                        className={styles.price}
-                        defaultValue={price}
-                        placeholder="必須 ¥300 ~"
-                        required
-                        onChange={handleChange}
-                    />
+                <div className={styles.priceAndErrorBox}>
+                    <div className={styles.priceBox}>
+                        <label htmlFor="price">販売価格</label>
+                        <input
+                            id="price"
+                            type="number"
+                            name="price"
+                            className={styles.price}
+                            defaultValue={price}
+                            placeholder="必須 ¥300 ~"
+                            required
+                            onChange={handleChange}
+                        />
+                    </div>
+                    {price < 300 && price !== '' ? (
+                        <p className={styles.priceError}>
+                            価格は¥300以上にしてください
+                        </p>
+                    ) : null}
                 </div>
 
                 <div className={styles.colorSelect}>
@@ -383,11 +398,11 @@ const ItemExhibit = ({
                                 className={styles.modalBackground}
                                 onClick={() => setColorModalOpen(false)}></div>
                             <div className={styles.modal}>
-                                {colors.map(color => (
+                                {colors.map((color, index) => (
                                     <img
-                                        key={color.id}
+                                        key={index}
                                         src={`color/color_${color}.png`}
-                                        onClick={() => handleColorChange(color)}
+                                        onClick={e => handleColorChange(color)}
                                         className={styles.modalColorImage}
                                     />
                                 ))}
@@ -401,6 +416,7 @@ const ItemExhibit = ({
                     <select
                         name="size"
                         id="size"
+                        required
                         defaultValue={size}
                         className={styles.select}
                         onChange={handleChange}>
@@ -423,6 +439,7 @@ const ItemExhibit = ({
                     <select
                         name="condition"
                         id="condition"
+                        required
                         defaultValue={condition}
                         className={styles.select}
                         onChange={handleChange}>
@@ -447,6 +464,7 @@ const ItemExhibit = ({
                     <select
                         name="days"
                         id="days"
+                        required
                         defaultValue={days}
                         className={styles.select}
                         onChange={handleChange}>
@@ -462,6 +480,7 @@ const ItemExhibit = ({
                     <select
                         name="postage"
                         id="postage"
+                        required
                         defaultValue={postage}
                         className={styles.select}
                         onChange={handlePostageChange}>
