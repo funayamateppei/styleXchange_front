@@ -90,10 +90,21 @@
     margin-bottom: 0.5rem;
 }
 
+.priceAndErrorBox {
+    display: flex;
+    flex-direction: column;
+}
+
 .price {
     text-align: end;
     border: none;
     border-bottom: 1px solid gray;
+}
+
+.priceError {
+    width: 100%;
+    text-align: right;
+    color: red;
 }
 
 .select {

@@ -60,7 +60,8 @@ const Exhibit = ({ secondCategories, thirdCategories }) => {
     }
 
     // フォーム追加の関数
-    const handleAddForm = () => {
+    const handleAddForm = e => {
+        e.preventDefault()
         setForms([
             ...forms,
             {
@@ -83,6 +84,37 @@ const Exhibit = ({ secondCategories, thirdCategories }) => {
         const newForms = [...forms] // 親コンポーネントで管理しているStateコピー
         newForms[index] = form // コピー(配列)のindex番目のformデータを返り値で更新
         setForms(newForms)
+    }
+
+    const submit = async (e) => {
+        e.preventDefault()
+        const data = new FormData()
+        data.append('thread', threadText)
+        threadImages.forEach(image => {
+            data.append('threadImages[]', image)
+        })
+        forms.map((item, index) => {
+            data.append(`items[${index}][title]`, item.title)
+            data.append(`items[${index}][text]`, item.text)
+            data.append(`items[${index}][price]`, item.price)
+            data.append(`items[${index}][gender]`, item.gender)
+            data.append(`items[${index}][category_id]`, item.category_id)
+            data.append(`items[${index}][color]`, item.color)
+            data.append(`items[${index}][size]`, item.size)
+            data.append(`items[${index}][condition]`, item.condition)
+            data.append(`items[${index}][days]`, item.days)
+            data.append(`items[${index}][postage]`, item.postage)
+
+            item.images.forEach((image, i) => {
+                data.append(`items[${index}][images][${i}]`, image)
+            })
+        })
+
+        const response = await axios.post('/api/exhibit', data, {
+            headers: {
+                'content-type': 'multipart/form-data',
+            },
+        })
     }
 
     return (
@@ -168,7 +200,25 @@ const Exhibit = ({ secondCategories, thirdCategories }) => {
                             onClick={handleAddForm}>
                             アイテム追加
                         </button>
-                        <button className={styles.exhibitButton}>出品</button>
+                        <button
+                            className={styles.exhibitButton}
+                            // disabled={
+                            //     !forms.every(
+                            //         form =>
+                            //             form.title &&
+                            //             form.text &&
+                            //             form.price &&
+                            //             form.price < 300 &&
+                            //             form.gender &&
+                            //             form.category_id &&
+                            //             form.size &&
+                            //             form.condition &&
+                            //             form.days,
+                            //     )
+                            // }
+                            onClick={submit}>
+                            出品
+                        </button>
                     </div>
                 </div>
             </div>
