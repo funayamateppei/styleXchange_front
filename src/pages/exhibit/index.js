@@ -86,10 +86,12 @@ const Exhibit = ({ secondCategories, thirdCategories }) => {
         setForms(newForms)
     }
 
-    const submit = async (e) => {
+    const submit = async e => {
         e.preventDefault()
         const data = new FormData()
-        data.append('thread', threadText)
+        data.append('thread[user_id]', user.id)
+        data.append('thread[text]', threadText)
+        data.append('thread[archive]', Number(true))
         threadImages.forEach(image => {
             data.append('threadImages[]', image)
         })
@@ -104,12 +106,10 @@ const Exhibit = ({ secondCategories, thirdCategories }) => {
             data.append(`items[${index}][condition]`, item.condition)
             data.append(`items[${index}][days]`, item.days)
             data.append(`items[${index}][postage]`, item.postage)
-
             item.images.forEach((image, i) => {
                 data.append(`items[${index}][images][${i}]`, image)
             })
         })
-
         const response = await axios.post('/api/exhibit', data, {
             headers: {
                 'content-type': 'multipart/form-data',
