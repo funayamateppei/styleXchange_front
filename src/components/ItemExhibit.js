@@ -31,7 +31,6 @@ const ItemExhibit = ({
     // ItemImages更新関数
     const handleItemImageChange = e => {
         const files = Array.from(e.target.files)
-        console.log(form)
         if (files.length <= 10) {
             onChange({ ...form, images: [...images, ...files] })
         } else {
