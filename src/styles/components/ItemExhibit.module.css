@@ -191,3 +191,27 @@
     box-shadow: 0 0 3px black;
     cursor: pointer;
 }
+
+.deleteButtonBox {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.deleteButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1rem;
+    background-color: #c8c8c8;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #2d3748;
+    cursor: pointer;
+    width: 10rem;
+    margin: 1rem 0;
+}

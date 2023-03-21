@@ -12,8 +12,8 @@ const ItemExhibit = ({
     secondCategories,
     thirdCategories,
     onChange,
+    onDelete,
 }) => {
-    console.log(form)
     const {
         title,
         text,
@@ -487,6 +487,15 @@ const ItemExhibit = ({
                         <option value="false">着払い</option>
                     </select>
                 </div>
+                {index === 1 ? (
+                    <div className={styles.deleteButtonBox}>
+                        <button
+                            className={styles.deleteButton}
+                            onClick={() => onDelete(index)}>
+                            アイテム{index + 1}を削除
+                        </button>
+                    </div>
+                ) : null}
             </div>
         </div>
     )
