@@ -6,14 +6,14 @@ import Textarea from '@/components/Textarea'
 import ExhibitImage from '@/components/ExhibitImage'
 import ExhibitDefaultImage from '@/components/ExhibitDefaultImage'
 
-const ItemExhibit = ({
+const ExhibitItem = ({
     index,
     form,
     secondCategories,
     thirdCategories,
     onChange,
+    onDelete,
 }) => {
-    console.log(form)
     const {
         title,
         text,
@@ -487,9 +487,18 @@ const ItemExhibit = ({
                         <option value="false">着払い</option>
                     </select>
                 </div>
+                {index !== 0 ? (
+                    <div className={styles.deleteButtonBox}>
+                        <button
+                            className={styles.deleteButton}
+                            onClick={() => onDelete(index)}>
+                            アイテム{index + 1}を削除
+                        </button>
+                    </div>
+                ) : null}
             </div>
         </div>
     )
 }
 
-export default ItemExhibit
+export default ExhibitItem

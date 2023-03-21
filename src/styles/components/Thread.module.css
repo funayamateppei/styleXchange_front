@@ -1,5 +1,12 @@
 .item {
-  width: 33%;
-  border: 1px solid gray;
-  border-collapse: collapse;
+    width: 33.3333333%;
+    height: 30vw;
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    position: relative;
+    border-radius: 0.3rem;
+    border: 1px solid gray;
+    border-collapse: collapse;
+    overflow: hidden;
 }

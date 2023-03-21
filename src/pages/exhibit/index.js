@@ -10,10 +10,13 @@ import FooterTabBar from '@/components/FooterTabBar'
 import ExhibitImage from '@/components/ExhibitImage'
 import ExhibitDefaultImage from '@/components/ExhibitDefaultImage'
 import Textarea from '@/components/Textarea'
-import ItemExhibit from '@/components/ItemExhibit'
+import ExhibitItem from '@/components/ItemExhibit'
 
 const Exhibit = ({ secondCategories, thirdCategories }) => {
     const { user } = useAuth({ middleware: 'auth' })
+
+    // エラーメッセージ
+    const [message, setMessage] = useState('')
 
     // thread image
     const [threadImages, setThreadImages] = useState([])
@@ -37,6 +40,7 @@ const Exhibit = ({ secondCategories, thirdCategories }) => {
         },
     ])
 
+    console.log(forms)
     // ThreadImages更新関数
     const handleThreadImageChange = e => {
         const files = Array.from(e.target.files)
@@ -80,9 +84,17 @@ const Exhibit = ({ secondCategories, thirdCategories }) => {
         ])
     }
 
+    // フォーム更新の関数
     const handleFormChange = (index, form) => {
         const newForms = [...forms] // 親コンポーネントで管理しているStateコピー
         newForms[index] = form // コピー(配列)のindex番目のformデータを返り値で更新
+        setForms(newForms)
+    }
+
+    // フォーム削除の関数
+    const handleDeleteForm = index => {
+        const newForms = [...forms]
+        newForms.splice(index, 1)
         setForms(newForms)
     }
 
@@ -110,11 +122,32 @@ const Exhibit = ({ secondCategories, thirdCategories }) => {
                 data.append(`items[${index}][images][${i}]`, image)
             })
         })
-        const response = await axios.post('/api/exhibit', data, {
-            headers: {
-                'content-type': 'multipart/form-data',
-            },
-        })
+        // API通信
+        try {
+            const response = await axios.post('/api/exhibit', data, {
+                headers: { 'content-type': 'multipart/form-data' },
+            })
+            console.log(response.status)
+
+            if (response.status === 204) {
+                window.location.href = '/profile'
+            } else {
+                setMessage('エラーが発生しました。')
+            }
+        } catch (error) {
+            if (error.response) {
+                // サーバからエラーレスポンスが返された場合の処理
+                setMessage(
+                    `エラーが発生しました。ステータスコード: ${error.response.status}`,
+                )
+            } else if (error.request) {
+                // リクエストが送信されたがレスポンスが返ってこなかった場合の処理
+                setMessage('サーバからレスポンスがありませんでした。')
+            } else {
+                // その他のエラーが発生した場合の処理
+                setMessage('エラーが発生しました。')
+            }
+        }
     }
 
     return (
@@ -181,7 +214,7 @@ const Exhibit = ({ secondCategories, thirdCategories }) => {
                     <div className={styles.itemContainer}>
                         <div className={styles.itemCardContainer}>
                             {forms.map((form, index) => (
-                                <ItemExhibit
+                                <ExhibitItem
                                     key={index}
                                     index={index}
                                     form={form}
@@ -190,6 +223,7 @@ const Exhibit = ({ secondCategories, thirdCategories }) => {
                                     onChange={event =>
                                         handleFormChange(index, event)
                                     }
+                                    onDelete={handleDeleteForm}
                                 />
                             ))}
                         </div>
@@ -200,22 +234,22 @@ const Exhibit = ({ secondCategories, thirdCategories }) => {
                             onClick={handleAddForm}>
                             アイテム追加
                         </button>
+                        <p className={styles.errorText}>{message}</p>
                         <button
                             className={styles.exhibitButton}
-                            // disabled={
-                            //     !forms.every(
-                            //         form =>
-                            //             form.title &&
-                            //             form.text &&
-                            //             form.price &&
-                            //             form.price < 300 &&
-                            //             form.gender &&
-                            //             form.category_id &&
-                            //             form.size &&
-                            //             form.condition &&
-                            //             form.days,
-                            //     )
-                            // }
+                            disabled={
+                                !forms.every(
+                                    form =>
+                                        form.title &&
+                                        form.price &&
+                                        form.price > 300 &&
+                                        form.gender !== '' &&
+                                        form.category_id &&
+                                        form.size &&
+                                        form.condition &&
+                                        form.days,
+                                )
+                            }
                             onClick={submit}>
                             出品
                         </button>

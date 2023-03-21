@@ -130,18 +130,18 @@ export async function getAllUserIds() {
     })
 }
 
-export async function getUserData(id) {
-    const response = await axios.get(`/api/user/${id}`)
-    const data = await response.data
-    return data
-}
-
 export async function getStaticPaths() {
     const paths = await getAllUserIds()
     return {
         paths,
         fallback: true,
     }
+}
+
+export async function getUserData(id) {
+    const response = await axios.get(`/api/user/${id}`)
+    const data = await response.data
+    return data
 }
 
 export async function getStaticProps({ params }) {
