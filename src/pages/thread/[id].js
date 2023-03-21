@@ -11,8 +11,8 @@ import { useAuth } from '@/hooks/auth'
 import axios from '@/lib/axios'
 
 const Thread = ({ id, data }) => {
-    console.log(id)
-    console.log(data)
+    // console.log(id)
+    // console.log(data)
     const { user } = useAuth({ middleware: 'auth' })
     return (
         <>
