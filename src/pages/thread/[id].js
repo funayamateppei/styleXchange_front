@@ -12,7 +12,7 @@ import axios from '@/lib/axios'
 
 const Thread = ({ id, data }) => {
     // console.log(id)
-    // console.log(data)
+    console.log(data)
     const { user } = useAuth({ middleware: 'auth' })
     return (
         <>
@@ -24,14 +24,16 @@ const Thread = ({ id, data }) => {
                     <div className={styles.container}>
                         {/* ページコンテンツ */}
                         <div className={styles.content}>
-                            {data.thread_images.map((image, index) => (
-                                <Image
-                                    key={index}
-                                    src={image.path}
-                                    alt="image"
-                                />
-                                // コンポーネント作成 スライドショー
-                            ))}
+                            {(data &&
+                                data.thread_images.map((image, index) => (
+                                    <Image
+                                        key={index}
+                                        src={image.path}
+                                        alt="image"
+                                    />
+                                    // コンポーネント作成 スライドショー
+                                ))) ||
+                                null}
                         </div>
                     </div>
                     <FooterTabBar user={user} />
