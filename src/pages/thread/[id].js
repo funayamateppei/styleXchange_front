@@ -42,7 +42,7 @@ const Thread = ({ id, data }) => {
 }
 
 export async function getAllThreadIds() {
-    const response = await axios.get('/api/threads/Ids')
+    const response = await axios.get('/api/threads/ids')
     const users = await response.data
     return await users.map(user => {
         return {
