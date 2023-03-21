@@ -10,7 +10,7 @@ import FooterTabBar from '@/components/FooterTabBar'
 import ExhibitImage from '@/components/ExhibitImage'
 import ExhibitDefaultImage from '@/components/ExhibitDefaultImage'
 import Textarea from '@/components/Textarea'
-import ItemExhibit from '@/components/ItemExhibit'
+import ExhibitItem from '@/components/ItemExhibit'
 
 const Exhibit = ({ secondCategories, thirdCategories }) => {
     const { user } = useAuth({ middleware: 'auth' })
@@ -40,6 +40,7 @@ const Exhibit = ({ secondCategories, thirdCategories }) => {
         },
     ])
 
+    console.log(forms)
     // ThreadImages更新関数
     const handleThreadImageChange = e => {
         const files = Array.from(e.target.files)
@@ -213,7 +214,7 @@ const Exhibit = ({ secondCategories, thirdCategories }) => {
                     <div className={styles.itemContainer}>
                         <div className={styles.itemCardContainer}>
                             {forms.map((form, index) => (
-                                <ItemExhibit
+                                <ExhibitItem
                                     key={index}
                                     index={index}
                                     form={form}
@@ -241,8 +242,8 @@ const Exhibit = ({ secondCategories, thirdCategories }) => {
                                     form =>
                                         form.title &&
                                         form.price &&
-                                        form.price < 300 &&
-                                        form.gender &&
+                                        form.price > 300 &&
+                                        form.gender !== '' &&
                                         form.category_id &&
                                         form.size &&
                                         form.condition &&

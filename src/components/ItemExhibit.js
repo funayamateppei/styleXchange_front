@@ -6,7 +6,7 @@ import Textarea from '@/components/Textarea'
 import ExhibitImage from '@/components/ExhibitImage'
 import ExhibitDefaultImage from '@/components/ExhibitDefaultImage'
 
-const ItemExhibit = ({
+const ExhibitItem = ({
     index,
     form,
     secondCategories,
@@ -487,7 +487,7 @@ const ItemExhibit = ({
                         <option value="false">着払い</option>
                     </select>
                 </div>
-                {index === 1 ? (
+                {index !== 0 ? (
                     <div className={styles.deleteButtonBox}>
                         <button
                             className={styles.deleteButton}
@@ -501,4 +501,4 @@ const ItemExhibit = ({
     )
 }
 
-export default ItemExhibit
+export default ExhibitItem
