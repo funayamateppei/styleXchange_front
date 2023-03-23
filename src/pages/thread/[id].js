@@ -103,8 +103,13 @@ const Thread = ({ id, threadData }) => {
                                                     />
                                                 </svg>
                                             )}
-                                            <h2>{data && data.user.name}</h2>
-                                            <p>{data && data.user.height}cm</p>
+                                            <h2>
+                                                {data ? data.user.name : null}
+                                            </h2>
+                                            <p>
+                                                {data ? data.user.height : null}
+                                                cm
+                                            </p>
                                         </div>
                                     </Link>
                                 ) : null}
