@@ -46,11 +46,13 @@ const Thread = ({ id, threadData }) => {
     // 関連する投稿の情報を取得し、表示している投稿を削除する
     let relativeThreads = []
     if (data) {
-        data.user.threads.filter(function (thread) {
-            if (thread.id !== data.id) {
-                relativeThreads.push(thread)
-            }
-        })
+        if (data.user.threads) {
+            data.user.threads.filter(function (thread) {
+                if (thread.id !== data.id) {
+                    relativeThreads.push(thread)
+                }
+            })
+        }
     }
 
     console.log(data)
