@@ -272,17 +272,21 @@ const Thread = ({ id, threadData }) => {
                                                               className={
                                                                   styles.name
                                                               }>
-                                                              {
-                                                                  commentData
-                                                                      .user.name
-                                                              }
+                                                              {commentData?.user
+                                                                  ?.name
+                                                                  ? commentData
+                                                                        .user
+                                                                        .name
+                                                                  : null}
                                                           </p>
                                                       </div>
                                                       <p
                                                           className={
                                                               styles.comment
                                                           }>
-                                                          {commentData.comment}
+                                                          {commentData
+                                                              ? commentData.comment
+                                                              : null}
                                                       </p>
                                                   </div>
                                               ))
