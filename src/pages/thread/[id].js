@@ -36,11 +36,13 @@ const Thread = ({ id, threadData }) => {
     // コメントを日付順で並び替え
     let comments = []
     if (data) {
-        comments = data.thread_comments.sort(function (a, b) {
-            if (a.created_at < b.created_at) return -1
-            if (a.created_at > b.created_at) return 1
-            return 0
-        })
+        if (data.comment) {
+            comments = data.thread_comments.sort(function (a, b) {
+                if (a.created_at < b.created_at) return -1
+                if (a.created_at > b.created_at) return 1
+                return 0
+            })
+        }
     }
 
     // 関連する投稿の情報を取得し、表示している投稿を削除する
@@ -55,7 +57,7 @@ const Thread = ({ id, threadData }) => {
         }
     }
 
-    console.log(data)
+    // console.log(data)
 
     if (threadData === null) {
         return (
