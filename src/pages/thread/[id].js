@@ -180,8 +180,11 @@ const Thread = ({ id, threadData }) => {
                                             />
                                         </svg>
                                         <p>
-                                            {data.bookmarked_threads
-                                                ? data.bookmarked_threads.length
+                                            {data
+                                                ? data.bookmarked_threads
+                                                    ? data.bookmarked_threads
+                                                          .length
+                                                    : 0
                                                 : 0}
                                         </p>
                                     </div>
@@ -201,8 +204,10 @@ const Thread = ({ id, threadData }) => {
                                             />
                                         </svg>
                                         <p>
-                                            {data.liked_threads
-                                                ? data.liked_threads.length
+                                            {data
+                                                ? data.liked_threads
+                                                    ? data.liked_threads.length
+                                                    : 0
                                                 : 0}
                                         </p>
                                     </div>
