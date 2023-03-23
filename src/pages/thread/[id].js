@@ -307,14 +307,17 @@ const Thread = ({ id, threadData }) => {
                                             </svg>
                                         ) : null
                                     ) : null}
-                                    <Link href={`/thread/comment/${data.id}`}>
-                                        <button
-                                            className={
-                                                styles.commentMoreButton
-                                            }>
-                                            MORE
-                                        </button>
-                                    </Link>
+                                    {data ? (
+                                        <Link
+                                            href={`/thread/comment/${data.id}`}>
+                                            <button
+                                                className={
+                                                    styles.commentMoreButton
+                                                }>
+                                                MORE
+                                            </button>
+                                        </Link>
+                                    ) : null}
                                 </div>
                             </div>
 
