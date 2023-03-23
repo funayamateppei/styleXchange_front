@@ -33,19 +33,7 @@ const Thread = ({ id, threadData }) => {
         mutate()
     }, [])
 
-    console.log(data)
-
-    // コメントを日付順で並び替え
-    let comments = []
-    if (data) {
-        if (data.thread_comments) {
-            comments = data.thread_comments.sort(function (a, b) {
-                if (a.created_at < b.created_at) return -1
-                if (a.created_at > b.created_at) return 1
-                return 0
-            })
-        }
-    }
+    // console.log(data)
 
     // 関連する投稿の情報を取得し、表示している投稿を削除する
     let relativeThreads = []
@@ -58,8 +46,6 @@ const Thread = ({ id, threadData }) => {
             })
         }
     }
-
-    // console.log(data)
 
     if (threadData === null) {
         return (
@@ -245,8 +231,8 @@ const Thread = ({ id, threadData }) => {
                                     コメント一覧
                                 </div>
                                 <div className={styles.commentContainer}>
-                                    {comments
-                                        ? comments
+                                    {data
+                                        ? data.thread_comments
                                               .slice(0, 2)
                                               .map((commentData, index) => (
                                                   <div key={index}>
@@ -301,33 +287,39 @@ const Thread = ({ id, threadData }) => {
                                                   </div>
                                               ))
                                         : null}
-                                    {comments ? (
-                                        comments.length >= 2 ? (
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                strokeWidth={1.5}
-                                                stroke="currentColor"
-                                                className="w-6 h-6 m-2 text-gray-500">
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z"
-                                                />
-                                            </svg>
+                                    {data ? (
+                                        data.thread_comments ? (
+                                            data.thread_comments.length >= 3 ? (
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    fill="none"
+                                                    viewBox="0 0 24 24"
+                                                    strokeWidth={1.5}
+                                                    stroke="currentColor"
+                                                    className="w-6 h-6 m-2 text-gray-500">
+                                                    <path
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z"
+                                                    />
+                                                </svg>
+                                            ) : null
                                         ) : null
                                     ) : null}
                                     {data ? (
-                                        <Link
-                                            href={`/thread/comment/${data.id}`}>
-                                            <button
-                                                className={
-                                                    styles.commentMoreButton
-                                                }>
-                                                MORE
-                                            </button>
-                                        </Link>
+                                        data.thread_comments ? (
+                                            data.thread_comments.length >= 3 ? (
+                                                <Link
+                                                    href={`/thread/comment/${data.id}`}>
+                                                    <button
+                                                        className={
+                                                            styles.commentMoreButton
+                                                        }>
+                                                        MORE
+                                                    </button>
+                                                </Link>
+                                            ) : null
+                                        ) : null
                                     ) : null}
                                 </div>
                             </div>
