@@ -246,7 +246,7 @@ const Thread = ({ id, threadData }) => {
                                                               styles.commentBox
                                                           }>
                                                           {commentData?.user
-                                                              .icon_path ? (
+                                                              ?.icon_path ? (
                                                               <Image
                                                                   src={
                                                                       commentData
