@@ -229,7 +229,7 @@ const Thread = ({ id, threadData }) => {
                             </div>
 
                             <div className={styles.textContainer}>
-                                <h2>{data.text}</h2>
+                                <h2>{data ? data.text : null}</h2>
                                 <div className={styles.commentsTitle}>
                                     コメント一覧
                                 </div>
