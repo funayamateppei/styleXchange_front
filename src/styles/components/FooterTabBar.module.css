@@ -7,6 +7,10 @@
   background-color: white;
 }
 
+.footer.push {
+  height: 4rem;
+}
+
 .container {
   display: flex;
   justify-content: space-between;
