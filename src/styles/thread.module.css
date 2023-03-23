@@ -7,9 +7,46 @@
     margin: auto;
 }
 
+.flexContainer {
+    height: 90vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .content {
     display: flex;
     justify-content: center;
-    width: 90%;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
     padding: 0.5rem;
+}
+
+.userInfo {
+    width: 100%;
+    margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.iconAndName {
+    display: flex;
+    align-items: center;
+}
+
+.iconAndName h2 {
+    font-weight: bold;
+    margin-left: 0.5rem;
+}
+
+.iconAndName p {
+    margin-left: 0.5rem;
+}
+
+.sliderBox {
+    min-width: 100vw;
+    min-height: 100vw;
 }
