@@ -33,10 +33,12 @@ const Thread = ({ id, threadData }) => {
         mutate()
     }, [])
 
+    console.log(data)
+
     // コメントを日付順で並び替え
     let comments = []
     if (data) {
-        if (data.comment) {
+        if (data.thread_comments) {
             comments = data.thread_comments.sort(function (a, b) {
                 if (a.created_at < b.created_at) return -1
                 if (a.created_at > b.created_at) return 1
@@ -376,10 +378,10 @@ const Thread = ({ id, threadData }) => {
 export async function getAllThreadIds() {
     const response = await axios.get('/api/threads/ids')
     const threads = await response.data
-    return await threads.map(user => {
+    return await threads.map(thread => {
         return {
             params: {
-                id: String(user.id),
+                id: String(thread.id),
             },
         }
     })
