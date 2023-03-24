@@ -43,73 +43,71 @@ const User = ({ id, data }) => {
                     <Head>
                         <title>Profile</title>
                     </Head>
-                    <div className={styles.container}>
-                        {/* ページコンテンツ */}
-                        <div className={styles.content}>
-                            {userData?.icon_path ? (
-                                <Image
-                                    src={userData.icon_path}
-                                    alt="icon"
-                                    style="rounded-full border border-gray-400 h-20 w-20"
-                                />
-                            ) : (
-                                <img
-                                    src="../icon.png"
-                                    alt="icon"
-                                    className="rounded-full border border-gray-400 h-20 w-20"
-                                />
-                            )}
-
-                            <div className={styles.follow}>
-                                <Link href={`/follows/${id}`}>
-                                    <div className={styles.box}>
-                                        <h2 className={styles.bold}>
-                                            {userData
-                                                ? userData.follower_count
-                                                : null}
-                                        </h2>
-                                        <p>フォロワー</p>
-                                    </div>
-                                </Link>
-                                <Link href={`/follows/${id}`}>
-                                    <div className={styles.box}>
-                                        <h2 className={styles.bold}>
-                                            {userData
-                                                ? userData.following_count
-                                                : null}
-                                        </h2>
-                                        <p>フォロー中</p>
-                                    </div>
-                                </Link>
+                    <div className={styles.marginTop}>
+                        <div className={styles.container}>
+                            {/* ページコンテンツ */}
+                            <div className={styles.content}>
+                                {userData?.icon_path ? (
+                                    <Image
+                                        src={userData.icon_path}
+                                        alt="icon"
+                                        style="rounded-full border border-gray-400 h-20 w-20"
+                                    />
+                                ) : (
+                                    <img
+                                        src="../icon.png"
+                                        alt="icon"
+                                        className="rounded-full border border-gray-400 h-20 w-20"
+                                    />
+                                )}
+                                <div className={styles.follow}>
+                                    <Link href={`/follows/${id}`}>
+                                        <div className={styles.box}>
+                                            <h2 className={styles.bold}>
+                                                {userData
+                                                    ? userData.follower_count
+                                                    : null}
+                                            </h2>
+                                            <p>フォロワー</p>
+                                        </div>
+                                    </Link>
+                                    <Link href={`/follows/${id}`}>
+                                        <div className={styles.box}>
+                                            <h2 className={styles.bold}>
+                                                {userData
+                                                    ? userData.following_count
+                                                    : null}
+                                            </h2>
+                                            <p>フォロー中</p>
+                                        </div>
+                                    </Link>
+                                </div>
                             </div>
-                        </div>
-
-                        <div className={styles.userInfo}>
-                            <h2 className={styles.bold}>
-                                {userData ? userData.name : null}
-                            </h2>
-                            <p className={styles.smallText}>
-                                {userData ? userData.text : null}
-                            </p>
-                        </div>
-
-                        {user ? (
-                            <FollowButton
-                                data={{
-                                    ...userData,
-                                    is_following: userData.followers.some(
-                                        follower => follower.id === user.id,
-                                    ),
-                                }}
-                            />
-                        ) : null}
-
-                        {/* 投稿一覧 */}
-                        {userData ? (
-                            <div className={styles.threads}>
-                                <ProfileItem data={userData} />
+                            <div className={styles.userInfo}>
+                                <h2 className={styles.bold}>
+                                    {userData ? userData.name : null}
+                                </h2>
+                                <p className={styles.smallText}>
+                                    {userData ? userData.text : null}
+                                </p>
                             </div>
-                        ) : null}
+                            {user ? (
+                                <FollowButton
+                                    data={{
+                                        ...userData,
+                                        is_following: userData.followers.some(
+                                            follower => follower.id === user.id,
+                                        ),
+                                    }}
+                                />
+                            ) : null}
+                            {/* 投稿一覧 */}
+                            {userData ? (
+                                <div className={styles.threads}>
+                                    <ProfileItem data={userData} />
+                                </div>
+                            ) : null}
+                        </div>
                     </div>
                 </Header>
                 <FooterTabBar user={user} />
