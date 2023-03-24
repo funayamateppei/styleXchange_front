@@ -47,21 +47,21 @@ const Item = ({ id, itemData }) => {
     }
 
     // いいね機能
-    // const likeSubmit = async () => {
-    //     // API通信
-    //     try {
-    //         const response = await axios.post(`/api/threads/likes/${id}`)
-    //         if (response.status === 204) {
-    //             console.log('success')
-    //             mutate()
-    //         }
-    //     } catch (error) {
-    //         if (error.response) {
-    //             // サーバからエラーレスポンスが返された場合の処理
-    //             console.log('failed')
-    //         }
-    //     }
-    // }
+    const likeSubmit = async () => {
+        // API通信
+        try {
+            const response = await axios.post(`/api/items/likes/${id}`)
+            if (response.status === 204) {
+                console.log('success')
+                mutate()
+            }
+        } catch (error) {
+            if (error.response) {
+                // サーバからエラーレスポンスが返された場合の処理
+                console.log('failed')
+            }
+        }
+    }
 
     // 関連する投稿の情報を取得し、表示している投稿を削除する
     let relativeItems = []
@@ -168,7 +168,7 @@ const Item = ({ id, itemData }) => {
                                                         strokeWidth={1.5}
                                                         stroke="currentColor"
                                                         className="w-6 h-6"
-                                                        // onClick={likeSubmit}
+                                                        onClick={likeSubmit}
                                                     >
                                                         <path
                                                             strokeLinecap="round"
@@ -184,7 +184,7 @@ const Item = ({ id, itemData }) => {
                                                         strokeWidth={1.5}
                                                         stroke="currentColor"
                                                         className="w-6 h-6"
-                                                        // onClick={likeSubmit}
+                                                        onClick={likeSubmit}
                                                     >
                                                         <path
                                                             strokeLinecap="round"
