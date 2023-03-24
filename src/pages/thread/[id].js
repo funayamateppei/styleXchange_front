@@ -13,7 +13,7 @@ import FooterTabBar from '@/components/FooterTabBar'
 
 import { useAuth } from '@/hooks/auth'
 import useSWR from 'swr'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import axios from '@/lib/axios'
 
 const Thread = ({ id, threadData }) => {
@@ -33,7 +33,46 @@ const Thread = ({ id, threadData }) => {
         mutate()
     }, [])
 
-    // console.log(data)
+    // コメントInput更新処理
+    const [comment, setComment] = useState('')
+    const [message, setMessage] = useState('')
+    const handleInputChange = e => {
+        setComment(e.target.value)
+        console.log(comment)
+    }
+
+    // コメント送信処理
+    const submit = async () => {
+        if (message === '') {
+            const data = new FormData()
+            data.append('comment', comment)
+            // API通信
+            try {
+                const response = await axios.post(
+                    `/api/threads/comments/${id}`,
+                    data,
+                )
+                if (response.status === 204) {
+                    window.location.href = `/thread/comment/${id}`
+                } else {
+                    setMessage('エラーが発生しました。')
+                }
+            } catch (error) {
+                if (error.response) {
+                    // サーバからエラーレスポンスが返された場合の処理
+                    setMessage(
+                        `エラーが発生しました。ステータスコード: ${error.response.status}`,
+                    )
+                } else if (error.request) {
+                    // リクエストが送信されたがレスポンスが返ってこなかった場合の処理
+                    setMessage('サーバからレスポンスがありませんでした。')
+                } else {
+                    // その他のエラーが発生した場合の処理
+                    setMessage('エラーが発生しました。')
+                }
+            }
+        }
+    }
 
     // 関連する投稿の情報を取得し、表示している投稿を削除する
     let relativeThreads = []
@@ -326,6 +365,31 @@ const Thread = ({ id, threadData }) => {
                                         ) : null
                                     ) : null}
                                 </div>
+                                <div className={styles.commentInput}>
+                                    <input
+                                        type="text"
+                                        className={styles.input}
+                                        onChange={handleInputChange}
+                                    />
+                                    <button
+                                        className={styles.submitButton}
+                                        onClick={submit}>
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            strokeWidth={1.5}
+                                            stroke="currentColor"
+                                            className="w-6 h-6">
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z"
+                                            />
+                                        </svg>
+                                    </button>
+                                </div>
+                                <p className="text-red-500">{message}</p>
                             </div>
 
                             {relativeThreads ? (
