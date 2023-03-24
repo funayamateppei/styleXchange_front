@@ -179,3 +179,33 @@
     font-size: 0.75rem;
     line-height: 1rem;
 }
+
+.commentBox {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.commentInput {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.input {
+    width: 80%;
+    height: 2rem;
+    border-collapse: collapse;
+    border-color: gray;
+}
+
+.submitButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 10%;
+    height: 2rem;
+    background-color: whitesmoke;
+    border: 1px solid gray;
+    border-collapse: collapse;
+}
