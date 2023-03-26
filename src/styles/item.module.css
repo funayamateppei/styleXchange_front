@@ -169,7 +169,7 @@
 .itemsContainer h2 {
     text-align: center;
     font-weight: bold;
-    margin-top: 2rem;
+    margin-top: 1rem;
     margin-bottom: 0.5rem;
 }
 
@@ -178,4 +178,69 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
+}
+
+.detailBox {
+    width: 100%;
+}
+
+.detail {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.detail p {
+    border: 1px solid gray;
+    border-collapse: collapse;
+}
+
+.detailCategory {
+    font-size: 0.8rem;
+    line-height: 3rem;
+    width: 35%;
+    padding: 0 0.5rem;
+}
+
+.detailName {
+    font-size: 0.8rem;
+    line-height: 1.5rem;
+    width: 35%;
+    padding: 0 0.5rem;
+}
+
+.detailData {
+    width: 65%;
+    text-align: right;
+    padding: 0 0.5rem;
+}
+
+.preLine {
+    white-space: pre-line;
+}
+
+.purchaseButton {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1.5rem 0 0 0;
+}
+
+.exhibitButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1rem;
+    background-color: #ff6f6f;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+    font-weight: 600;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #fff;
+    cursor: pointer;
+    width: 12rem;
+    margin: 2rem 0 1rem 0;
 }
