@@ -168,8 +168,7 @@ const Item = ({ id, itemData }) => {
                                                         strokeWidth={1.5}
                                                         stroke="currentColor"
                                                         className="w-6 h-6"
-                                                        onClick={likeSubmit}
-                                                    >
+                                                        onClick={likeSubmit}>
                                                         <path
                                                             strokeLinecap="round"
                                                             strokeLinejoin="round"
@@ -184,8 +183,7 @@ const Item = ({ id, itemData }) => {
                                                         strokeWidth={1.5}
                                                         stroke="currentColor"
                                                         className="w-6 h-6"
-                                                        onClick={likeSubmit}
-                                                    >
+                                                        onClick={likeSubmit}>
                                                         <path
                                                             strokeLinecap="round"
                                                             strokeLinejoin="round"
@@ -370,6 +368,75 @@ const Item = ({ id, itemData }) => {
                                     </button>
                                 </div>
                                 <p className="text-red-500">{message}</p>
+                            </div>
+
+                            <div className={styles.detailBox}>
+                                <div className={styles.detail}>
+                                    <p className={styles.detailCategory}>
+                                        カテゴリー
+                                    </p>
+                                    <p
+                                        className={`${styles.preLine} ${styles.detailData}`}>
+                                        {data
+                                            ? data.category
+                                                ? data.parent_category
+                                                    ? data.gender === 0
+                                                        ? `メンズ/${data.parent_category.name}/\n${data.category.name}`
+                                                        : `レディース/${data.parent_category.name}/\n${data.category.name}`
+                                                    : null
+                                                : null
+                                            : null}
+                                    </p>
+                                </div>
+
+                                <div className={styles.detail}>
+                                    <p className={styles.detailName}>サイズ</p>
+                                    <p className={styles.detailData}>
+                                        {data ? data.size : null}
+                                    </p>
+                                </div>
+
+                                <div className={styles.detail}>
+                                    <p className={styles.detailName}>
+                                        商品の状態
+                                    </p>
+                                    <p className={styles.detailData}>
+                                        {data ? data.condition : null}
+                                    </p>
+                                </div>
+
+                                <div className={styles.detail}>
+                                    <p className={styles.detailName}>
+                                        配送料の負担
+                                    </p>
+                                    <p className={styles.detailData}>
+                                        {data
+                                            ? data.postage
+                                                ? '送料込み'
+                                                : '着払い'
+                                            : null}
+                                    </p>
+                                </div>
+
+                                <div className={styles.detail}>
+                                    <p className={styles.detailName}>
+                                        発送までの日数
+                                    </p>
+                                    <p className={styles.detailData}>
+                                        {data ? data.days : null}
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div className={styles.exhibitButton}>
+                                <button>
+                                    <a
+                                        href="https://jp.mercari.com/item/m33022208115?utm_source=ios&utm_medium=share&source_location=share"
+                                        rel="noreferrer noopener"
+                                        target="_blank">
+                                        購入
+                                    </a>
+                                </button>
                             </div>
 
                             <div className={styles.itemsContainer}>
