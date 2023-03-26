@@ -209,3 +209,7 @@
     border: 1px solid gray;
     border-collapse: collapse;
 }
+
+.submitButton:disabled {
+    background: #ccc;
+}

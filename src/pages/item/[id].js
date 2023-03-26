@@ -30,12 +30,6 @@ const Item = ({ id, itemData }) => {
         mutate()
     }, [])
 
-    if (data) {
-        const price = data.price
-            .toString()
-            .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-    }
-
     console.log(data)
 
     // コメントInput更新処理
@@ -43,7 +37,41 @@ const Item = ({ id, itemData }) => {
     const [message, setMessage] = useState('')
     const handleInputChange = e => {
         setComment(e.target.value)
-        console.log(comment)
+    }
+
+    // コメント送信処理
+    const submit = async () => {
+        if (comment !== '') {
+            const data = new FormData()
+            data.append('comment', comment)
+            // API通信
+            try {
+                const response = await axios.post(
+                    `/api/items/comments/${id}`,
+                    data,
+                )
+                if (response.status === 204) {
+                    window.location.href = `/item/comment/${id}`
+                } else {
+                    setMessage('エラーが発生しました。')
+                }
+            } catch (error) {
+                if (error.response) {
+                    // サーバからエラーレスポンスが返された場合の処理
+                    setMessage(
+                        `エラーが発生しました。ステータスコード: ${error.response.status}`,
+                    )
+                } else if (error.request) {
+                    // リクエストが送信されたがレスポンスが返ってこなかった場合の処理
+                    setMessage('サーバからレスポンスがありませんでした。')
+                } else {
+                    // その他のエラーが発生した場合の処理
+                    setMessage('エラーが発生しました。')
+                }
+            }
+        } else {
+            console.log('hoge')
+        }
     }
 
     // いいね機能
@@ -349,9 +377,8 @@ const Item = ({ id, itemData }) => {
                                     />
                                     <button
                                         className={styles.submitButton}
-                                        disabled={comment ? true : false}
-                                        // onClick={submit}
-                                    >
+                                        disabled={comment === '' ? true : false}
+                                        onClick={submit}>
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             fill="none"
