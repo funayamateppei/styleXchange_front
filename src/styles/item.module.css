@@ -101,6 +101,7 @@
 }
 
 .commentContainer {
+    width: 95%;
     padding: 0.5rem;
     border-radius: 0.5rem;
     background-color: rgb(200, 200, 200);
@@ -247,4 +248,10 @@
     cursor: pointer;
     width: 12rem;
     margin: 2rem 0 1rem 0;
+}
+
+.box {
+    padding: 0.5rem;
+    border-bottom: 1px solid gray;
+    width: 100%;
 }

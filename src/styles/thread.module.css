@@ -125,6 +125,7 @@
 }
 
 .commentContainer {
+    width: 95%;
     padding: 0.5rem;
     border-radius: 0.5rem;
     background-color: rgb(200, 200, 200);
@@ -212,4 +213,10 @@
 
 .submitButton:disabled {
     background: #ccc;
+}
+
+.box {
+    padding: 0.5rem;
+    border-bottom: 1px solid gray;
+    width: 100%;
 }
