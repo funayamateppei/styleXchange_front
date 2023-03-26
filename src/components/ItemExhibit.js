@@ -25,6 +25,7 @@ const ExhibitItem = ({
         condition,
         days,
         postage,
+        url,
         images,
     } = form
 
@@ -487,6 +488,21 @@ const ExhibitItem = ({
                         <option value="false">着払い</option>
                     </select>
                 </div>
+
+                <div className={styles.selectBox}>
+                    <label htmlFor="url">商品URL</label>
+                    <input
+                        id="url"
+                        type="text"
+                        name="url"
+                        className={styles.price}
+                        defaultValue={url}
+                        placeholder="必須"
+                        required
+                        onChange={handleChange}
+                    />
+                </div>
+
                 {index !== 0 ? (
                     <div className={styles.deleteButtonBox}>
                         <button

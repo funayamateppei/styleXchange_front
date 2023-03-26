@@ -431,7 +431,7 @@ const Item = ({ id, itemData }) => {
                             <div className={styles.exhibitButton}>
                                 <button>
                                     <a
-                                        href="https://jp.mercari.com/item/m33022208115?utm_source=ios&utm_medium=share&source_location=share"
+                                        href={data ? data.url : null}
                                         rel="noreferrer noopener"
                                         target="_blank">
                                         購入
