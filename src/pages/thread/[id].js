@@ -40,7 +40,6 @@ const Thread = ({ id, threadData }) => {
     const [message, setMessage] = useState('')
     const handleInputChange = e => {
         setComment(e.target.value)
-        console.log(comment)
     }
 
     // いいね機能
@@ -363,7 +362,7 @@ const Thread = ({ id, threadData }) => {
                                         ? data.thread_comments
                                               .slice(0, 2)
                                               .map((commentData, index) => (
-                                                  <div key={index}>
+                                                  <div key={index} className={styles.box}>
                                                       <div
                                                           className={
                                                               styles.commentBox

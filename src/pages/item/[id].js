@@ -278,7 +278,7 @@ const Item = ({ id, itemData }) => {
                                         ? data.item_comments
                                               .slice(0, 2)
                                               .map((commentData, index) => (
-                                                  <div key={index}>
+                                                  <div key={index} className={styles.box}>
                                                       <div
                                                           className={
                                                               styles.commentBox
