@@ -5,7 +5,7 @@
     border-bottom-width: 1px;
     --tw-border-opacity: 1;
     border-color: rgba(243, 244, 246, var(--tw-border-opacity));
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     z-index: 100;
