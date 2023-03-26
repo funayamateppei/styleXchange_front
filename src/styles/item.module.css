@@ -166,6 +166,10 @@
     border-collapse: collapse;
 }
 
+.submitButton:disabled {
+    background: #ccc;
+}
+
 .itemsContainer h2 {
     text-align: center;
     font-weight: bold;

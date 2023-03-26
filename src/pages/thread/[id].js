@@ -79,7 +79,7 @@ const Thread = ({ id, threadData }) => {
 
     // コメント送信処理
     const submit = async () => {
-        if (message === '') {
+        if (comment !== '') {
             const data = new FormData()
             data.append('comment', comment)
             // API通信
@@ -462,6 +462,7 @@ const Thread = ({ id, threadData }) => {
                                     />
                                     <button
                                         className={styles.submitButton}
+                                        disabled={comment === '' ? true : false}
                                         onClick={submit}>
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
