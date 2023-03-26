@@ -18,7 +18,7 @@ import axios from '@/lib/axios'
 
 const Thread = ({ id, threadData }) => {
     const { user } = useAuth({
-        middleware: 'auth',
+        middleware: 'guest',
     })
 
     // CSRで最新の情報を取得
