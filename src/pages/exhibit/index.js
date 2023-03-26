@@ -36,6 +36,7 @@ const Exhibit = ({ secondCategories, thirdCategories }) => {
             condition: '',
             days: '',
             postage: true,
+            url: '',
             images: [],
         },
     ])
@@ -79,6 +80,7 @@ const Exhibit = ({ secondCategories, thirdCategories }) => {
                 condition: '',
                 days: '',
                 postage: true,
+                url: '',
                 images: [],
             },
         ])
@@ -118,6 +120,7 @@ const Exhibit = ({ secondCategories, thirdCategories }) => {
             data.append(`items[${index}][condition]`, item.condition)
             data.append(`items[${index}][days]`, item.days)
             data.append(`items[${index}][postage]`, Number(item.postage))
+            data.append(`items[${index}][url]`, item.url)
             item.images.forEach((image, i) => {
                 data.append(`items[${index}][images][${i}]`, image)
             })
@@ -247,7 +250,8 @@ const Exhibit = ({ secondCategories, thirdCategories }) => {
                                         form.category_id &&
                                         form.size &&
                                         form.condition &&
-                                        form.days,
+                                        form.days &&
+                                        form.url,
                                 )
                             }
                             onClick={submit}>
