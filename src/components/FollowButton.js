@@ -1,13 +1,19 @@
 import React from 'react'
 import styles from '@/styles/follows.module.css'
 
-const FollowButton = ({ data }) => {
+import axios from '@/lib/axios'
+
+const FollowButton = ({ data, onClick }) => {
     return (
         <>
             {data.is_following ? (
-                <button className={styles.followButton}>unFollow</button>
+                <button onClick={onClick} className={styles.followButton}>
+                    unFollow
+                </button>
             ) : (
-                <button className={styles.unFollowButton}>follow</button>
+                <button onClick={onClick} className={styles.unFollowButton}>
+                    follow
+                </button>
             )}
         </>
     )

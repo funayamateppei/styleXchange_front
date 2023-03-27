@@ -3,12 +3,10 @@ import styles from '@/styles/follows.module.css'
 import Image from '@/components/Image'
 import Link from 'next/link'
 
-const FollowUserInfo = ({ user, auth }) => {
-    // console.log(user)
-
+const FollowUserInfo = ({ user, auth, onClick }) => {
     return (
-        <Link href={`/profile/${user.id}`}>
-            <div className={styles.userInfo}>
+        <div className={styles.userInfo}>
+            <Link href={`/profile/${user.id}`}>
                 <div className={styles.info}>
                     {user?.icon_path ? (
                         <Image
@@ -25,18 +23,19 @@ const FollowUserInfo = ({ user, auth }) => {
                     )}
                     <p className={styles.userName}>{user.name}</p>
                 </div>
-                {user.id !== auth &&
-                    (user.is_following ? (
-                            <button className={styles.followButton}>
-                                UnFollow
-                            </button>
-                    ) : (
-                            <button className={styles.unFollowButton}>
-                                Follow
-                            </button>
-                    ))}
-            </div>
-        </Link>
+            </Link>
+
+            {/* {user.id !== auth &&
+                (user.is_following ? (
+                    <button onClick={onClick} className={styles.followButton}>
+                        UnFollow
+                    </button>
+                ) : (
+                    <button onClick={onClick} className={styles.unFollowButton}>
+                        Follow
+                    </button>
+                ))} */}
+        </div>
     )
 }
 

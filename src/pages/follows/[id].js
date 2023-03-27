@@ -4,6 +4,7 @@ import styles from '@/styles/follows.module.css'
 import Layout from '@/components/Layouts/Layout'
 import Header from '@/components/Header'
 import FollowUserInfo from '@/components/FollowUserInfo'
+import FollowButton from '@/components/FollowButton'
 
 import { useState, useEffect } from 'react'
 import { useAuth } from '@/hooks/auth'
@@ -27,6 +28,22 @@ const follow = ({ data, id }) => {
         mutate()
     }, [])
 
+    const followSubmit = async id => {
+        // API通信
+        try {
+            const response = await axios.post(`/api/follows/${id}`)
+            if (response.status === 204) {
+                console.log('success')
+                mutate()
+            }
+        } catch (error) {
+            if (error.response) {
+                // サーバからエラーレスポンスが返された場合の処理
+                console.log('failed')
+            }
+        }
+    }
+
     // フォロー中表示かフォロワー表示の状態管理
     // trueがフォロワー falseがフォロー中
     const [mode, setMode] = useState(true)
@@ -36,6 +53,8 @@ const follow = ({ data, id }) => {
     const modeChangeItem = () => {
         setMode(false)
     }
+
+    console.log(userData)
 
     return (
         <Layout>
@@ -58,14 +77,39 @@ const follow = ({ data, id }) => {
                         </button>
                     </div>
                     {/* 一覧 */}
-                    <div>
+                    <div className={styles.userBox}>
                         {mode === true
                             ? userData && userData.followers
                                 ? userData.followers.map(x =>
                                       user ? (
-                                          <FollowUserInfo
-                                              auth={user.id}
-                                              user={{
+                                          <div
+                                              className={styles.flex}
+                                              key={x.id}>
+                                              <FollowUserInfo user={x} />
+                                              <FollowButton
+                                                  data={{
+                                                      ...x,
+                                                      is_following: x.followers.some(
+                                                          follower =>
+                                                              follower.id ===
+                                                              user.id,
+                                                      ),
+                                                  }}
+                                                  onClick={() =>
+                                                      followSubmit(x.id)
+                                                  }
+                                              />
+                                          </div>
+                                      ) : null,
+                                  )
+                                : null
+                            : userData && userData.followings
+                            ? userData.followings.map(x =>
+                                  user ? (
+                                      <div className={styles.flex} key={x.id}>
+                                          <FollowUserInfo user={x} />
+                                          <FollowButton
+                                              data={{
                                                   ...x,
                                                   is_following: x.followers.some(
                                                       follower =>
@@ -73,25 +117,9 @@ const follow = ({ data, id }) => {
                                                           user.id,
                                                   ),
                                               }}
-                                              key={x.id}
+                                              onClick={() => followSubmit(x.id)}
                                           />
-                                      ) : null,
-                                  )
-                                : null
-                            : userData && userData.followings
-                            ? userData.followings.map(x =>
-                                  user ? (
-                                      <FollowUserInfo
-                                          auth={user.id}
-                                          user={{
-                                              ...x,
-                                              is_following: x.followers.some(
-                                                  follower =>
-                                                      follower.id === user.id,
-                                              ),
-                                          }}
-                                          key={x.id}
-                                      />
+                                      </div>
                                   ) : null,
                               )
                             : null}
