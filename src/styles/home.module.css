@@ -1,9 +1,47 @@
+.header {
+    width: 100%;
+    height: 3rem;
+    position: fixed;
+    background-color: rgba(243, 244, 246);
+    top: 0;
+    left: 0;
+    border-bottom: 1px solid rgb(209, 209, 209);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header p {
+    font-weight: bold;
+}
+
 .container {
-  height: 100%;
-  width: 100%;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3rem;
+    margin-bottom: 4rem;
 }
 
 .content {
-  width: 95%;
-  height: 100vh
+    width: 95%;
+    height: 100%;
+}
+
+.itemBox {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.noMoreData {
+    color: #4b5563;
+    width: 100%;
+    height: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
