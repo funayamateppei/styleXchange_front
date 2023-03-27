@@ -6,13 +6,22 @@
     top: 0;
     left: 0;
     border-bottom: 1px solid rgb(209, 209, 209);
+    border-collapse: collapse;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.header p {
+.header button {
+    width: 33.3333333%;
+    height: 3rem;
+    border: 1px solid gray;
     font-weight: bold;
+    letter-spacing: 0.05em;
+}
+
+.header button:disabled {
+    background-color: gray;
 }
 
 .container {
