@@ -12,7 +12,7 @@ import axios from '@/lib/axios'
 import { useEffect, useState } from 'react'
 
 const Timeline = () => {
-    const { user } = useAuth({ middleware: 'auth' })
+    const { user } = useAuth({ middleware: 'guest' })
 
     const PAGE_SIZE = 8
 

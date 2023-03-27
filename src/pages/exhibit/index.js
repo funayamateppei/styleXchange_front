@@ -13,7 +13,7 @@ import Textarea from '@/components/Textarea'
 import ExhibitItem from '@/components/ItemExhibit'
 
 const Exhibit = ({ secondCategories, thirdCategories }) => {
-    const { user } = useAuth({ middleware: 'auth' })
+    const { user } = useAuth({ middleware: 'guest' })
 
     // エラーメッセージ
     const [message, setMessage] = useState('')
