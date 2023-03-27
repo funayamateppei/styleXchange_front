@@ -16,7 +16,10 @@ const Home = () => {
 
     const PAGE_SIZE = 8 // どれだけ表示するか
 
-    const [currentPage, setCurrentPage] = useState(1) // 現在のページ
+    // エンドポイント変更のためのstate 1:mens 2:mix 3:ladies
+    const [category, setCategory] = useState(2) // 初期値はmix
+
+    const [currentPage, setCurrentPage] = useState(0) // 現在のページ
     const [isLoading, setIsLoading] = useState(true) // ロード中か否か
     const [threads, setThreads] = useState([]) // 表示するdataの配列
 
@@ -24,10 +27,17 @@ const Home = () => {
         return await axios(url).then(response => response.data)
     }
 
-    const { data, error } = useSWR(
-        `/api/home?page=${currentPage}&size=${PAGE_SIZE}`,
-        fetcher,
-    )
+    // エンドポイントを変更する
+    let endpoint
+    if (category === 1) {
+        endpoint = `/api/home/mens?page=${currentPage}&size=${PAGE_SIZE}`
+    } else if (category === 2) {
+        endpoint = `/api/home?page=${currentPage}&size=${PAGE_SIZE}`
+    } else if (category === 3) {
+        endpoint = `/api/home/ladies?page=${currentPage}&size=${PAGE_SIZE}`
+    }
+
+    const { data, error } = useSWR(endpoint, fetcher)
 
     // dataが書き変わったらthreadsに取得したデータを追加する
     useEffect(() => {
@@ -66,6 +76,14 @@ const Home = () => {
         return () => window.removeEventListener('scroll', handleScroll)
     }, [data])
 
+    // カテゴリーchange関数
+    const categoryChange = index => {
+        window.scrollTo(0, 0)
+        setCategory(index)
+        setThreads([])
+        setCurrentPage(0)
+    }
+
     console.log(data)
 
     if (isLoading) {
@@ -92,7 +110,21 @@ const Home = () => {
                 <title>Home</title>
             </Head>
             <div className={styles.header}>
-                <p>HOME</p>
+                <button
+                    disabled={category === 1 ? true : false}
+                    onClick={() => categoryChange(1)}>
+                    MENS
+                </button>
+                <button
+                    disabled={category === 2 ? true : false}
+                    onClick={() => categoryChange(2)}>
+                    MIX
+                </button>
+                <button
+                    disabled={category === 3 ? true : false}
+                    onClick={() => categoryChange(3)}>
+                    LADIES
+                </button>
             </div>
             <div className={styles.container}>
                 <div className={styles.content}>
