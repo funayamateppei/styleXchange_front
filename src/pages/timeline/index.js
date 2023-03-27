@@ -95,11 +95,13 @@ const Timeline = () => {
                               ))
                             : null}
                     </div>
-                    {!data.next_page_url && (
-                        <div className={styles.noMoreData}>
-                            これ以上ありません
-                        </div>
-                    )}
+                    {data
+                        ? !data.next_page_url && (
+                              <div className={styles.noMoreData}>
+                                  これ以上ありません
+                              </div>
+                          )
+                        : null}
                 </div>
             </div>
             <FooterTabBar user={user} />
