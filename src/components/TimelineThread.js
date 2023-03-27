@@ -17,7 +17,6 @@ const TimelineThread = ({ thread }) => {
         .getHours()
         .toString()
         .padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`
-    console.log(formatted_date)
 
     return (
         <div className={styles.threadBox}>

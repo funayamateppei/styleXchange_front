@@ -21,8 +21,8 @@ const Timeline = () => {
     const [threads, setThreads] = useState([])
 
     // CSRで最新の情報を取得
-    const fetcher = url => {
-        return axios(url).then(response => response.data)
+    const fetcher = async url => {
+        return await axios(url).then(response => response.data)
     }
 
     const { data, error } = useSWR(
