@@ -3,7 +3,7 @@ import styles from '@/styles/follows.module.css'
 import Image from '@/components/Image'
 import Link from 'next/link'
 
-const FollowUserInfo = ({ user, auth, onClick }) => {
+const FollowUserInfo = ({ user }) => {
     return (
         <div className={styles.userInfo}>
             <Link href={`/profile/${user.id}`}>
@@ -24,17 +24,6 @@ const FollowUserInfo = ({ user, auth, onClick }) => {
                     <p className={styles.userName}>{user.name}</p>
                 </div>
             </Link>
-
-            {/* {user.id !== auth &&
-                (user.is_following ? (
-                    <button onClick={onClick} className={styles.followButton}>
-                        UnFollow
-                    </button>
-                ) : (
-                    <button onClick={onClick} className={styles.unFollowButton}>
-                        Follow
-                    </button>
-                ))} */}
         </div>
     )
 }
