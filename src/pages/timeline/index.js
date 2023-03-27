@@ -49,7 +49,6 @@ const Timeline = () => {
             document.documentElement.clientHeight || window.innerHeight
         const scrolledToBottom =
             Math.ceil(scrollTop + clientHeight) >= scrollHeight
-
         if (scrolledToBottom && data && data.next_page_url) {
             setCurrentPage(prevPage => prevPage + 1)
         }
@@ -66,6 +65,7 @@ const Timeline = () => {
         return (
             <div className={styles.flexContainer}>
                 <img src="loading.gif" alt="loading" />
+                <FooterTabBar user={user} />
             </div>
         )
     }
@@ -74,6 +74,7 @@ const Timeline = () => {
         return (
             <div className={styles.flexContainer}>
                 <p>エラーが発生しました</p>
+                <FooterTabBar user={user} />
             </div>
         )
     }
