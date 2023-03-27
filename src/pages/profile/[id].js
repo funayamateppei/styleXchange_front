@@ -28,6 +28,22 @@ const User = ({ id, data }) => {
         mutate()
     }, [])
 
+    const followSubmit = async () => {
+        // API通信
+        try {
+            const response = await axios.post(`/api/follows/${userData.id}`)
+            if (response.status === 204) {
+                console.log('success')
+                mutate()
+            }
+        } catch (error) {
+            if (error.response) {
+                // サーバからエラーレスポンスが返された場合の処理
+                console.log('failed')
+            }
+        }
+    }
+
     if (userData === null) {
         return (
             <div className={styles.flexContainer}>
@@ -91,6 +107,7 @@ const User = ({ id, data }) => {
                                     {userData ? userData.text : null}
                                 </p>
                             </div>
+
                             {user ? (
                                 <FollowButton
                                     data={{
@@ -99,8 +116,10 @@ const User = ({ id, data }) => {
                                             follower => follower.id === user.id,
                                         ),
                                     }}
+                                    onClick={followSubmit}
                                 />
                             ) : null}
+                            
                             {/* 投稿一覧 */}
                             {userData ? (
                                 <div className={styles.threads}>

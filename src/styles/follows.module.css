@@ -74,5 +74,18 @@
     letter-spacing: 0.05em;
     color: #fff;
     cursor: pointer;
-    width: 6.5rem;
+    width: 8rem;
+}
+
+.userBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.flex {
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
 }
