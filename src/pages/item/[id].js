@@ -278,7 +278,9 @@ const Item = ({ id, itemData }) => {
                                         ? data.item_comments
                                               .slice(0, 2)
                                               .map((commentData, index) => (
-                                                  <div key={index} className={styles.box}>
+                                                  <div
+                                                      key={index}
+                                                      className={styles.box}>
                                                       <div
                                                           className={
                                                               styles.commentBox
@@ -408,8 +410,8 @@ const Item = ({ id, itemData }) => {
                                             ? data.category
                                                 ? data.parent_category
                                                     ? data.gender === 0
-                                                        ? `メンズ/${data.parent_category.name}/\n${data.category.name}`
-                                                        : `レディース/${data.parent_category.name}/\n${data.category.name}`
+                                                        ? `メンズ/\n${data.parent_category.name}/\n${data.category.name}`
+                                                        : `レディース/\n${data.parent_category.name}/\n${data.category.name}`
                                                     : null
                                                 : null
                                             : null}
