@@ -10,6 +10,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 30;
 }
 
 .header button {
@@ -21,7 +22,78 @@
 }
 
 .header button:disabled {
-    background-color: gray;
+    background-color: rgb(190, 190, 190);
+}
+
+.headerForSort {
+    width: 100%;
+    height: 2rem;
+    position: fixed;
+    top: 3rem;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    background-color: rgba(243, 244, 246);
+    border-bottom: 1px solid gray;
+    z-index: 30;
+}
+
+.headerForSort button {
+    display: flex;
+    align-items: center;
+    width: 7rem;
+    padding: 0.3rem 0.5rem;
+}
+
+.openDropdownList {
+    position: fixed;
+    top: 5rem; /* 上に隠しておく */
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(243, 244, 246);
+    z-index: 20;
+}
+.openDropdownList button {
+    display: flex;
+    align-items: center;
+    width: 7rem;
+    padding: 0.3rem 0.5rem;
+    border-bottom: 1px solid gray;
+}
+.openDropdownList button:disabled {
+    background-color: rgb(190, 190, 190);
+}
+/* スライドダウンアニメーションの定義 */
+.slideDown {
+    animation-name: slideDownAnimation;
+    animation-duration: 0.3s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+}
+@keyframes slideDownAnimation {
+    from {
+        top: 0; /* 初期位置 */
+    }
+    to {
+        top: 5rem; /* 表示位置 */
+    }
+}
+/* スライドアップアニメーションの定義 */
+.slideUp {
+    animation-name: slideUpAnimation;
+    animation-duration: 0.3s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+}
+@keyframes slideUpAnimation {
+    from {
+        top: 5rem; /* 表示位置 */
+    }
+    to {
+        top: 0rem; /* 初期位置 */
+    }
 }
 
 .container {
@@ -31,7 +103,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 3rem;
+    padding: 1rem 0;
+    margin-top: 5rem;
     margin-bottom: 4rem;
 }
 
