@@ -45,11 +45,13 @@ const profile = () => {
                     {/* ページコンテンツ */}
                     <div className={styles.content}>
                         {data?.icon_path ? (
-                            <Image
-                                src={data.icon_path}
-                                alt="icon"
-                                style="rounded-full border border-gray-400 h-20 w-20"
-                            />
+                            <div className="w-28 h-20 rounded-full overflow-hidden border border-gray-400">
+                                <img
+                                    src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${data.icon_path}`}
+                                    alt="icon"
+                                    className="w-full h-full object-cover mx-auto my-auto"
+                                />
+                            </div>
                         ) : (
                             <img
                                 src="../icon.png"
