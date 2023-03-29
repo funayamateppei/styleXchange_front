@@ -51,7 +51,7 @@ const edit = () => {
             const response = await axios.post('/api/my/data', data, {
                 headers: {
                     'content-type': 'multipart/form-data',
-                    'X-HTTP-Method-Override': 'PUT',
+                    'X-HTTP-Method-Override': 'PATCH',
                 },
             })
             console.log(response.status)
