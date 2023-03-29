@@ -11,7 +11,157 @@
 .content {
     display: flex;
     justify-content: center;
-    width: 90%;
-    padding: 0.5rem;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
     margin-top: 4rem;
+}
+
+.form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 90%;
+    padding: 1rem 0;
+}
+
+.iconBox {
+    width: 90%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.icon {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 100%;
+    border: 1px solid rgb(107, 114, 128);
+}
+
+.clearButton {
+    position: absolute;
+    bottom: 0;
+    left: 5.5rem;
+    background-color: #bbbbbb;
+    padding: 0.1rem 0.3rem;
+    border-radius: 0.2rem;
+    border: 1px solid gray;
+}
+
+.heightBox {
+    width: 90%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.heightBox input {
+    width: 4rem;
+    margin: 0 0.3rem 0 1rem;
+    text-align: center;
+    border-color: #bbbbbb;
+}
+
+.nameBox {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+
+.nameBox input {
+    width: 100%;
+    border-color: #bbbbbb;
+}
+
+.emailBox {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+
+.emailBox input {
+    width: 100%;
+    border-color: #bbbbbb;
+}
+
+.textBox {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+
+.textBox textarea {
+    width: 100%;
+    height: 6rem;
+    border-color: #bbbbbb;
+}
+
+.postcodeAddress {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+}
+
+.postcodeBox {
+    width: 90%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.2rem;
+}
+
+.postcodeBox input {
+    width: 6rem;
+    text-align: center;
+    border-color: #bbbbbb;
+}
+
+.addressBox {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+
+.addressBox input {
+    width: 100%;
+    border-color: #bbbbbb;
+}
+
+.instagramBox {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+
+.instagramBox input {
+    width: 100%;
+    border-color: #bbbbbb;
+}
+
+.submitButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1rem;
+    background-color: #414c5e;
+    border-radius: 0.25rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #fff;
+    width: 8rem;
+    margin: 1rem 0;
+}
+
+.submitButton:disabled {
+    background-color: rgb(190, 190, 190);
 }
