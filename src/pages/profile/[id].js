@@ -64,11 +64,13 @@ const User = ({ id, data }) => {
                             {/* ページコンテンツ */}
                             <div className={styles.content}>
                                 {userData?.icon_path ? (
-                                    <Image
-                                        src={userData.icon_path}
-                                        alt="icon"
-                                        style="rounded-full border border-gray-400 h-20 w-20"
-                                    />
+                                    <div className="w-28 h-20 rounded-full overflow-hidden border border-gray-400">
+                                        <img
+                                            src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${userData.icon_path}`}
+                                            alt="icon"
+                                            className="w-full h-full object-cover mx-auto my-auto"
+                                        />
+                                    </div>
                                 ) : (
                                     <img
                                         src="../icon.png"
@@ -119,7 +121,7 @@ const User = ({ id, data }) => {
                                     onClick={followSubmit}
                                 />
                             ) : null}
-                            
+
                             {/* 投稿一覧 */}
                             {userData ? (
                                 <div className={styles.threads}>
