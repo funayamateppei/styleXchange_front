@@ -27,6 +27,20 @@
     padding: 0.5rem;
 }
 
+.textContainer {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.userInfo {
+    display: flex;
+    align-items: center;
+    margin: 1rem 0;
+}
+.userInfo p {
+    margin-left: 1rem;
+}
+
 .commentContainer {
     width: 100%;
     padding: 0.5rem;

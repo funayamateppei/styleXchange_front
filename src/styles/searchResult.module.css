@@ -1,0 +1,111 @@
+.headerForSort {
+    width: 100%;
+    height: 2rem;
+    position: fixed;
+    top: 4rem;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    background-color: white;
+    border-bottom: 1px solid gray;
+    border-top: 1px solid gray;
+    z-index: 30;
+}
+
+.headerForSort button {
+    display: flex;
+    align-items: center;
+    width: 7rem;
+    padding: 0.3rem 0.5rem;
+}
+
+.openDropdownList {
+    position: fixed;
+    top: 4rem; /* 上に隠しておく */
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(243, 244, 246);
+    z-index: 20;
+}
+.openDropdownList button {
+    display: flex;
+    align-items: center;
+    width: 7rem;
+    padding: 0.3rem 0.5rem;
+    border-bottom: 1px solid gray;
+}
+.openDropdownList button:disabled {
+    background-color: rgb(190, 190, 190);
+}
+/* スライドダウンアニメーションの定義 */
+.slideDown {
+    animation-name: slideDownAnimation;
+    animation-duration: 0.3s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+}
+@keyframes slideDownAnimation {
+    from {
+        top: 0; /* 初期位置 */
+    }
+    to {
+        top: 6rem; /* 表示位置 */
+    }
+}
+/* スライドアップアニメーションの定義 */
+.slideUp {
+    animation-name: slideUpAnimation;
+    animation-duration: 0.3s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+}
+@keyframes slideUpAnimation {
+    from {
+        top: 6rem; /* 表示位置 */
+    }
+    to {
+        top: 0rem; /* 初期位置 */
+    }
+}
+
+.container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 6rem;
+    margin-bottom: 4rem;
+}
+
+.flexContainer {
+    height: 90vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content {
+    width: 95%;
+    height: 100%;
+    padding-top: 1rem;
+}
+
+.itemBox {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.noMoreData {
+    color: #4b5563;
+    width: 100%;
+    height: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

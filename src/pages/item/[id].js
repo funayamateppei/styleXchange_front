@@ -269,6 +269,33 @@ const Item = ({ id, itemData }) => {
                                 <p>{data ? data.text : null}</p>
                             </div>
 
+                            {data ? (
+                                <Link
+                                    className={styles.threadLink}
+                                    href={`/thread/${data.thread_id}`}>
+                                    <p className="w-full text-center">
+                                        このアイテムを着用している投稿
+                                    </p>
+                                    <div className={styles.threadImageBox}>
+                                        {data
+                                            ? data.thread.thread_images
+                                                  .slice(0, 3)
+                                                  .map(image => (
+                                                      <div
+                                                          className={
+                                                              styles.threadImgBox
+                                                          }>
+                                                          <img
+                                                              src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${image.path}`}
+                                                              alt="image"
+                                                          />
+                                                      </div>
+                                                  ))
+                                            : null}
+                                    </div>
+                                </Link>
+                            ) : null}
+
                             <div className={styles.textContainer}>
                                 <div className={styles.commentsTitle}>
                                     コメント一覧

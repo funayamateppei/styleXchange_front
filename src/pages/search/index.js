@@ -3,24 +3,37 @@ import styles from '@/styles/search.module.css'
 
 import Layout from '@/components/Layouts/Layout'
 import Head from 'next/head'
-import Header from '@/components/Header'
 import FooterTabBar from '@/components/FooterTabBar'
 
 import axios from '@/lib/axios'
 import { useAuth } from '@/hooks/auth'
 import { useState } from 'react'
+import { useRouter } from 'next/router'
 
 const Search = ({ secondCategoriesList, thirdCategoriesList }) => {
     const { user } = useAuth({ middleware: 'guest' })
+    const router = useRouter()
 
     // カテゴリーの何層目を開いているかのstate
     const [isOpenFirstCategory, setIsOpenFirstCategory] = useState(false)
     const [isOpenSecondCategory, setIsOpenSecondCategory] = useState(false)
     const [isOpenThirdCategory, setIsOpenThirdCategory] = useState(false)
     // カテゴリーの配列のstate
-    const [firstCategories, setFirstCategories] = useState(['MENS', 'LADIES'])
+    const [firstCategories, setFirstCategories] = useState([
+        { gender: 1, name: 'MENS' },
+        { gender: 0, name: 'LADIES' },
+    ])
     const [secondCategories, setSecondCategories] = useState([])
     const [thirdCategories, setThirdCategories] = useState([])
+    // カテゴリ選択のstate
+    const [firstSelect, setFirstSelect] = useState('')
+    const [secondSelect, setSecondSelect] = useState('')
+
+    // threadとitemどちらで検索するかのstate
+    const [rule, setRule] = useState(true)
+
+    // フリーワードのstate
+    const [word, setWord] = useState('')
 
     const firstCategoryIsOpen = () => {
         setIsOpenFirstCategory(true)
@@ -29,18 +42,58 @@ const Search = ({ secondCategoriesList, thirdCategoriesList }) => {
         setIsOpenFirstCategory(false)
     }
 
-    const secondCategoryIsOpen = () => {
+    const secondCategoryIsOpen = e => {
         setIsOpenSecondCategory(true)
+        setFirstSelect(e.target.value)
+        const filteredSecondCategories = secondCategoriesList.filter(
+            category =>
+                category.gender == 2 || category.gender == e.target.value,
+        )
+        setSecondCategories(filteredSecondCategories)
     }
     const secondCategoryIsClose = () => {
         setIsOpenSecondCategory(false)
+        setFirstSelect('')
+        setSecondCategories([])
     }
 
-    const thirdCategoryIsOpen = () => {
+    const thirdCategoryIsOpen = e => {
         setIsOpenThirdCategory(true)
+        setSecondSelect(e.target.value)
+        const filteredThirdCategories = thirdCategoriesList.filter(
+            category =>
+                category.parent == e.target.value &&
+                (firstSelect == 1
+                    ? category.gender == 2 || category.gender == 1
+                    : category.gender == 2 || category.gender == 0),
+        )
+        setThirdCategories(filteredThirdCategories)
     }
     const thirdCategoryIsClose = () => {
         setIsOpenThirdCategory(false)
+        setThirdCategories([])
+        setSecondSelect('')
+    }
+
+    const categorySearch = e => {
+        if (rule) {
+            const searchUrl = `/search/result/thread/category?gender=${firstSelect}&category=${e.target.value}`
+            router.push(searchUrl)
+        } else {
+            const searchUrl = `/search/result/item/category?gender=${firstSelect}&category=${e.target.value}`
+            router.push(searchUrl)
+        }
+    }
+
+    function handleSubmit(event) {
+        event.preventDefault()
+        if (rule) {
+            const searchUrl = `/search/result/thread/word?word=${word}`
+            router.push(searchUrl)
+        } else {
+            const searchUrl = `/search/result/item/word?word=${word}`
+            router.push(searchUrl)
+        }
     }
 
     return (
@@ -50,6 +103,19 @@ const Search = ({ secondCategoriesList, thirdCategoriesList }) => {
             </Head>
             <div className={styles.container}>
                 <div className={styles.content}>
+                    <div className={styles.header}>
+                        <button
+                            disabled={rule ? true : false}
+                            onClick={() => setRule(true)}>
+                            コーデ
+                        </button>
+                        <button
+                            disabled={rule ? false : true}
+                            onClick={() => setRule(false)}>
+                            アイテム
+                        </button>
+                    </div>
+
                     <div className={styles.search}>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -64,10 +130,11 @@ const Search = ({ secondCategoriesList, thirdCategoriesList }) => {
                                 d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
                             />
                         </svg>
-                        <form>
+                        <form onSubmit={handleSubmit}>
                             <input
                                 type="text"
                                 placeholder="Search"
+                                onChange={e => setWord(e.target.value)}
                                 className={styles.searchInput}
                             />
                         </form>
@@ -110,10 +177,11 @@ const Search = ({ secondCategoriesList, thirdCategoriesList }) => {
                                               className={styles.categoryButton}
                                               key={index}>
                                               <button
+                                                  value={category.gender}
                                                   onClick={
                                                       secondCategoryIsOpen
                                                   }>
-                                                  {category}
+                                                  {category.name}
                                               </button>
                                               <svg
                                                   xmlns="http://www.w3.org/2000/svg"
@@ -169,10 +237,11 @@ const Search = ({ secondCategoriesList, thirdCategoriesList }) => {
                                                   }
                                                   key={index}>
                                                   <button
+                                                      value={category.parent}
                                                       onClick={
                                                           thirdCategoryIsOpen
                                                       }>
-                                                      {category}
+                                                      {category.name}
                                                   </button>
                                                   <svg
                                                       xmlns="http://www.w3.org/2000/svg"
@@ -226,8 +295,9 @@ const Search = ({ secondCategoriesList, thirdCategoriesList }) => {
                                               className={styles.categoryButton}
                                               key={index}>
                                               <button
-                                                  onClick={thirdCategoryIsOpen}>
-                                                  {category}
+                                                  value={category.id}
+                                                  onClick={categorySearch}>
+                                                  {category.name}
                                               </button>
                                               <svg
                                                   xmlns="http://www.w3.org/2000/svg"
