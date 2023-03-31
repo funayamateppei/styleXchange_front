@@ -3,18 +3,20 @@ import styles from '@/styles/profile.module.css'
 import Layout from '@/components/Layouts/Layout'
 import Header from '@/components/Header'
 import FooterTabBar from '@/components/FooterTabBar'
-import Image from '@/components/Image'
 import ProfileItem from '@/components/ProfileItem'
 import FollowButton from '@/components/FollowButton'
 import Link from 'next/link'
 import Head from 'next/head'
 import { useAuth } from '@/hooks/auth'
 import { useEffect } from 'react'
+import { useRouter } from 'next/router'
 import useSWR from 'swr'
 import axios from '@/lib/axios'
 
 const User = ({ id, data }) => {
     const { user } = useAuth({ middleware: 'auth' })
+
+    const router = useRouter()
 
     // CSRで最新の情報を取得
     const fetcher = url => {
@@ -40,6 +42,14 @@ const User = ({ id, data }) => {
             if (error.response) {
                 // サーバからエラーレスポンスが返された場合の処理
                 console.log('failed')
+            }
+        }
+    }
+
+    if (userData) {
+        if (user) {
+            if (userData.id === user.id) {
+                router.push('/profile')
             }
         }
     }
