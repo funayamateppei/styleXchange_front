@@ -30,14 +30,14 @@ const TimelineThread = ({ thread }) => {
                 </div>
 
                 <div className={styles.userInfo}>
-                    <Image
+                    <img
                         src={
                             thread?.user?.icon_path
-                                ? thread.user.icon_path
+                                ? `${process.env.NEXT_PUBLIC_BACKEND_URL}${thread.user.icon_path}`
                                 : '/icon.png'
                         }
                         alt="icon"
-                        style="h-8 w-8 rounded-full border border-gray-400 ml-2"
+                        className="h-8 w-8 rounded-full border border-gray-400 ml-2"
                     />
                     <p className={styles.username}>{thread?.user?.name}</p>
                 </div>
