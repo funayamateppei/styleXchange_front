@@ -117,17 +117,19 @@ const User = ({ id, data }) => {
                                         {userData ? userData.name : null}
                                     </h2>
                                     <p>{userData ? userData.height : null}cm</p>
-                                    {userData.instagram_id ? (
-                                        <a
-                                            href={`https://www.instagram.com/${data.instagram_id}`}
-                                            rel="noreferrer noopener"
-                                            target="_blank">
-                                            <img
-                                                src="/Instagram_Glyph_Gradient_RGB.svg"
-                                                alt="instagram icon"
-                                                className="w-7 h-7 ml-4"
-                                            />
-                                        </a>
+                                    {userData ? (
+                                        userData.instagram_id ? (
+                                            <a
+                                                href={`https://www.instagram.com/${data.instagram_id}`}
+                                                rel="noreferrer noopener"
+                                                target="_blank">
+                                                <img
+                                                    src="/Instagram_Glyph_Gradient_RGB.svg"
+                                                    alt="instagram icon"
+                                                    className="w-7 h-7 ml-4"
+                                                />
+                                            </a>
+                                        ) : null
                                     ) : null}
                                 </div>
                                 <p className={styles.smallText}>
