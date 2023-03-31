@@ -11,10 +11,7 @@ const ThreadItem = ({ item }) => {
         <div className={styles.container}>
             <Link href={`/item/${item.id}`}>
                 <div className={styles.itemImageBox}>
-                    <Image
-                        src={item.item_images[0].path}
-                        alt="item image"
-                    />
+                    <Image src={item.item_images[0].path} alt="item image" />
                     <p className={styles.price}>¥ {price}</p>
                 </div>
                 <p className={styles.title}>{item.title}</p>
