@@ -102,9 +102,22 @@ const User = ({ id, data }) => {
                                 </div>
                             </div>
                             <div className={styles.userInfo}>
-                                <h2 className={styles.bold}>
-                                    {userData ? userData.name : null}
-                                </h2>
+                                <div>
+                                    <h2 className={styles.bold}>{data.name}</h2>
+                                    <p>{userData ? userData.height : null}cm</p>
+                                    {userData.instagram_id ? (
+                                        <a
+                                            href={`https://www.instagram.com/${data.instagram_id}`}
+                                            rel="noreferrer noopener"
+                                            target="_blank">
+                                            <img
+                                                src="/Instagram_Glyph_Gradient_RGB.svg"
+                                                alt="instagram icon"
+                                                className="w-7 h-7 ml-4"
+                                            />
+                                        </a>
+                                    ) : null}
+                                </div>
                                 <p className={styles.smallText}>
                                     {userData ? userData.text : null}
                                 </p>
