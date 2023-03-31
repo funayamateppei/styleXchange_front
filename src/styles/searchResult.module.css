@@ -1,0 +1,39 @@
+.container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+}
+
+.flexContainer {
+    height: 90vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content {
+    width: 95%;
+    height: 100%;
+    padding-top: 1rem;
+}
+
+.itemBox {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.noMoreData {
+    color: #4b5563;
+    width: 100%;
+    height: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
