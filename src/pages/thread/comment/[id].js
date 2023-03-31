@@ -86,6 +86,36 @@ const Comment = ({ id, datalist }) => {
                     </Head>
                     <div className={styles.container}>
                         <div className={styles.content}>
+                            <div className={styles.textContainer}>
+                                <Link
+                                    href={
+                                        data
+                                            ? `/profile/${data.threadData.user.id}`
+                                            : null
+                                    }>
+                                    <div className={styles.userInfo}>
+                                        <img
+                                            src={
+                                                data
+                                                    ? data.threadData.user
+                                                          .icon_path
+                                                        ? `${process.env.NEXT_PUBLIC_BACKEND_URL}${data.threadData.user.icon_path}`
+                                                        : '/icon.png'
+                                                    : null
+                                            }
+                                            alt="icon"
+                                            className="h-12 w-12 rounded-full border border-gray-400"
+                                        />
+                                        <p>
+                                            {data
+                                                ? data.threadData.user.name
+                                                : null}
+                                        </p>
+                                    </div>
+                                </Link>
+                                <p>{data ? data.threadData.text : null}</p>
+                            </div>
+
                             <div className={styles.commentContainer}>
                                 {data
                                     ? data.commentData.map((comment, index) => (
