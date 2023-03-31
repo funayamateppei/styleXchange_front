@@ -13,7 +13,7 @@ import useSWR from 'swr'
 import axios from '@/lib/axios'
 import { useState, useEffect } from 'react'
 
-const result = () => {
+const category = () => {
     const { user } = useAuth({ middleware: 'guest' })
     const router = useRouter()
     const { gender, category } = router.query // gender:1=MENS 2=LADIES
@@ -115,4 +115,4 @@ const result = () => {
     )
 }
 
-export default result
+export default category
