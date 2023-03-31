@@ -24,12 +24,16 @@ const category = () => {
     const [isLoading, setIsLoading] = useState(true)
     const [threads, setThreads] = useState([])
 
+    // 新着順or30日以内に投稿されたthreadでいいね順 like:いいね順 new:新着順
+    const [sortBy, setSortBy] = useState('like') // 初期値はlike
+    const [isOpenDropdown, setIsOpenDropdown] = useState(false)
+
     // CSRで最新の情報を取得
     const fetcher = async url => {
         return await axios(url).then(response => response.data)
     }
     const { data, error } = useSWR(
-        `/api/search/thread/category?page=${currentPage}&size=${PAGE_SIZE}&gender=${gender}&category=${category}`,
+        `/api/search/thread/category?page=${currentPage}&size=${PAGE_SIZE}&gender=${gender}&category=${category}&sort=${sortBy}`,
         fetcher,
     )
 
@@ -62,6 +66,20 @@ const category = () => {
         return () => window.removeEventListener('scroll', handleScroll)
     }, [data])
 
+    const DropdownMode = () => {
+        setIsOpenDropdown(!isOpenDropdown)
+    }
+    // sortChange関数
+    const sortChange = e => {
+        if (e.target.value !== sortBy) {
+            window.scrollTo(0, 0)
+            setSortBy(e.target.value)
+            setItems([])
+            setCurrentPage(0)
+            setIsOpenDropdown(false)
+        }
+    }
+
     console.log(data)
 
     if (isLoading) {
@@ -88,6 +106,92 @@ const category = () => {
                 <Head>
                     <title>Exhibit</title>
                 </Head>
+
+                <div className={styles.headerForSort}>
+                    <button onClick={DropdownMode}>
+                        {sortBy === 'like' ? 'いいね順' : '新着順'}
+                        {isOpenDropdown ? (
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                strokeWidth={1.5}
+                                stroke="currentColor"
+                                className="w-4 h-4 ml-1">
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M4.5 15.75l7.5-7.5 7.5 7.5"
+                                />
+                            </svg>
+                        ) : (
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                strokeWidth={1.5}
+                                stroke="currentColor"
+                                className="w-4 h-4 ml-1">
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+                                />
+                            </svg>
+                        )}
+                    </button>
+                </div>
+
+                <div
+                    className={
+                        isOpenDropdown
+                            ? `${styles.openDropdownList} ${styles.slideDown}`
+                            : `${styles.openDropdownList} ${styles.slideUp}`
+                    }>
+                    <button
+                        disabled={sortBy === 'like' ? true : false}
+                        value="like"
+                        onClick={sortChange}>
+                        いいね順
+                        {sortBy === 'like' ? (
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                strokeWidth={1.5}
+                                stroke="currentColor"
+                                className="w-4 h-4 ml-2">
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M4.5 12.75l6 6 9-13.5"
+                                />
+                            </svg>
+                        ) : null}
+                    </button>
+                    <button
+                        disabled={sortBy === 'new' ? true : false}
+                        value="new"
+                        onClick={sortChange}>
+                        新着順
+                        {sortBy === 'new' ? (
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                strokeWidth={1.5}
+                                stroke="currentColor"
+                                className="w-4 h-4 ml-2">
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M4.5 12.75l6 6 9-13.5"
+                                />
+                            </svg>
+                        ) : null}
+                    </button>
+                </div>
+
                 <div className={styles.container}>
                     <div className={styles.content}>
                         <div className={styles.itemBox}>
