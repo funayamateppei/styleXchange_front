@@ -3,7 +3,6 @@ import styles from '@/styles/search.module.css'
 
 import Layout from '@/components/Layouts/Layout'
 import Head from 'next/head'
-import Header from '@/components/Header'
 import FooterTabBar from '@/components/FooterTabBar'
 
 import axios from '@/lib/axios'
