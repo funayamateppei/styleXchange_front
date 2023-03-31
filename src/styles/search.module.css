@@ -1,3 +1,25 @@
+.header {
+    width: 100%;
+    height: 3rem;
+    background-color: rgba(243, 244, 246);
+    border-collapse: collapse;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header button {
+    width: 50%;
+    height: 3rem;
+    border: 1px solid gray;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+}
+
+.header button:disabled {
+    background-color: rgb(190, 190, 190);
+}
+
 .container {
     height: 100%;
     width: 100%;
@@ -9,12 +31,12 @@
 }
 
 .content {
-    width: 95%;
+    width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 1.5rem 0;
+    /* margin: 1.5rem 0; */
 }
 
 .search {
@@ -26,6 +48,7 @@
     background: rgb(200, 200, 200);
     border: none;
     border-radius: 10px;
+    margin-top: 2rem;
 }
 
 .search form {

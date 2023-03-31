@@ -29,6 +29,9 @@ const Search = ({ secondCategoriesList, thirdCategoriesList }) => {
     const [firstSelect, setFirstSelect] = useState('')
     const [secondSelect, setSecondSelect] = useState('')
 
+    // threadとitemどちらで検索するかのstate
+    const [rule, setRule] = useState(true)
+
     // フリーワードのstate
     const [word, setWord] = useState('')
 
@@ -73,14 +76,24 @@ const Search = ({ secondCategoriesList, thirdCategoriesList }) => {
     }
 
     const categorySearch = e => {
-        const searchUrl = `/search/result/thread/category?gender=${firstSelect}&category=${e.target.value}`
-        router.push(searchUrl)
+        if (rule) {
+            const searchUrl = `/search/result/thread/category?gender=${firstSelect}&category=${e.target.value}`
+            router.push(searchUrl)
+        } else {
+            const searchUrl = `/search/result/item/category?gender=${firstSelect}&category=${e.target.value}`
+            router.push(searchUrl)
+        }
     }
 
     function handleSubmit(event) {
         event.preventDefault()
-        const searchUrl = `/search/result/thread/word?word=${word}`
-        router.push(searchUrl)
+        if (rule) {
+            const searchUrl = `/search/result/thread/word?word=${word}`
+            router.push(searchUrl)
+        } else {
+            const searchUrl = `/search/result/item/word?word=${word}`
+            router.push(searchUrl)
+        }
     }
 
     return (
@@ -90,6 +103,19 @@ const Search = ({ secondCategoriesList, thirdCategoriesList }) => {
             </Head>
             <div className={styles.container}>
                 <div className={styles.content}>
+                    <div className={styles.header}>
+                        <button
+                            disabled={rule ? true : false}
+                            onClick={() => setRule(true)}>
+                            コーデ
+                        </button>
+                        <button
+                            disabled={rule ? false : true}
+                            onClick={() => setRule(false)}>
+                            アイテム
+                        </button>
+                    </div>
+
                     <div className={styles.search}>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"

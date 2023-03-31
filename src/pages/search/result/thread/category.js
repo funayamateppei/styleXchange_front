@@ -29,7 +29,7 @@ const result = () => {
         return await axios(url).then(response => response.data)
     }
     const { data, error } = useSWR(
-        `/api/search/category?page=${currentPage}&size=${PAGE_SIZE}&gender=${gender}&category=${category}`,
+        `/api/search/thread/category?page=${currentPage}&size=${PAGE_SIZE}&gender=${gender}&category=${category}`,
         fetcher,
     )
 
