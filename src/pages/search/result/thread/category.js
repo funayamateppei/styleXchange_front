@@ -74,7 +74,7 @@ const category = () => {
         if (e.target.value !== sortBy) {
             window.scrollTo(0, 0)
             setSortBy(e.target.value)
-            setItems([])
+            setThreads([])
             setCurrentPage(0)
             setIsOpenDropdown(false)
         }
