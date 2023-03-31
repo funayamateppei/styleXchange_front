@@ -34,7 +34,7 @@ const TimelineThread = ({ thread }) => {
                         src={
                             thread?.user?.icon_path
                                 ? thread.user.icon_path
-                                : 'icon.png'
+                                : '/icon.png'
                         }
                         alt="icon"
                         style="h-8 w-8 rounded-full border border-gray-400 ml-2"
