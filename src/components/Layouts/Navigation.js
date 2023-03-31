@@ -3,13 +3,22 @@ import { ResponsiveNavButton } from '@/components/ResponsiveNavLink'
 import { DropdownButton } from '@/components/DropdownLink'
 import { useAuth } from '@/hooks/auth'
 import { useState } from 'react'
+import { useRouter } from 'next/router'
 
 const Navigation = ({ user }) => {
-
     const { logout } = useAuth()
 
     // ハンバーガーメニューが開いているかどうか
     const [open, setOpen] = useState(false)
+
+    const router = useRouter()
+
+    const likeRouter = () => {
+        router.push('/profile/like')
+    }
+    const bookmarkRouter = () => {
+        router.push('/profile/bookmark')
+    }
 
     if (user) {
         const path = `${process.env.NEXT_PUBLIC_BACKEND_URL}/${user.icon_path}`
@@ -48,6 +57,12 @@ const Navigation = ({ user }) => {
                                 </button>
                             }>
                             {/* Authentication */}
+                            <DropdownButton onClick={likeRouter}>
+                                いいね一覧
+                            </DropdownButton>
+                            <DropdownButton onClick={bookmarkRouter}>
+                                ブックマーク一覧
+                            </DropdownButton>
                             <DropdownButton onClick={logout}>
                                 Logout
                             </DropdownButton>
@@ -119,6 +134,12 @@ const Navigation = ({ user }) => {
 
                         <div className="mt-3 space-y-1">
                             {/* Authentication */}
+                            <ResponsiveNavButton onClick={likeRouter}>
+                                いいね一覧
+                            </ResponsiveNavButton>
+                            <ResponsiveNavButton onClick={bookmarkRouter}>
+                                ブックマーク一覧
+                            </ResponsiveNavButton>
                             <ResponsiveNavButton onClick={logout}>
                                 Logout
                             </ResponsiveNavButton>
