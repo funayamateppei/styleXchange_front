@@ -7,7 +7,6 @@ import { useAuth } from '@/hooks/auth'
 import axios from '@/lib/axios'
 import useSWR from 'swr'
 import { useEffect } from 'react'
-import Image from '@/components/Image'
 import Button from '@/components/Button'
 import Link from 'next/link'
 import ProfileItem from '@/components/ProfileItem'
@@ -81,7 +80,22 @@ const profile = () => {
                     </div>
 
                     <div className={styles.userInfo}>
-                        <h2 className={styles.bold}>{data.name}</h2>
+                        <div>
+                            <h2 className={styles.bold}>{data.name}</h2>
+                            <p>{data.height}cm</p>
+                            {data.instagram_id ? (
+                                <a
+                                    href={`https://www.instagram.com/${data.instagram_id}`}
+                                    rel="noreferrer noopener"
+                                    target="_blank">
+                                    <img
+                                        src="/Instagram_Glyph_Gradient_RGB.svg"
+                                        alt="instagram icon"
+                                        className="w-7 h-7 ml-4"
+                                    />
+                                </a>
+                            ) : null}
+                        </div>
                         <p className={styles.smallText}>{data.text}</p>
                     </div>
 
