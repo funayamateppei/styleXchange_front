@@ -278,7 +278,7 @@ const Item = ({ id, itemData }) => {
                                     </p>
                                     <div className={styles.threadImageBox}>
                                         {data
-                                            ? data?.thread?.thread_images
+                                            ? data.thread.thread_images
                                                   .slice(0, 3)
                                                   .map(image => (
                                                       <div
