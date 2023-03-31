@@ -74,13 +74,13 @@ const Search = ({ secondCategoriesList, thirdCategoriesList }) => {
     }
 
     const categorySearch = e => {
-        const searchUrl = `/search/result/category?gender=${firstSelect}&category=${e.target.value}`
+        const searchUrl = `/search/result/thread/category?gender=${firstSelect}&category=${e.target.value}`
         router.push(searchUrl)
     }
 
     function handleSubmit(event) {
         event.preventDefault()
-        const searchUrl = `/search/result/word?word=${word}`
+        const searchUrl = `/search/result/thread/word?word=${word}`
         router.push(searchUrl)
     }
 

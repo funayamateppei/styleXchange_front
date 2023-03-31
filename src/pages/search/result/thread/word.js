@@ -99,6 +99,15 @@ const word = () => {
                                       />
                                   ))
                                 : null}
+                            
+                            {/* {threads
+                                ? threads.map((thread, index) => (
+                                      <TimelineThread
+                                          key={index}
+                                          thread={thread}
+                                      />
+                                  ))
+                                : null} */}
                         </div>
                         {data
                             ? !data.next_page_url && (
