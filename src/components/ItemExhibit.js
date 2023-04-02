@@ -32,10 +32,10 @@ const ExhibitItem = ({
     // ItemImages更新関数
     const handleItemImageChange = e => {
         const files = Array.from(e.target.files)
-        if (files.length <= 10) {
+        if (files.length <= 6) {
             onChange({ ...form, images: [...images, ...files] })
         } else {
-            alert('画像は10枚までしか選択できません')
+            alert('画像は6枚までしか選択できません')
         }
     }
 
@@ -170,7 +170,7 @@ const ExhibitItem = ({
                           ))
                         : null}
                     {Array.from({
-                        length: 10 - images.length,
+                        length: 6 - images.length,
                     }).map((defaultImage, i) => (
                         <label
                             htmlFor={`itemImageInput${index}`}
