@@ -3,6 +3,7 @@ import styles from '@/styles/edit.module.css'
 
 import Layout from '@/components/Layouts/Layout'
 import Header from '@/components/Header'
+import Textarea from '@/components/Textarea'
 import ExhibitImage from '@/components/ExhibitImage'
 import ExhibitDefaultImage from '@/components/ExhibitDefaultImage'
 
@@ -67,21 +68,19 @@ const thread = ({ id, data }) => {
         e.preventDefault()
         setIsSubmitting(true)
         const formData = new FormData()
-        formData.append('title', threadData.title)
-        formData.append('content', threadData.content)
-        threadData.thread_images.forEach(img => {
-            formData.append('threadImages', img.id)
-        })
+        formData.append('text', threadData.text)
         threadData.deletedImageIds.forEach(id => {
-            formData.append('deletedImageIds', id)
+            formData.append('deletedImageIds[]', id)
         })
         threadData.newImages.forEach(img => {
-            formData.append('newImages', img)
+            formData.append('newImages[]', img)
         })
+        console.log(formData)
         try {
-            const response = await axios.patch(`/api/threads/${id}`, formData, {
+            const response = await axios.post(`/api/threads/${id}`, formData, {
                 headers: {
-                    'Content-Type': 'multipart/form-data',
+                    'content-type': 'multipart/form-data',
+                    'X-HTTP-Method-Override': 'PATCH',
                 },
             })
             console.log(response)
@@ -95,6 +94,10 @@ const thread = ({ id, data }) => {
     // 削除処理
     const handleDeleteSubmit = async e => {
         e.preventDefault()
+        const shouldDelete = window.confirm('本当に削除してもよろしいですか？')
+        if (!shouldDelete) {
+            return
+        }
         setIsSubmitting(true)
         try {
             const response = await axios.delete(`/api/threads/${id}`)
@@ -112,15 +115,6 @@ const thread = ({ id, data }) => {
                 <div className={styles.container}>
                     <div className={styles.content}>
                         <form>
-                            <div>
-                                <label htmlFor="text">キャプション</label>
-                                <textarea
-                                    id="text"
-                                    value={threadData.text}
-                                    onChange={handleTextChange}
-                                />
-                            </div>
-
                             <input
                                 id="threadImages"
                                 type="file"
@@ -193,17 +187,34 @@ const thread = ({ id, data }) => {
                                 </div>
                             </div>
 
-                            <button
-                                onClick={handleUpdateSubmit}
-                                disabled={isSubmitting}>
-                                更新
-                            </button>
+                            <div className={styles.textareaBox}>
+                                <p>キャプションを編集</p>
+                                <Textarea
+                                    onChange={handleTextChange}
+                                    value={threadData.text}
+                                    placeholder="キャプションを入力"
+                                />
+                            </div>
 
-                            <button
-                                onClick={handleDeleteSubmit}
-                                disabled={isSubmitting}>
-                                削除
-                            </button>
+                            <div className="flex">
+                                <div className={styles.submitButtonBox}>
+                                    <button
+                                        className={styles.updateButton}
+                                        onClick={handleUpdateSubmit}
+                                        disabled={isSubmitting}>
+                                        投稿を更新
+                                    </button>
+                                </div>
+
+                                <div className={styles.submitButtonBox}>
+                                    <button
+                                        className={styles.deleteButton}
+                                        onClick={handleDeleteSubmit}
+                                        disabled={isSubmitting}>
+                                        投稿を削除
+                                    </button>
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>
