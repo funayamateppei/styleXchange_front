@@ -40,6 +40,29 @@
     overflow-x: auto;
 }
 
+.selectBox {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin: 0.5rem 0;
+}
+
+.selectBox label {
+    margin-right: 1rem;
+    font-size: 0.8rem;
+}
+
+.select {
+    width: 60%;
+    padding: 0.3rem 0.5rem;
+    border: 1px solid gray;
+    margin-right: 0.3rem;
+    --tw-bg-opacity: 1;
+    background-color: rgba(243, 244, 246, var(--tw-bg-opacity));
+    border: none;
+    border-bottom: 1px solid gray;
+}
+
 .submitButtonBox {
     width: 100%;
     display: flex;

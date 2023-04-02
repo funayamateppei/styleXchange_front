@@ -20,16 +20,26 @@ const thread = ({ id, data }) => {
         thread_images: data.thread_images || [],
         deletedImageIds: [],
         newImages: [],
+        archive: data.archive,
     })
     console.log(threadData)
 
+    // textを更新する関数
     const handleTextChange = e => {
         setThreadData({
             ...threadData,
             text: e.target.value,
         })
     }
+    // archiveを更新する関数
+    const handleArchiveChange = e => {
+        setThreadData({
+            ...threadData,
+            archive: Number(e.target.value),
+        })
+    }
 
+    // 新しく追加する画像を更新する関数
     const handleThreadImageChange = e => {
         const files = Array.from(e.target.files)
         const newImages = files.map(file => file)
@@ -42,6 +52,7 @@ const thread = ({ id, data }) => {
             newImages: newImages,
         })
     }
+    // 新しく追加する画像を削除する関数
     const handleDeleteNewImage = (e, index) => {
         e.preventDefault()
         const updatedImages = [...threadData.newImages]
@@ -52,6 +63,7 @@ const thread = ({ id, data }) => {
         })
     }
 
+    // 保存されている画像を削除する関数
     const handleDeleteImage = (e, imageId) => {
         e.preventDefault()
         setThreadData({
@@ -67,8 +79,17 @@ const thread = ({ id, data }) => {
     const handleUpdateSubmit = async e => {
         e.preventDefault()
         setIsSubmitting(true)
+        if (
+            threadData.thread_images.length + threadData.newImages.length ===
+            0
+        ) {
+            alert('画像を１枚以上選んでください')
+            setIsSubmitting(false)
+            return
+        }
         const formData = new FormData()
         formData.append('text', threadData.text)
+        formData.append('archive', threadData.archive)
         threadData.deletedImageIds.forEach(id => {
             formData.append('deletedImageIds[]', id)
         })
@@ -194,6 +215,20 @@ const thread = ({ id, data }) => {
                                     value={threadData.text}
                                     placeholder="キャプションを入力"
                                 />
+                            </div>
+
+                            <div className={styles.selectBox}>
+                                <label htmlFor="size">Archive</label>
+                                <select
+                                    name="size"
+                                    id="size"
+                                    required
+                                    value={threadData.archive}
+                                    className={styles.select}
+                                    onChange={handleArchiveChange}>
+                                    <option value="1">Not Archive</option>
+                                    <option value="0">Archive</option>
+                                </select>
                             </div>
 
                             <div className="flex">
