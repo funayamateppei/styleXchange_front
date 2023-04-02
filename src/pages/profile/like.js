@@ -32,10 +32,10 @@ const like = () => {
         fetcher,
     )
 
-  // dataが書き変わったらitemsに取得したデータを追加する
+    // dataが書き変わったらitemsに取得したデータを追加する
     useEffect(() => {
         if (data) {
-            setItems(prevThreads => [...prevThreads, ...data.data])
+            setItems(prevItems => [...prevItems, ...data.data])
             setIsLoading(false)
         }
     }, [data])
@@ -125,6 +125,13 @@ const like = () => {
                                     : items.map(item => (
                                           <Item item={item} key={item.id} />
                                       ))
+                                : null}
+                            {data
+                                ? !data.next_page_url && (
+                                      <div className={styles.noMoreData}>
+                                          これ以上ありません
+                                      </div>
+                                  )
                                 : null}
                         </div>
                     </div>
