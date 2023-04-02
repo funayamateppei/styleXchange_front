@@ -44,3 +44,9 @@
 .header button:disabled {
     background-color: rgb(190, 190, 190);
 }
+
+.itemsContainer {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
