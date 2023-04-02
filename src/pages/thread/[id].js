@@ -15,11 +15,11 @@ import { useAuth } from '@/hooks/auth'
 import useSWR from 'swr'
 import { useEffect, useState } from 'react'
 import axios from '@/lib/axios'
+import { useRouter } from 'next/router'
 
 const Thread = ({ id, threadData }) => {
-    const { user } = useAuth({
-        middleware: 'guest',
-    })
+    const { user } = useAuth({ middleware: 'guest' })
+    const router = useRouter()
 
     // CSRで最新の情報を取得
     const fetcher = url => {
@@ -118,6 +118,12 @@ const Thread = ({ id, threadData }) => {
                     relativeThreads.push(thread)
                 }
             })
+        }
+    }
+
+    if (user && data) {
+        if (user.id === data.user.id) {
+            router.push(`/profile/thread/${data.id}`)
         }
     }
 
@@ -362,7 +368,9 @@ const Thread = ({ id, threadData }) => {
                                         ? data.thread_comments
                                               .slice(0, 2)
                                               .map((commentData, index) => (
-                                                  <div key={index} className={styles.box}>
+                                                  <div
+                                                      key={index}
+                                                      className={styles.box}>
                                                       <div
                                                           className={
                                                               styles.commentBox

@@ -14,9 +14,11 @@ import { useAuth } from '@/hooks/auth'
 import useSWR from 'swr'
 import { useEffect, useState } from 'react'
 import axios from '@/lib/axios'
+import { useRouter } from 'next/router'
 
 const Item = ({ id, itemData }) => {
     const { user } = useAuth({ middleware: 'auth' })
+    const router = useRouter()
 
     // CSRで最新の情報を取得
     const fetcher = url => {
@@ -100,6 +102,12 @@ const Item = ({ id, itemData }) => {
                     relativeItems.push(item)
                 }
             })
+        }
+    }
+
+    if (user && data) {
+        if (user.id === data.user.id) {
+            router.push(`/profile/item/${data.id}`)
         }
     }
 
