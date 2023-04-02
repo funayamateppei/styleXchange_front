@@ -10,9 +10,11 @@ import ExhibitDefaultImage from '@/components/ExhibitDefaultImage'
 import { useAuth } from '@/hooks/auth'
 import { useState } from 'react'
 import axios from '@/lib/axios'
+import { useRouter } from 'next/router'
 
 const thread = ({ id, data }) => {
     const { user } = useAuth({ middleware: 'auth' })
+    const router = useRouter()
 
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [threadData, setThreadData] = useState({
@@ -96,7 +98,6 @@ const thread = ({ id, data }) => {
         threadData.newImages.forEach(img => {
             formData.append('newImages[]', img)
         })
-        console.log(formData)
         try {
             const response = await axios.post(`/api/threads/${id}`, formData, {
                 headers: {
@@ -105,6 +106,7 @@ const thread = ({ id, data }) => {
                 },
             })
             console.log(response)
+            router.push(`/thread/${id}`)
         } catch (error) {
             console.error(error)
         } finally {
@@ -123,6 +125,7 @@ const thread = ({ id, data }) => {
         try {
             const response = await axios.delete(`/api/threads/${id}`)
             console.log(response)
+            router.push('/profile')
         } catch (error) {
             console.error(error)
         } finally {
