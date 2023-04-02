@@ -1,0 +1,36 @@
+.container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 4rem;
+}
+
+.content {
+    width: 95%;
+    height: 100%;
+    padding-top: 1rem;
+}
+
+.flexContainer {
+    height: 90vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.threadImagesContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.imageContainer {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 20%;
+    overflow-x: auto;
+}
