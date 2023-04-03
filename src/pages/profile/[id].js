@@ -111,12 +111,17 @@ const User = ({ id, data }) => {
                                     </Link>
                                 </div>
                             </div>
+
                             <div className={styles.userInfo}>
                                 <div>
                                     <h2 className={styles.bold}>
                                         {userData ? userData.name : null}
                                     </h2>
-                                    <p>{userData ? userData.height : null}cm</p>
+                                    <p>
+                                        {userData
+                                            ? userData.height + ' cm'
+                                            : null}
+                                    </p>
                                     {userData ? (
                                         userData.instagram_id ? (
                                             <a
