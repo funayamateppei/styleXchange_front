@@ -453,7 +453,7 @@ const Item = ({ id, itemData }) => {
                                         {data
                                             ? data.category
                                                 ? data.parent_category
-                                                    ? data.gender === 0
+                                                    ? data.gender === 1
                                                         ? `メンズ/\n${data.parent_category.name}/\n${data.category.name}`
                                                         : `レディース/\n${data.parent_category.name}/\n${data.category.name}`
                                                     : null
