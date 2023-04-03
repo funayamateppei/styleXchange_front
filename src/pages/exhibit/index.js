@@ -45,10 +45,10 @@ const Exhibit = ({ secondCategories, thirdCategories }) => {
     // ThreadImages更新関数
     const handleThreadImageChange = e => {
         const files = Array.from(e.target.files)
-        if (files.length <= 10) {
+        if (files.length <= 6) {
             setThreadImages([...threadImages, ...files])
         } else {
-            alert('画像は10枚までしか選択できません')
+            alert('画像は6枚までしか選択できません')
         }
     }
 
@@ -191,7 +191,7 @@ const Exhibit = ({ secondCategories, thirdCategories }) => {
                                 />
                             ))}
                             {Array.from({
-                                length: 10 - threadImages.length,
+                                length: 6 - threadImages.length,
                             }).map((defaultImage, index) => (
                                 <label
                                     htmlFor="threadImageInput"
