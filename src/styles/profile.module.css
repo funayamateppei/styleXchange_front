@@ -49,6 +49,7 @@
 }
 
 .userInfo {
+    width: 90%;
     display: flex;
     flex-direction: column;
     margin-bottom: 0.5rem;
@@ -57,7 +58,7 @@
 .userInfo div {
     display: flex;
     align-items: center;
-    margin-bottom: .5rem;
+    margin-bottom: 0.5rem;
 }
 
 .userInfo div h2 {

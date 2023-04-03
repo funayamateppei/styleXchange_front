@@ -82,7 +82,7 @@ const profile = () => {
                     <div className={styles.userInfo}>
                         <div>
                             <h2 className={styles.bold}>{data.name}</h2>
-                            <p>{data.height}cm</p>
+                            <p>{data.height ? data.height + ' cm' : null}</p>
                             {data.instagram_id ? (
                                 <a
                                     href={`https://www.instagram.com/${data.instagram_id}`}
