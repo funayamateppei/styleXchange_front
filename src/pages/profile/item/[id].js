@@ -44,9 +44,11 @@ const item = ({ id, data, secondCategoriesList, thirdCategoriesList }) => {
             alert('画像は6枚までしかアップロードできません。')
             return
         }
-        setThreadData({
-            ...threadData,
-            newImages: newImages,
+        setThreadData(prevThreadData => {
+            return {
+                ...prevThreadData,
+                newImages: [...prevThreadData.newImages, ...newImages],
+            }
         })
     }
     // 新しく追加する画像を削除する関数
@@ -206,6 +208,69 @@ const item = ({ id, data, secondCategoriesList, thirdCategoriesList }) => {
     ]
 
     const daysArray = ['1~2日で発送', '2~3日で発送', '4~7日で発送']
+
+    // 更新処理
+    const handleUpdateSubmit = async e => {
+        e.preventDefault()
+        setIsSubmitting(true)
+        if (threadData.item_images.length + threadData.newImages.length === 0) {
+            alert('画像を１枚以上選んでください')
+            setIsSubmitting(false)
+            return
+        }
+        const formData = new FormData()
+        formData.append('item[title]', threadData.title)
+        formData.append('item[text]', threadData.text)
+        formData.append('item[price]', threadData.price)
+        formData.append('item[gender]', threadData.gender)
+        formData.append('item[category_id]', threadData.category_id)
+        formData.append('item[color]', threadData.color)
+        formData.append('item[size]', threadData.size)
+        formData.append('item[condition]', threadData.condition)
+        formData.append('item[days]', threadData.days)
+        formData.append('item[sale]', threadData.sale)
+        formData.append('item[postage]', threadData.postage)
+        formData.append('item[url]', threadData.url)
+        threadData.deletedImageIds.forEach(id => {
+            formData.append('deletedImageIds[]', id)
+        })
+        threadData.newImages.forEach(img => {
+            formData.append('newImages[]', img)
+        })
+        try {
+            const response = await axios.post(`/api/items/${id}`, formData, {
+                headers: {
+                    'content-type': 'multipart/form-data',
+                    'X-HTTP-Method-Override': 'PATCH',
+                },
+            })
+            console.log(response)
+            router.push(`/item/${id}`)
+        } catch (error) {
+            console.error(error)
+        } finally {
+            setIsSubmitting(false)
+        }
+    }
+
+    // 削除処理
+    const handleDeleteSubmit = async e => {
+        e.preventDefault()
+        const shouldDelete = window.confirm('本当に削除してもよろしいですか？')
+        if (!shouldDelete) {
+            return
+        }
+        setIsSubmitting(true)
+        try {
+            const response = await axios.delete(`/api/items/${id}`)
+            console.log(response)
+            router.push('/profile')
+        } catch (error) {
+            console.error(error)
+        } finally {
+            setIsSubmitting(false)
+        }
+    }
 
     return (
         <Layout>
@@ -751,7 +816,7 @@ const item = ({ id, data, secondCategoriesList, thirdCategoriesList }) => {
                                 />
                             </div>
 
-                            {/* <div className="flex">
+                            <div className="flex">
                                 <div className={styles.submitButtonBox}>
                                     <button
                                         className={styles.updateButton}
@@ -769,7 +834,7 @@ const item = ({ id, data, secondCategoriesList, thirdCategoriesList }) => {
                                         投稿を削除
                                     </button>
                                 </div>
-                            </div> */}
+                            </div>
                         </form>
                     </div>
                 </div>

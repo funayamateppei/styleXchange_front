@@ -49,9 +49,11 @@ const thread = ({ id, data }) => {
             alert('画像は6枚までしかアップロードできません。')
             return
         }
-        setThreadData({
-            ...threadData,
-            newImages: newImages,
+        setThreadData(prevThreadData => {
+            return {
+                ...prevThreadData,
+                newImages: [...prevThreadData.newImages, ...newImages],
+            }
         })
     }
     // 新しく追加する画像を削除する関数
