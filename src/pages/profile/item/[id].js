@@ -213,7 +213,10 @@ const item = ({ id, data, secondCategoriesList, thirdCategoriesList }) => {
     const handleUpdateSubmit = async e => {
         e.preventDefault()
         setIsSubmitting(true)
-        if (threadData.item_images.length + threadData.newImages.length === 0) {
+        if (
+            threadData.item_images.length === 0 &&
+            threadData.newImages.length === 0
+        ) {
             alert('画像を１枚以上選んでください')
             setIsSubmitting(false)
             return

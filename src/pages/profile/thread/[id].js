@@ -84,7 +84,7 @@ const thread = ({ id, data }) => {
         e.preventDefault()
         setIsSubmitting(true)
         if (
-            threadData.thread_images.length + threadData.newImages.length ===
+            threadData.thread_images.length === 0 && threadData.newImages.length ===
             0
         ) {
             alert('画像を１枚以上選んでください')
