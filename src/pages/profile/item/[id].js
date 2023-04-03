@@ -12,7 +12,7 @@ import { useState } from 'react'
 import axios from '@/lib/axios'
 import { useRouter } from 'next/router'
 
-const item = ({ id, data, secondCategoriesList, thirdCategoriesList }) => {
+const itemEdit = ({ id, data, secondCategoriesList, thirdCategoriesList }) => {
     const { user } = useAuth({ middleware: 'auth' })
     const router = useRouter()
 
@@ -328,13 +328,12 @@ const item = ({ id, data, secondCategoriesList, thirdCategoriesList }) => {
                                         ),
                                     )}
                                     {/* デフォルト画像を表示 */}
-                                    {[
-                                        ...Array(
+                                    {Array.from({
+                                        length:
                                             6 -
-                                                threadData.item_images.length -
-                                                threadData.newImages.length,
-                                        ),
-                                    ].map((_, index) => (
+                                            threadData.item_images.length -
+                                            threadData.newImages.length,
+                                    }).map((_, index) => (
                                         <label
                                             htmlFor="threadImages"
                                             key={index}>
@@ -882,4 +881,4 @@ export async function getServerSideProps(context) {
     }
 }
 
-export default item
+export default itemEdit

@@ -12,7 +12,7 @@ import { useState } from 'react'
 import axios from '@/lib/axios'
 import { useRouter } from 'next/router'
 
-const thread = ({ id, data }) => {
+const threadEdit = ({ id, data }) => {
     const { user } = useAuth({ middleware: 'auth' })
     const router = useRouter()
 
@@ -84,8 +84,8 @@ const thread = ({ id, data }) => {
         e.preventDefault()
         setIsSubmitting(true)
         if (
-            threadData.thread_images.length === 0 && threadData.newImages.length ===
-            0
+            threadData.thread_images.length === 0 &&
+            threadData.newImages.length === 0
         ) {
             alert('画像を１枚以上選んでください')
             setIsSubmitting(false)
@@ -188,14 +188,12 @@ const thread = ({ id, data }) => {
                                         ),
                                     )}
                                     {/* デフォルト画像を表示 */}
-                                    {[
-                                        ...Array(
+                                    {Array.from({
+                                        length:
                                             6 -
-                                                threadData.thread_images
-                                                    .length -
-                                                threadData.newImages.length,
-                                        ),
-                                    ].map((_, index) => (
+                                            threadData.thread_images.length -
+                                            threadData.newImages.length,
+                                    }).map((_, index) => (
                                         <label
                                             htmlFor="threadImages"
                                             key={index}>
@@ -287,4 +285,4 @@ export async function getServerSideProps(context) {
     }
 }
 
-export default thread
+export default threadEdit
