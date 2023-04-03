@@ -221,10 +221,10 @@ const thread = ({ id, data }) => {
                             </div>
 
                             <div className={styles.selectBox}>
-                                <label htmlFor="size">Archive</label>
+                                <label htmlFor="archive">Archive</label>
                                 <select
-                                    name="size"
-                                    id="size"
+                                    name="archive"
+                                    id="archive"
                                     required
                                     value={threadData.archive}
                                     className={styles.select}

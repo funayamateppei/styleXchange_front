@@ -22,11 +22,6 @@
     align-items: center;
 }
 
-.textareaBox {
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-}
-
 .threadImagesContainer {
     display: flex;
     flex-direction: column;
@@ -38,6 +33,246 @@
     width: 100%;
     height: 20%;
     overflow-x: auto;
+}
+
+.labelInputBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.labelInputBox label {
+    display: flex;
+    align-items: center;
+}
+
+.input {
+    border-radius: 0.3rem;
+}
+
+.textareaBox {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.priceBox {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.priceBox label {
+    margin-right: 1rem;
+    font-size: 0.8rem;
+}
+
+.priceAndErrorBox {
+    display: flex;
+    flex-direction: column;
+}
+
+.price {
+    width: 60%;
+    text-align: end;
+    border: none;
+    border-bottom: 1px solid gray;
+    background-color: rgb(243, 244, 246);
+    margin-right: 0.3rem;
+}
+
+.priceError {
+    width: 100%;
+    text-align: right;
+    color: red;
+}
+
+.categoryBox {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 100%;
+    margin: 0.5rem 0;
+}
+
+.categoryModalButton {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 60%;
+    padding: 0.3rem 0.5rem;
+    border: 1px solid gray;
+    margin-right: 0.3rem;
+    --tw-bg-opacity: 1;
+    background-color: rgba(243, 244, 246, var(--tw-bg-opacity));
+    border: none;
+    border-bottom: 1px solid gray;
+}
+
+/* カテゴリ表示アニメーションの定義 */
+.slideShow {
+    animation-name: slideShowAnimation;
+    animation-duration: 0.3s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+}
+@keyframes slideShowAnimation {
+    from {
+        left: 100vw; /* 初期位置 */
+    }
+    to {
+        left: 0; /* 表示位置 */
+    }
+}
+/* カテゴリ非表示アニメーションの定義 */
+.slideHidden {
+    animation-name: slideHiddenAnimation;
+    animation-duration: 0.3s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+}
+@keyframes slideHiddenAnimation {
+    from {
+        left: 0; /* 表示位置 */
+    }
+    to {
+        left: 100vw; /* 初期位置 */
+    }
+}
+
+.firstCategoryList {
+    width: 100%;
+    height: calc(100vh - 4rem);
+    overflow-y: scroll;
+    position: fixed;
+    top: 0;
+    left: 0vw;
+    background-color: white;
+    z-index: 1000;
+}
+
+.categoryHeader {
+    height: 4rem;
+    width: 100%;
+    border-bottom-width: 1px;
+    border-color: rgb(243, 244, 246);
+}
+
+.categoryList {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.categoryButton {
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid gray;
+}
+
+.categoryButton button {
+    width: 75%;
+    height: 3rem;
+    text-align: left;
+}
+.categoryButton svg {
+    width: 15%;
+}
+
+.secondCategoryList {
+    width: 100%;
+    height: calc(100vh - 4rem);
+    overflow-y: scroll;
+    position: fixed;
+    top: 0;
+    left: 0vw;
+    background-color: white;
+    z-index: 2000;
+}
+
+.thirdCategoryList {
+    width: 100%;
+    height: calc(100vh - 4rem);
+    overflow-y: scroll;
+    position: fixed;
+    top: 0;
+    left: 0vw;
+    background-color: white;
+    z-index: 3000;
+}
+
+.colorSelect {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin: 0.5rem 0;
+}
+
+.modalButton {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 45%;
+    padding: 0.3rem 0.5rem;
+    border: 1px solid gray;
+    margin-right: 0.3rem;
+    --tw-bg-opacity: 1;
+    background-color: rgba(243, 244, 246, var(--tw-bg-opacity));
+    border: none;
+    border-bottom: 1px solid gray;
+}
+
+.colorSelect label {
+    margin-right: 1rem;
+    font-size: 0.8rem;
+}
+
+.colorClearButton {
+    width: 15%;
+    padding: 0.3rem 0.5rem;
+    --tw-bg-opacity: 1;
+    background-color: rgba(243, 244, 246, var(--tw-bg-opacity));
+    box-shadow: 0 0 1px black;
+}
+
+.modalBackground {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    --tw-bg-opacity: 1;
+    background-color: rgba(243, 244, 246, var(--tw-bg-opacity));
+    z-index: 1000;
+}
+
+.modalColorImage {
+    width: 25%;
+    margin: 5px;
+    border-radius: 100%;
+    box-shadow: 0 0 3px black;
+    cursor: pointer;
 }
 
 .selectBox {
