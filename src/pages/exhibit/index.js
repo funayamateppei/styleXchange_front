@@ -41,6 +41,9 @@ const Exhibit = ({ secondCategories, thirdCategories }) => {
         },
     ])
 
+    // 送信中かどうか
+    const [isSubmitting, setIsSubmitting] = useState(false)
+
     console.log(forms)
     // ThreadImages更新関数
     const handleThreadImageChange = e => {
@@ -102,6 +105,7 @@ const Exhibit = ({ secondCategories, thirdCategories }) => {
 
     const submit = async e => {
         e.preventDefault()
+        setIsSubmitting(true)
         const data = new FormData()
         data.append('thread[user_id]', user.id)
         data.append('thread[text]', threadText)
@@ -131,7 +135,6 @@ const Exhibit = ({ secondCategories, thirdCategories }) => {
                 headers: { 'content-type': 'multipart/form-data' },
             })
             console.log(response.status)
-
             if (response.status === 204) {
                 window.location.href = '/profile'
             } else {
@@ -139,6 +142,7 @@ const Exhibit = ({ secondCategories, thirdCategories }) => {
             }
         } catch (error) {
             if (error.response) {
+                setIsSubmitting(false)
                 // サーバからエラーレスポンスが返された場合の処理
                 setMessage(
                     `エラーが発生しました。ステータスコード: ${error.response.status}`,
@@ -151,6 +155,15 @@ const Exhibit = ({ secondCategories, thirdCategories }) => {
                 setMessage('エラーが発生しました。')
             }
         }
+    }
+
+    if (isSubmitting === true) {
+        return (
+            <div className={styles.flexContainer}>
+                <p>送信中</p>
+                <img src="loading.gif" alt="loading" />
+            </div>
+        )
     }
 
     return (
@@ -245,7 +258,7 @@ const Exhibit = ({ secondCategories, thirdCategories }) => {
                                     form =>
                                         form.title &&
                                         form.price &&
-                                        form.price > 300 &&
+                                        form.price >= 300 &&
                                         form.gender !== '' &&
                                         form.category_id &&
                                         form.size &&

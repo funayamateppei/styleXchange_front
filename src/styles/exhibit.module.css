@@ -17,6 +17,21 @@
     font-size: 1.5rem;
 }
 
+.flexContainer {
+    height: 90vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.flexContainer p {
+        font-weight: 600;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
 .container {
     height: 100%;
     width: 100%;
