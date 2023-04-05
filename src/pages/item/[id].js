@@ -188,10 +188,15 @@ const Item = ({ id, itemData }) => {
                             </div>
 
                             <div className={styles.sliderBox}>
-                                {(data && (
-                                    <Slider images={data.item_images} />
-                                )) ||
-                                    null}
+                                <div className="relative">
+                                    {(data && (
+                                        <Slider images={data.item_images} />
+                                    )) ||
+                                        null}
+                                    {data.sale ? null : (
+                                        <p className={styles.sale}>SOLD OUT</p>
+                                    )}
+                                </div>
                                 <div className={styles.statusBox}>
                                     <div
                                         className={`${styles.statusButton} ml-2`}>

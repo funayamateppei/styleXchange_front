@@ -13,6 +13,7 @@ const ThreadItem = ({ item }) => {
                 <div className={styles.itemImageBox}>
                     <Image src={item.item_images[0].path} alt="item image" />
                     <p className={styles.price}>¥ {price}</p>
+                    {item.sale ? null : <p className={styles.sale}>SOLD OUT</p>}
                 </div>
                 <p className={styles.title}>{item.title}</p>
             </Link>

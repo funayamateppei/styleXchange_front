@@ -27,6 +27,7 @@ const TimelineItem = ({ item }) => {
                         alt="thread_image"
                         style="w-full h-full object-contain"
                     />
+                    {item.sale ? null : <p className={styles.sale}>SOLD OUT</p>}
                 </div>
 
                 <div className={styles.userInfo}>
