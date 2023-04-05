@@ -527,13 +527,22 @@ const Item = ({ id, itemData }) => {
                                     {data
                                         ? data &&
                                           data.user.items
+                                              .filter(
+                                                  item => data.id !== item.id,
+                                              )
                                               .slice(0, 3)
-                                              .map((item, index) => (
-                                                  <ThreadItem
-                                                      key={index}
-                                                      item={item}
-                                                  />
-                                              ))
+                                              .map((item, index) => {
+                                                  if (data.id === item.id) {
+                                                      return null
+                                                  } else {
+                                                      return (
+                                                          <ThreadItem
+                                                              key={index}
+                                                              item={item}
+                                                          />
+                                                      )
+                                                  }
+                                              })
                                         : null}
                                 </div>
                             </div>
