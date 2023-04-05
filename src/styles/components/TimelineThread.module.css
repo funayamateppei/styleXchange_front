@@ -20,6 +20,17 @@
     height: 150px;
     margin: 0.5rem;
     background-color: white;
+    position: relative;
+}
+
+.sale {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0 0.3rem;
+    border-radius: 0.1rem;
+    background-color: rgba(255, 0, 0, 0.8);
+    color: #fff;
 }
 
 .username {

@@ -348,7 +348,7 @@ const Thread = ({ id, threadData }) => {
                             </div>
 
                             <div className={styles.itemsContainer}>
-                                <h2>販売中のアイテム</h2>
+                                <h2>着用アイテム</h2>
                                 <div className={styles.itemsBox}>
                                     {data
                                         ? data.items.map((item, index) => (

@@ -27,6 +27,8 @@ const TimelineItem = ({ item }) => {
                         alt="thread_image"
                         style="w-full h-full object-contain"
                     />
+                    {/* saleがfalseの場合はsold outを表示 */}
+                    {item.sale ? null : <p className={styles.sale}>SOLD OUT</p>} 
                 </div>
 
                 <div className={styles.userInfo}>
