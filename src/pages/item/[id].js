@@ -193,9 +193,13 @@ const Item = ({ id, itemData }) => {
                                         <Slider images={data.item_images} />
                                     )) ||
                                         null}
-                                    {data.sale ? null : (
-                                        <p className={styles.sale}>SOLD OUT</p>
-                                    )}
+                                    {data ? (
+                                        data.sale ? null : (
+                                            <p className={styles.sale}>
+                                                SOLD OUT
+                                            </p>
+                                        )
+                                    ) : null}
                                 </div>
                                 <div className={styles.statusBox}>
                                     <div
