@@ -33,7 +33,7 @@ const Search = ({ secondCategoriesList, thirdCategoriesList }) => {
     const [rule, setRule] = useState(true)
 
     // フリーワードのstate
-    const [word, setWord] = useState('')
+    // const [word, setWord] = useState('')
 
     const firstCategoryIsOpen = () => {
         setIsOpenFirstCategory(true)
@@ -85,16 +85,16 @@ const Search = ({ secondCategoriesList, thirdCategoriesList }) => {
         }
     }
 
-    function handleSubmit(event) {
-        event.preventDefault()
-        if (rule) {
-            const searchUrl = `/search/result/thread/word?word=${word}`
-            router.push(searchUrl)
-        } else {
-            const searchUrl = `/search/result/item/word?word=${word}`
-            router.push(searchUrl)
-        }
-    }
+    // function handleSubmit(event) {
+    //     event.preventDefault()
+    //     if (rule) {
+    //         const searchUrl = `/search/result/thread/word?word=${word}`
+    //         router.push(searchUrl)
+    //     } else {
+    //         const searchUrl = `/search/result/item/word?word=${word}`
+    //         router.push(searchUrl)
+    //     }
+    // }
 
     return (
         <Layout>
@@ -116,7 +116,7 @@ const Search = ({ secondCategoriesList, thirdCategoriesList }) => {
                         </button>
                     </div>
 
-                    <div className={styles.search}>
+                    {/* <div className={styles.search}>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
@@ -138,7 +138,7 @@ const Search = ({ secondCategoriesList, thirdCategoriesList }) => {
                                 className={styles.searchInput}
                             />
                         </form>
-                    </div>
+                    </div> */}
 
                     <div className={styles.category}>
                         <button onClick={firstCategoryIsOpen}>
