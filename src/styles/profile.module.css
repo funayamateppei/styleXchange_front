@@ -48,6 +48,10 @@
     border-radius: 0.5rem;
 }
 
+.box p {
+    font-size: 0.9rem;
+}
+
 .userInfo {
     width: 90%;
     display: flex;
