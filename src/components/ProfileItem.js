@@ -40,7 +40,7 @@ const ProfileItem = ({ data }) => {
             </div>
 
             <div className={styles.items}>
-                {mode === true
+                {mode
                     ? data && data.threads && Array.isArray(data.threads)
                         ? data.threads.map(item => (
                               <Thread item={item} key={item.id} />
