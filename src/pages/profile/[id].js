@@ -19,8 +19,8 @@ const User = ({ id, data }) => {
     const router = useRouter()
 
     // CSRで最新の情報を取得
-    const fetcher = url => {
-        return axios(url).then(response => response.data)
+    const fetcher = async url => {
+        return await axios(url).then(response => response.data)
     }
     const apiUrl = `/api/user/${id}`
     const { data: userData, mutate } = useSWR(apiUrl, fetcher, {

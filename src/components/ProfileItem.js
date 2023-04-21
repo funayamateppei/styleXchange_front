@@ -8,11 +8,8 @@ const ProfileItem = ({ data }) => {
     // threadを表示しているかitemを表示しているかの状態管理
     // trueがthread falseがitem
     const [mode, setMode] = useState(true)
-    const modeChangeThread = () => {
-        setMode(true)
-    }
-    const modeChangeItem = () => {
-        setMode(false)
+    const modeChange = isThread => {
+        setMode(isThread)
     }
 
     return (
@@ -21,9 +18,10 @@ const ProfileItem = ({ data }) => {
                 <div className={styles.threadLayout}>
                     <button
                         className={`${styles.modeButton} ${
-                            mode === true ? styles.modeChange : ''
+                            mode ? styles.modeChange : ''
                         }`}
-                        onClick={modeChangeThread}>
+                        onClick={() => modeChange(true)}
+                        disabled={mode}>
                         <img
                             src="../thread.svg"
                             alt="thread"
@@ -32,15 +30,17 @@ const ProfileItem = ({ data }) => {
                     </button>
                     <button
                         className={`${styles.modeButton} ${
-                            mode === false ? styles.modeChange : ''
+                            mode ? '' : styles.modeChange
                         }`}
-                        onClick={modeChangeItem}>
+                        onClick={() => modeChange(false)}
+                        disabled={!mode}>
                         <img src="../item.svg" alt="item" className="w-8 h-8" />
                     </button>
                 </div>
             </div>
+
             <div className={styles.items}>
-                {mode === true
+                {mode
                     ? data && data.threads && Array.isArray(data.threads)
                         ? data.threads.map(item => (
                               <Thread item={item} key={item.id} />
