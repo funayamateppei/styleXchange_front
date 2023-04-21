@@ -39,6 +39,7 @@ const ProfileItem = ({ data }) => {
                     </button>
                 </div>
             </div>
+            
             <div className={styles.items}>
                 {mode === true
                     ? data && data.threads && Array.isArray(data.threads)

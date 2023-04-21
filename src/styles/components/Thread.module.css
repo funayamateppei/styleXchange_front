@@ -3,7 +3,7 @@
     height: 30vw;
     display: flex;
     justify-content: center;
-    background-color: white;
+    background-color: rgba(180, 180, 180, 0.5);
     position: relative;
     border-radius: 0.3rem;
     border: 1px solid gray;
