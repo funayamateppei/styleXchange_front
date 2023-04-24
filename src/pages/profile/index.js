@@ -15,11 +15,11 @@ const profile = () => {
     useAuth({ middleware: 'auth' })
 
     // CSRで最新の情報を取得
-    const fetcher = url => {
-        return axios(url).then(response => response.data)
+    const fetcher = async url => {
+        return await axios(url).then(response => response.data)
     }
     const apiUrl = `/api/my/data`
-    const { data: data, mutate } = useSWR(apiUrl, fetcher, {
+    const { data, mutate } = useSWR(apiUrl, fetcher, {
         fallbackData: null,
     })
     useEffect(() => {
