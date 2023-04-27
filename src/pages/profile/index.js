@@ -46,7 +46,8 @@ const profile = () => {
                         {data?.icon_path ? (
                             <div className="w-28 h-20 rounded-full overflow-hidden border border-gray-400">
                                 <img
-                                    src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${data.icon_path}`}
+                                    // src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${data.icon_path}`}
+                                    src={`${process.env.NEXT_PUBLIC_AWS_URL}${data.icon_path}`}
                                     alt="icon"
                                     className="w-full h-full object-cover mx-auto my-auto"
                                 />
