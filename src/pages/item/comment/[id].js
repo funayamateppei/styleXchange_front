@@ -16,8 +16,8 @@ const ItemComment = ({ id, datalist }) => {
     const { user } = useAuth({ middleware: 'auth' })
 
     // CSRで最新の情報を取得
-    const fetcher = url => {
-        return axios(url).then(response => response.data)
+    const fetcher = async url => {
+        return await axios(url).then(response => response.data)
     }
     const apiUrl = `/api/items/comments/${id}`
     const { data: data, mutate } = useSWR(apiUrl, fetcher, {
