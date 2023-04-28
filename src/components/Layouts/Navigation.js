@@ -114,7 +114,7 @@ const Navigation = ({ user }) => {
                                 <img
                                     src={
                                         user?.icon_path
-                                            ? `${process.env.NEXT_PUBLIC_BACKEND_URL}${user.icon_path}`
+                                            ? `${process.env.NEXT_PUBLIC_AWS_URL}${user.icon_path}`
                                             : 'icon.png'
                                     }
                                     alt="icon"

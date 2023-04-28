@@ -17,7 +17,7 @@ const Slider = ({ images }) => {
                         <SplideSlide key={index}>
                             <img
                                 className={styles.img}
-                                src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${image.path}`}
+                                src={`${process.env.NEXT_PUBLIC_AWS_URL}${image.path}`}
                                 alt={image.original_file_name}
                             />
                         </SplideSlide>

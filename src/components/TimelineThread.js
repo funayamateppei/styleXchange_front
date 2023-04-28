@@ -33,7 +33,7 @@ const TimelineThread = ({ thread }) => {
                     <img
                         src={
                             thread?.user?.icon_path
-                                ? `${process.env.NEXT_PUBLIC_BACKEND_URL}${thread.user.icon_path}`
+                                ? `${process.env.NEXT_PUBLIC_AWS_URL}${thread.user.icon_path}`
                                 : '/icon.png'
                         }
                         alt="icon"
