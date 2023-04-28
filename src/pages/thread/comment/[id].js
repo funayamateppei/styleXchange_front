@@ -16,8 +16,8 @@ const Comment = ({ id, datalist }) => {
     const { user } = useAuth({ middleware: 'auth' })
 
     // CSRで最新の情報を取得
-    const fetcher = url => {
-        return axios(url).then(response => response.data)
+    const fetcher = async url => {
+        return await axios(url).then(response => response.data)
     }
     const apiUrl = `/api/threads/comments/${id}`
     const { data: data, mutate } = useSWR(apiUrl, fetcher, {
@@ -67,8 +67,6 @@ const Comment = ({ id, datalist }) => {
         }
     }
 
-    console.log(data)
-
     if (data === null) {
         return (
             <div className={styles.flexContainer}>
@@ -96,7 +94,7 @@ const Comment = ({ id, datalist }) => {
                                                     data
                                                         ? data.threadData.user
                                                               .icon_path
-                                                            ? `${process.env.NEXT_PUBLIC_BACKEND_URL}${data.threadData.user.icon_path}`
+                                                            ? `${process.env.NEXT_PUBLIC_AWS_URL}${data.threadData.user.icon_path}`
                                                             : '/icon.png'
                                                         : null
                                                 }
