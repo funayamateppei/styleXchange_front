@@ -66,7 +66,6 @@ const ItemComment = ({ id, datalist }) => {
             }
         }
     }
-    console.log(datalist)
     if (data === null) {
         return (
             <div className={styles.flexContainer}>
