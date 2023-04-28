@@ -35,7 +35,7 @@ const TimelineItem = ({ item }) => {
                     <img
                         src={
                             item?.user?.icon_path
-                                ? `${process.env.NEXT_PUBLIC_BACKEND_URL}${item.user.icon_path}`
+                                ? `${process.env.NEXT_PUBLIC_AWS_URL}${item.user.icon_path}`
                                 : '/icon.png'
                         }
                         alt="icon"

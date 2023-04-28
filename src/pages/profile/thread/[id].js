@@ -157,7 +157,7 @@ const threadEdit = ({ id, data }) => {
                                             <ExhibitImage
                                                 key={index}
                                                 index={index}
-                                                src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${image.path}`}
+                                                src={`${process.env.NEXT_PUBLIC_AWS_URL}${image.path}`}
                                                 onDelete={e =>
                                                     handleDeleteImage(
                                                         e,
