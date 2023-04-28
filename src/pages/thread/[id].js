@@ -22,8 +22,8 @@ const Thread = ({ id, threadData }) => {
     const router = useRouter()
 
     // CSRで最新の情報を取得
-    const fetcher = url => {
-        return axios(url).then(response => response.data)
+    const fetcher = async url => {
+        return await axios(url).then(response => response.data)
     }
     const apiUrl = `/api/threads/${id}`
     const { data: data, mutate } = useSWR(apiUrl, fetcher, {
@@ -32,8 +32,6 @@ const Thread = ({ id, threadData }) => {
     useEffect(() => {
         mutate()
     }, [])
-
-    console.log(data)
 
     // コメントInput更新処理
     const [comment, setComment] = useState('')
