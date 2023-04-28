@@ -32,8 +32,6 @@ const Item = ({ id, itemData }) => {
         mutate()
     }, [])
 
-    console.log(data)
-
     // コメントInput更新処理
     const [comment, setComment] = useState('')
     const [message, setMessage] = useState('')
