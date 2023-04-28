@@ -97,16 +97,19 @@
 
 .threadLink {
     margin-top: 2rem;
+    width: 100%;
 }
 
 .threadImageBox {
     width: 100%;
-    overflow-x: scroll;
+    /* overflow-x: scroll; */
     display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .threadImgBox {
-    width: 33.3333333%;
+    width: 33.333333%;
     height: 30vw;
     display: flex;
     justify-content: center;

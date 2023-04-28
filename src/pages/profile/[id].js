@@ -76,7 +76,7 @@ const User = ({ id, data }) => {
                                 {userData?.icon_path ? (
                                     <div className="w-28 h-20 rounded-full overflow-hidden border border-gray-400">
                                         <img
-                                            src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${userData.icon_path}`}
+                                            src={`${process.env.NEXT_PUBLIC_AWS_URL}${userData.icon_path}`}
                                             alt="icon"
                                             className="w-full h-full object-cover mx-auto my-auto"
                                         />
