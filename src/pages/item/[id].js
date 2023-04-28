@@ -312,7 +312,7 @@ const Item = ({ id, itemData }) => {
                                                               styles.threadImgBox
                                                           }>
                                                           <img
-                                                              src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${image.path}`}
+                                                              src={`${process.env.NEXT_PUBLIC_AWS_URL}${image.path}`}
                                                               alt="image"
                                                           />
                                                       </div>
