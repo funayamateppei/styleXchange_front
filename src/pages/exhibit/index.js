@@ -105,6 +105,7 @@ const Exhibit = ({ secondCategories, thirdCategories }) => {
 
     // 画像をリサイズする関数
     const compressImage = async image => {
+        const maxSizeInBytes = 1 * 1024 * 1024 // 1MBの制限
         return new Promise((resolve, reject) => {
             const img = new Image()
             img.src = URL.createObjectURL(image)
@@ -117,6 +118,15 @@ const Exhibit = ({ secondCategories, thirdCategories }) => {
                 canvas.height = height
                 // 画像を描画
                 ctx.drawImage(img, 0, 0, width, height)
+                // ファイルサイズが制限を超えている場合にリサイズする
+                if (image.size > maxSizeInBytes) {
+                    const scaleFactor = Math.sqrt(maxSizeInBytes / image.size)
+                    width *= scaleFactor
+                    height *= scaleFactor
+                    canvas.width = width
+                    canvas.height = height
+                    ctx.drawImage(img, 0, 0, width, height)
+                }
                 // 圧縮した画像データを取得
                 canvas.toBlob(
                     blob => {
