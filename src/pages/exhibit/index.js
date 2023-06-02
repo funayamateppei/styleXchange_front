@@ -44,7 +44,7 @@ const Exhibit = ({ secondCategories, thirdCategories }) => {
     // 送信中かどうか
     const [isSubmitting, setIsSubmitting] = useState(false)
 
-    console.log(forms)
+    // console.log(forms)
     // ThreadImages更新関数
     const handleThreadImageChange = e => {
         const files = Array.from(e.target.files)
@@ -103,32 +103,76 @@ const Exhibit = ({ secondCategories, thirdCategories }) => {
         setForms(newForms)
     }
 
+    // 画像をリサイズする関数
+    const compressImage = async image => {
+        return new Promise((resolve, reject) => {
+            const img = new Image()
+            img.src = URL.createObjectURL(image)
+            img.onload = () => {
+                const canvas = document.createElement('canvas')
+                const ctx = canvas.getContext('2d')
+                let width = img.width
+                let height = img.height
+                canvas.width = width
+                canvas.height = height
+                // 画像を描画
+                ctx.drawImage(img, 0, 0, width, height)
+                // 圧縮した画像データを取得
+                canvas.toBlob(
+                    blob => {
+                        const compressedImage = new File([blob], image.name, {
+                            type: 'image/jpeg',
+                        })
+                        resolve(compressedImage)
+                    },
+                    'image/jpeg',
+                    0.8, // 画質を調整する場合は、0.8のような値を指定してください
+                )
+            }
+            img.onerror = error => {
+                reject(error)
+            }
+        })
+    }
+
+    // 送信する関数
     const submit = async e => {
         e.preventDefault()
         setIsSubmitting(true)
         const data = new FormData()
         data.append('thread[user_id]', user.id)
         data.append('thread[text]', threadText)
-        // data.append('thread[archive]', Number(true))
-        threadImages.forEach(image => {
-            data.append('threadImages[]', image)
+        // 画像ファイルをリサイズして追加
+        const resizedThreadImages = await Promise.all(
+            threadImages.map(image => compressImage(image)),
+        )
+        resizedThreadImages.forEach((image, index) => {
+            data.append(`threadImages[${index}]`, image)
         })
-        forms.map((item, index) => {
-            data.append(`items[${index}][title]`, item.title)
-            data.append(`items[${index}][text]`, item.text)
-            data.append(`items[${index}][price]`, item.price)
-            data.append(`items[${index}][gender]`, Number(item.gender))
-            data.append(`items[${index}][category_id]`, item.category_id)
-            data.append(`items[${index}][color]`, item.color)
-            data.append(`items[${index}][size]`, item.size)
-            data.append(`items[${index}][condition]`, item.condition)
-            data.append(`items[${index}][days]`, item.days)
-            data.append(`items[${index}][postage]`, Number(item.postage))
-            data.append(`items[${index}][url]`, item.url)
-            item.images.forEach((image, i) => {
-                data.append(`items[${index}][images][${i}]`, image)
-            })
-        })
+        await Promise.all(
+            forms.map(async (item, index) => {
+                data.append(`items[${index}][title]`, item.title)
+                data.append(`items[${index}][text]`, item.text)
+                data.append(`items[${index}][price]`, item.price)
+                data.append(`items[${index}][gender]`, Number(item.gender))
+                data.append(`items[${index}][category_id]`, item.category_id)
+                data.append(`items[${index}][color]`, item.color)
+                data.append(`items[${index}][size]`, item.size)
+                data.append(`items[${index}][condition]`, item.condition)
+                data.append(`items[${index}][days]`, item.days)
+                data.append(`items[${index}][postage]`, Number(item.postage))
+                data.append(`items[${index}][url]`, item.url)
+                // 画像ファイルをリサイズして追加
+                const resizedItemImages = await Promise.all(
+                    item.images.map(image => compressImage(image)),
+                )
+                resizedItemImages.forEach((image, i) => {
+                    data.append(`items[${index}][images][${i}]`, image) // items配列のimages配列に画像ファイル格納
+                })
+                // console.log(resizedItemImages)
+                console.log(...data.entries())
+            }),
+        )
         // API通信
         try {
             const response = await axios.post('/api/exhibit', data, {
